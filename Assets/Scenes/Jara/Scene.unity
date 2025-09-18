@@ -316,7 +316,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4144355, g: 1, b: 0.3537736, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -420,24 +420,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509077936f6e1810881a2b3ff797b176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _horizontalMovement: 0
-  _jumpForce: 7
-  coyoteTime: 0.15
-  _groundCheck: {fileID: 1859815710}
-  _groundCheckRadius: {x: 0.58, y: 0.1}
-  _groundLayer:
+  moveSpeed: 5
+  jumpForce: 8
+  coyoteTime: 0.3
+  groundCheck: {fileID: 1859815710}
+  groundCheckRadius: {x: 0.5, y: 0.1}
+  groundLayer:
     serializedVersion: 2
     m_Bits: 8
   baseGravity: 2
   maxFallSpeed: 12
   fallSpeedMultiplier: 2
-  _climbSpeed: 3
-  _verticalMovement: 0
-  _wallCheckRight: {fileID: 814050530}
-  _wallCheckLeft: {fileID: 811069281}
-  _wallCheckRadius: {x: 0.4, y: 1.7}
-  _climbableLayer:
+  climbSpeed: 3
+  wallCheckRight: {fileID: 811069281}
+  wallCheckLeft: {fileID: 814050530}
+  wallCheckRadius: {x: 0.3, y: 1}
+  climbableLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!50 &657954999

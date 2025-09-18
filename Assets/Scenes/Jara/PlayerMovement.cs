@@ -7,11 +7,11 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D col;
     [Header("Movement")]
     public float moveSpeed = 5f;
-    public float horizontalMovement;
+    private float horizontalMovement;
 
     [Header("Jump")]
-    public float jumpForce = 15f;
-    public float coyoteTime = 0.15f;
+    public float jumpForce = 10f;
+    public float coyoteTime = 0.30f; // time after leaving ground that jump is still allowed
 
 
     [Header("Ground Check")]
@@ -25,11 +25,11 @@ public class PlayerMovement : MonoBehaviour
     public float fallSpeedMultiplier = 1f;
 
     [Header("Climbing")]
-    public float climbSpeed = 3f;
-    public float verticalMovement;
+    public float climbSpeed = 5f;
+    private float verticalMovement;
     public Transform wallCheckRight;
     public Transform wallCheckLeft;
-    public Vector2 wallCheckRadius = new Vector2(0.1f, 0.5f);
+    public Vector2 wallCheckRadius = new Vector2(0.2f, 1f);
     public LayerMask climbableLayer;
     private bool isClimbing = false;
 
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             isClimbing = true;
-            rb.gravityScale = 0f;
+            rb.gravityScale = 0f; // turns off gravity while climbing so the player doesn't fall
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalMovement * climbSpeed);
         }
         else if (context.canceled)
