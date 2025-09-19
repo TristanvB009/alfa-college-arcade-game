@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     public float jumpForce = 10f;
     public float coyoteTime = 0.30f; // time after leaving ground that jump is still allowed
+
+    [Header("Dash")]
+    public float dashForce = 8f;
+    public float DashDelay = 0.1f;
+    private bool DashReady = true;
 
 
     [Header("Ground Check")]
@@ -42,11 +48,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
-        
+
         Gravity();
         if (!IsClimbable())
         {
             rb.gravityScale = baseGravity;
+        }
+        if (IsGrounded())
+        {
+            DashReady = true;
         }
     }
 
@@ -109,6 +119,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (!IsGrounded() && DashReady)
+        {
+            DashReady = false;
+            horizontalMovement = horizontalMovement * dashForce;
+            verticalMovement = verticalMovement * dashForce;
+            // stop after a short delay
+            Invoke("ResetDash", DashDelay);
+        }
+    }
+    private void ResetDash()
+    {
+        horizontalMovement = math.clamp(horizontalMovement, -1, 1);
+        verticalMovement = math.clamp(verticalMovement, -1, 1);
+    }
     private bool IsClimbable()
     {
         if (Physics2D.OverlapBox(wallCheckRight.position, wallCheckRadius, 0f, climbableLayer) ||
