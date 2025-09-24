@@ -230,9 +230,9 @@ TextureImporter:
       name: SchoolArcadeGameTilemapWIP_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 176
-        width: 64
+        x: 320
+        y: 192
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -240,10 +240,11 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 14}
-        - {x: -32, y: 14}
-        - {x: -32, y: 4}
-        - {x: 32, y: 4}
+      - - {x: 16, y: 16}
+        - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: ee883d70eb1ad6dc0800000000000000
@@ -258,7 +259,7 @@ TextureImporter:
         serializedVersion: 2
         x: 288
         y: 128
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -266,11 +267,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 16}
-        - {x: -32, y: 16}
-        - {x: -32, y: -12}
-        - {x: -32, y: -16}
-        - {x: 32, y: -16}
+      - - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: e47367e1c64680770800000000000000
@@ -311,7 +311,7 @@ TextureImporter:
         serializedVersion: 2
         x: 64
         y: 128
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -319,10 +319,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 16}
-        - {x: -32, y: 16}
-        - {x: -32, y: -16}
-        - {x: 32, y: -16}
+      - - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 0f60a04abbdcf1b10800000000000000
@@ -420,7 +420,7 @@ TextureImporter:
         serializedVersion: 2
         x: 64
         y: 64
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -464,7 +464,7 @@ TextureImporter:
         serializedVersion: 2
         x: 64
         y: 32
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -472,10 +472,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 10}
-        - {x: -32, y: 10}
-        - {x: -32, y: 2}
-        - {x: 32, y: 2}
+      - - {x: 16, y: 10}
+        - {x: -16, y: 10}
+        - {x: -16, y: 2}
+        - {x: 16, y: 2}
       tessellationDetail: 0
       bones: []
       spriteID: a3c45bc6e2035294dbcfb5bf6edd26f3
@@ -571,7 +571,7 @@ TextureImporter:
         serializedVersion: 2
         x: 288
         y: 160
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -579,10 +579,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 16}
-        - {x: -32, y: 16}
-        - {x: -32, y: -16}
-        - {x: 32, y: -16}
+      - - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 9289356406d77b042b2085d931c06f0f
@@ -597,7 +597,7 @@ TextureImporter:
         serializedVersion: 2
         x: 288
         y: 192
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -605,16 +605,141 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 32, y: 14}
-        - {x: 32, y: 14}
-        - {x: -32, y: 14}
-        - {x: -32, y: 14}
-        - {x: -32, y: -16}
-        - {x: 32, y: -16}
+      - - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 95df08e8f7e904b4e933492c3e016746
       internalID: -175047841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameTilemapWIP_18
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 16, y: -3}
+        - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ba09dd609b78541a579b7ebef3e135
+      internalID: -1983110728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameTilemapWIP_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a773a04ff3a814f42b10726e202270e1
+      internalID: 240404202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameTilemapWIP_20
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 16, y: -16}
+        - {x: 16, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f9f70aeeae50c428bd86ef5768d058
+      internalID: -1948982911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameTilemapWIP_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 16, y: 10}
+        - {x: -16, y: 10}
+        - {x: -16, y: 2}
+        - {x: 16, y: 2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eee0d539425dca4bab7537630e592a3
+      internalID: -1817030396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameTilemapWIP_22
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e695fdbab7a194abed0184f0b677c6
+      internalID: 66198407
       vertices: []
       indices: 
       edges: []
@@ -643,7 +768,12 @@ TextureImporter:
       SchoolArcadeGameTilemapWIP_15: -532637741
       SchoolArcadeGameTilemapWIP_16: 1086543604
       SchoolArcadeGameTilemapWIP_17: -175047841
+      SchoolArcadeGameTilemapWIP_18: -1983110728
+      SchoolArcadeGameTilemapWIP_19: 240404202
       SchoolArcadeGameTilemapWIP_2: 6155595348018640034
+      SchoolArcadeGameTilemapWIP_20: -1948982911
+      SchoolArcadeGameTilemapWIP_21: -1817030396
+      SchoolArcadeGameTilemapWIP_22: 66198407
       SchoolArcadeGameTilemapWIP_3: -3644078685925701394
       SchoolArcadeGameTilemapWIP_4: 8577215905857419086
       SchoolArcadeGameTilemapWIP_5: -6614608196806962361
