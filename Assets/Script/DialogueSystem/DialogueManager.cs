@@ -27,9 +27,29 @@ public class DialogueManager : MonoBehaviour
     public Button choiceButtonPrefab;
     public GameObject panel1;
     public GameObject panel2;
+    
+    [Header("Typewriter Settings")]
+    [Tooltip("Speed of the typewriter effect (characters per second)")]
+    public float typewriterSpeed = 30f;
+    
+    [Tooltip("Allow clicking to skip typewriter animation")]
+    public bool allowSkip = true;
 
     private List<DialogueNode> dialogueNodes;
     private int currentNodeIndex = 0;
+    private Coroutine typewriterCoroutine;
+    private bool isTyping = false;
+    private string currentFullText = "";
+    private bool skipRequested = false;
+
+    private void Update()
+    {
+        // Allow skipping typewriter effect with mouse click or space/enter
+        if (allowSkip && isTyping && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)))
+        {
+            skipRequested = true;
+        }
+    }
 
     public void StartDialogue(List<DialogueNode> nodes)
     {
@@ -44,13 +64,46 @@ public class DialogueManager : MonoBehaviour
         
         DialogueNode node = dialogueNodes[currentNodeIndex];
         characterNameText.text = node.characterName;
-        dialogueText.text = node.dialogueText;
         
+        // Stop any existing typewriter coroutine
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+        }
+        
+        // Clear choices until typing is complete
         foreach (Transform child in choicesContainer.transform)
         {
             Destroy(child.gameObject);
         }
-
+        
+        // Start typewriter effect
+        currentFullText = node.dialogueText;
+        skipRequested = false;
+        typewriterCoroutine = StartCoroutine(TypewriterEffect(node));
+    }
+    
+    private IEnumerator TypewriterEffect(DialogueNode node)
+    {
+        isTyping = true;
+        dialogueText.text = "";
+        
+        for (int i = 0; i <= currentFullText.Length; i++)
+        {
+            if (skipRequested)
+            {
+                dialogueText.text = currentFullText;
+                break;
+            }
+            
+            dialogueText.text = currentFullText.Substring(0, i);
+            yield return new WaitForSeconds(1f / typewriterSpeed);
+        }
+        
+        isTyping = false;
+        skipRequested = false;
+        
+        // Now create the choice buttons after typing is complete
         foreach (var choice in node.choices)
         {
             Button choiceButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
@@ -79,6 +132,14 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        // Stop typewriter coroutine if running
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
+        }
+        
+        isTyping = false;
         dialogueText.text = "";
         characterNameText.text = "";
         choicesContainer.SetActive(false);
