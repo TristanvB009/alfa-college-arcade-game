@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: fdd7743392580b74da35b9cfbf72ac10
+guid: e4c71a2f83ef07f46862a5ea09061f6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8723173129626154205
-    second: HazardGroundTile3_0
+      213: -1710515774342141471
+    second: HazardGroundTile1_0
   - first:
-      213: 6093171378022407341
-    second: HazardGroundTile3_1
+      213: -9002294017724419305
+    second: HazardGroundTile1_1
   - first:
-      213: 7866247471707899007
-    second: HazardGroundTile3_2
+      213: -6404984859380128813
+    second: HazardGroundTile1_2
+  - first:
+      213: 7680402821880324301
+    second: HazardGroundTile1_3
+  - first:
+      213: 5432534387877529
+    second: HazardGroundTile1_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HazardGroundTile3_0
+      name: HazardGroundTile1_0
       rect:
         serializedVersion: 2
         x: 16
@@ -132,26 +138,25 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 48, y: 2}
-        - {x: 48, y: 8}
+      - - {x: 48, y: 8}
         - {x: -48, y: 8}
         - {x: -48, y: -32}
         - {x: 48, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: 32b8666814011f680800000000000000
-      internalID: -8723173129626154205
+      spriteID: 1e962a747f60348e0800000000000000
+      internalID: -1710515774342141471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HazardGroundTile3_1
+      name: HazardGroundTile1_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -159,20 +164,20 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 16, y: 10}
-        - {x: -16, y: 10}
+      - - {x: 16, y: 11}
+        - {x: -16, y: 11}
         - {x: -16, y: -32}
         - {x: 16, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: dac5a96d51b4f8450800000000000000
-      internalID: 6093171378022407341
+      spriteID: 71379ed794d611380800000000000000
+      internalID: -9002294017724419305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HazardGroundTile3_2
+      name: HazardGroundTile1_4
       rect:
         serializedVersion: 2
         x: 96
@@ -185,42 +190,14 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 16, y: 2}
-        - {x: 16, y: 7}
-        - {x: -16, y: 7}
+      - - {x: 16, y: 14}
+        - {x: -16, y: 14}
         - {x: -16, y: -32}
         - {x: 16, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: f74c67af5668a2d60800000000000000
-      internalID: 7866247471707899007
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HazardGroundTile3_3
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape:
-      - - {x: 16, y: 7}
-        - {x: -15, y: 7}
-        - {x: -16, y: 6}
-        - {x: -16, y: -32}
-        - {x: 16, y: -32}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59708b2fccfed503795e2fa01a645b67
-      internalID: -1281114121
+      spriteID: 9966b6a7cdc431000800000000000000
+      internalID: 5432534387877529
       vertices: []
       indices: 
       edges: []
@@ -229,7 +206,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d52257a2a2e90f84a9f89994c8ad0694
+    spriteID: dc6dce5bd69e2ed478efcfff9fb66ab8
     internalID: 0
     vertices: []
     indices: 
@@ -239,10 +216,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HazardGroundTile3_0: -8723173129626154205
-      HazardGroundTile3_1: 6093171378022407341
-      HazardGroundTile3_2: 7866247471707899007
-      HazardGroundTile3_3: -1281114121
+      HazardGroundTile1_0: -1710515774342141471
+      HazardGroundTile1_1: -9002294017724419305
+      HazardGroundTile1_2: -6404984859380128813
+      HazardGroundTile1_3: 7680402821880324301
+      HazardGroundTile1_4: 5432534387877529
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
