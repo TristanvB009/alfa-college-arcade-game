@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -164,4 +165,13 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawCube(wallCheckRight.position, wallCheckRadius);
         Gizmos.DrawCube(wallCheckLeft.position, wallCheckRadius);
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Player triggered with " + collision.name);
+
+        
+    }
+
 }
