@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
+    private Animator animator;
     [Header("Movement")]
     public float moveSpeed = 5f;
     private float horizontalMovement;
@@ -17,8 +18,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dash")]
     public float dashForce = 8f;
-    public float DashDelay = 0.1f;
+    public float DashDelay = 0.3f;
+    public float minDashDuration = 0.2f; // Minimum time dash animation must stay active
     private bool DashReady = true;
+    private bool isDashingActive = false;
+    private float dashStartTime = 0f;
 
 
     [Header("Ground Check")]
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -59,6 +64,8 @@ public class PlayerController : MonoBehaviour
         {
             DashReady = true;
         }
+        
+        UpdateAnimationStates();
     }
 
     private void Gravity()
@@ -72,6 +79,45 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.gravityScale = baseGravity;
+        }
+    }
+
+    private void UpdateAnimationStates()
+    {
+        if (animator == null) return;
+        
+        // Reset all animation bools first
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isFalling", false);
+        animator.SetBool("isDashing", false);
+        animator.SetBool("isClimbing", false);
+
+        // Check if dash animation should stay active (minimum duration enforcement)
+        bool dashAnimationActive = isDashingActive || (dashStartTime > 0f && Time.time - dashStartTime < minDashDuration);
+        
+        if (dashAnimationActive)
+        {
+            animator.SetBool("isDashing", true);
+            return; // No other animations can activate while dashing
+        }
+        
+        // Only check other animations if NOT dashing
+        if (rb.linearVelocity.y < -0.1f && !IsGrounded() && !isClimbing)
+        {
+            animator.SetBool("isFalling", true);
+        }
+        else if (isClimbing)
+        {
+            animator.SetBool("isClimbing", true);
+        }
+        else if (rb.linearVelocity.y > 0.1f && !IsGrounded() && !isClimbing)
+        {
+            animator.SetBool("isJumping", true);
+        }
+        else if (Mathf.Abs(horizontalMovement) > 0.1f && IsGrounded() && !isClimbing)
+        {
+            animator.SetBool("isWalking", true);
         }
     }
 
@@ -125,6 +171,8 @@ public class PlayerController : MonoBehaviour
         if (!IsGrounded() && DashReady)
         {
             DashReady = false;
+            isDashingActive = true;
+            dashStartTime = Time.time; // Record when dash started
             horizontalMovement = horizontalMovement * dashForce;
             verticalMovement = verticalMovement * dashForce;
             // stop after a short delay
@@ -135,6 +183,19 @@ public class PlayerController : MonoBehaviour
     {
         horizontalMovement = math.clamp(horizontalMovement, -1, 1);
         verticalMovement = math.clamp(verticalMovement, -1, 1);
+        
+        // Only reset isDashingActive if minimum duration has passed
+        if (Time.time - dashStartTime >= minDashDuration)
+        {
+            isDashingActive = false;
+            dashStartTime = 0f; // Reset the timer
+        }
+        else
+        {
+            // If minimum duration hasn't passed, schedule another reset check
+            float remainingTime = minDashDuration - (Time.time - dashStartTime);
+            Invoke("ResetDash", remainingTime);
+        }
     }
     private bool IsClimbable()
     {
