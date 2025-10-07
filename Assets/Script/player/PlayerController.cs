@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     public float jumpForce = 10f;
-    public float coyoteTime = 0.30f; // time after leaving ground that jump is still allowed
+    public float coyoteTime = 0.30f;    // time after leaving ground that jump is still allowed
 
     [Header("Dash")]
     public float dashForce = 8f;
@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public Vector2 groundCheckRadius = new Vector2(0.5f, 0.1f);
     public LayerMask groundLayer;
+
+    public Vector3 lastGroundedPosition;    //tracks the vector of the last location the player was grounded
+    public bool realGrounded;               //Grounded bool without coyote time
 
     [Header("Gravity")]
     public float baseGravity;
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        realGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckRadius, 0f, groundLayer);
+
+
 
         Gravity();
         if (!IsClimbable())
@@ -77,6 +83,11 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        //Update last grounded position if the player is really grounded
+        if (realGrounded)
+        {
+            lastGroundedPosition = transform.position;
+        }
         Vector2 movementInput = context.ReadValue<Vector2>();
         horizontalMovement = movementInput.x;
         verticalMovement = movementInput.y;
@@ -146,7 +157,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private bool IsGrounded()
+    private bool IsGrounded()  //doesn't only check if grounded, but also implements coyote time
     {
         float lastGrounded = 0f;
         if (Physics2D.OverlapBox(groundCheck.position, groundCheckRadius, 0f, groundLayer))
@@ -172,6 +183,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player triggered with " + collision.name);
 
         
+    }
+
+    // Respawn at the last grounded position
+    public void LastGroundedRespawn()
+    {
+        transform.position = new Vector3(lastGroundedPosition.x, lastGroundedPosition.y, transform.position.z);
+
     }
 
 }
