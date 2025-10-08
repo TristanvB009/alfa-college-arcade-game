@@ -20,10 +20,12 @@ public class PlayerController : MonoBehaviour
     private float maxJumpTime = 0.4f;
 
     [Header("Dash")]
-    public float dashForce = 8f;
-    public float DashDelay = 0.1f;
-    private bool DashReady = true;
+    private bool canDash = true;
     private bool isDashing = false;
+    public float dashingPower = 20f;
+    public float dashingTime = 0.2f;
+    public float dashingCooledown = 1f;
+    private TrailRenderer tr;
 
 
     [Header("Ground Check")]
@@ -49,12 +51,14 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        if (isDashing) return;
+
 
         Gravity();
         if (!IsClimbable())
@@ -63,11 +67,16 @@ public class PlayerController : MonoBehaviour
         }
         if (IsGrounded())
         {
-            DashReady = true;
             isJumping = false;
         }
 
         Movement();
+    }
+    void FixedUpdate()
+    {
+        if (isDashing) return;
+        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+
     }
     private void Movement()
     {
@@ -76,8 +85,11 @@ public class PlayerController : MonoBehaviour
         verticalMovement = Input.GetAxisRaw("Vertical");
         Jump();
         Climbing();
-        Dash();
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && horizontalMovement != 0)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     private void Gravity()
@@ -167,39 +179,20 @@ public class PlayerController : MonoBehaviour
         ClimbingEnabled = true;
     }
 
-    public void Dash()
+    private IEnumerator Dash()
     {
-        if (!IsGrounded() && DashReady && !isDashing )
-        {
-            DashReady = false;
-            // horizontalMovement = horizontalMovement * dashForce;
-            // verticalMovement = verticalMovement * dashForce;
-            rb.AddForce(new Vector2(dashForce * Mathf.Sign(horizontalMovement), 0), ForceMode2D.Impulse);
-            Debug.Log("Dash performed");
-            // stop after a short delay
-            // Invoke("ResetDash", DashDelay);
-            StartCoroutine(DashCoroutine(1f));
-        }
-    }
-    // private void ResetDash()
-    // {
-    //     horizontalMovement = math.clamp(horizontalMovement, -1, 1);
-    //     verticalMovement = math.clamp(verticalMovement, -1, 1);
-    // }
-
-    IEnumerator DashCoroutine(float dashDuration)
-    {
-       if(isDashing)
-          yield break; 
-
-       isDashing = true;
-       rb.linearVelocity = new Vector2(dashForce, 0);
-
-       yield return new WaitForSeconds(dashDuration);
-
-       rb.linearVelocity = new Vector2(0,0);
-
-       isDashing = false;
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.linearVelocity = new Vector2(horizontalMovement * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooledown);
+        canDash = true;
     }
 
     private bool IsClimbable()
