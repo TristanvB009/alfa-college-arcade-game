@@ -1028,6 +1028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1049120819}
     m_Modifications:
+    - target: {fileID: 494029685855847149, guid: 4a3db6d8510e8a335abc4cf796e96681, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1874328537581013343, guid: 4a3db6d8510e8a335abc4cf796e96681, type: 3}
       propertyPath: <damageAmount>k__BackingField
       value: 5
@@ -1223,6 +1227,10 @@ PrefabInstance:
     - target: {fileID: 894473642617209647, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
       propertyPath: <damageAmount>k__BackingField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871178702836853325, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259163294172873904, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
       propertyPath: m_Name
@@ -1648,6 +1656,14 @@ PrefabInstance:
     - target: {fileID: 4606891834182750813, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065207256644583578, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
+      propertyPath: knockbackForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065207256644583578, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
+      propertyPath: knockbackDuration
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5134455512835490721, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
       propertyPath: m_Name
@@ -62643,6 +62659,10 @@ PrefabInstance:
       propertyPath: <damageAmount>k__BackingField
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6871178702836853325, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8259163294172873904, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
       propertyPath: m_Name
       value: HazardGroundTile1
@@ -64390,6 +64410,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1049120819}
     m_Modifications:
+    - target: {fileID: 494029685855847149, guid: 4a3db6d8510e8a335abc4cf796e96681, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1874328537581013343, guid: 4a3db6d8510e8a335abc4cf796e96681, type: 3}
       propertyPath: <damageAmount>k__BackingField
       value: 5
@@ -65893,6 +65917,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4519829927565051779, guid: 784f0edc8c77e706abf23f4abc5ea35c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7431800468909431467, guid: 784f0edc8c77e706abf23f4abc5ea35c, type: 3}
       propertyPath: <damageAmount>k__BackingField
       value: 5
@@ -66144,6 +66172,10 @@ PrefabInstance:
     - target: {fileID: 894473642617209647, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
       propertyPath: <damageAmount>k__BackingField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871178702836853325, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259163294172873904, guid: f21f7f589417385bb829c53c1464d75b, type: 3}
       propertyPath: m_Name
@@ -116645,7 +116677,7 @@ Tilemap:
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 9, y: 5, z: 0}
@@ -116849,7 +116881,7 @@ Tilemap:
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 78, y: 25, z: 0}
