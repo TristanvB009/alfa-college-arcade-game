@@ -1,28 +1,33 @@
-using Unity.Mathematics;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
+    private bool InputEnabled = true;
+
     private Animator animator;
     [Header("Movement")]
     public float moveSpeed = 5f;
     private float horizontalMovement;
 
     [Header("Jump")]
-    public float jumpForce = 10f;
+    public float jumpForce = 5f;
     public float coyoteTime = 0.30f; // time after leaving ground that jump is still allowed
+    private bool isJumping = false;
+    private float jumpTime = 0f;
+    private float maxJumpTime = 0.4f;
 
     [Header("Dash")]
-    public float dashForce = 8f;
-    public float DashDelay = 0.3f;
-    public float minDashDuration = 0.2f; // Minimum time dash animation must stay active
-    private bool DashReady = true;
-    private bool isDashingActive = false;
-    private float dashStartTime = 0f;
+    private bool canDash = true;
+    private bool isDashing = false;
+    public float dashingPower = 20f;
+    public float dashingTime = 0.2f;
+    public float dashingCooledown = 1f;
+    public LayerMask dashStopLayer;
+    private TrailRenderer tr;
 
 
     [Header("Ground Check")]
@@ -43,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 wallCheckRadius = new Vector2(0.2f, 1f);
     public LayerMask climbableLayer;
     private bool isClimbing = false;
+    private bool ClimbingEnabled = true;
 
     [Header("Knockback")]
     private Knockback knockback;
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
     }
@@ -59,20 +66,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        if (isDashing) return;
 
-        if (!knockback.IsBeingKnockedBack)
-        {
-            
-        }
+
         Gravity();
-        if (!IsClimbable())
-        {
-            rb.gravityScale = baseGravity;
-        }
+
         if (IsGrounded())
         {
-            DashReady = true;
+            isJumping = false;
+        }
+
+        Movement();
+    }
+    void FixedUpdate()
+    {
+        if (isDashing) return;
+        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+    }
+
+    private void Movement()
+    {
+        if (!InputEnabled) return;
+        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        verticalMovement = Input.GetAxisRaw("Vertical");
+        Jump();
+        Climbing();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && horizontalMovement != 0)
+        {
+            StartCoroutine(Dash());
         }
         
         UpdateAnimationStates();
@@ -138,75 +160,110 @@ public class PlayerController : MonoBehaviour
         verticalMovement = movementInput.y;
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    public void Jump()
     {
-
+        cutJumpShort();
+        if (!Input.GetButtonDown("Jump")) return;
         if (!IsGrounded() && !isClimbing) return;
-        if (context.performed)
-        {
-            isClimbing = false;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        }
 
+
+        Debug.Log("Jump performed");
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        isJumping = true;
+    }
+    public void cutJumpShort()
+    {
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        }
     }
 
-    public void Climbing(InputAction.CallbackContext context)
+    public void Climbing()
     {
-        if (!IsClimbable())
+        if (!IsClimbable() || !ClimbingEnabled)
         {
-            isClimbing = false;
-            rb.gravityScale = baseGravity;
+            StopClimbing();
             return;
         }
-
-        if (context.performed)
+        if (verticalMovement != 0)
         {
             isClimbing = true;
             rb.gravityScale = 0f; // turns off gravity while climbing so the player doesn't fall
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalMovement * climbSpeed);
         }
-        else if (context.canceled)
+
+        if (verticalMovement == 0 && isClimbing)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.gravityScale = 0f;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         }
-        else if (IsGrounded())
+
+        if (Input.GetButtonDown("Jump") && isClimbing)
         {
-            isClimbing = false;
-            rb.gravityScale = baseGravity;
+            Debug.Log("Jumping off wall");
+            StopClimbing();
+            StartCoroutine(ClimbCooldown(0.2f));
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 1.2f);
+        }
+
+        if (IsGrounded())
+        {
+            StopClimbing();
         }
     }
 
-    public void Dash(InputAction.CallbackContext context)
+    private void StopClimbing()
     {
-        if (!IsGrounded() && DashReady)
-        {
-            DashReady = false;
-            isDashingActive = true;
-            dashStartTime = Time.time; // Record when dash started
-            horizontalMovement = horizontalMovement * dashForce;
-            verticalMovement = verticalMovement * dashForce;
-            // stop after a short delay
-            Invoke("ResetDash", DashDelay);
-        }
+        isClimbing = false;
+        rb.gravityScale = baseGravity;
     }
-    private void ResetDash()
+
+    IEnumerator ClimbCooldown(float duration)
     {
-        horizontalMovement = math.clamp(horizontalMovement, -1, 1);
-        verticalMovement = math.clamp(verticalMovement, -1, 1);
-        
-        // Only reset isDashingActive if minimum duration has passed
-        if (Time.time - dashStartTime >= minDashDuration)
-        {
-            isDashingActive = false;
-            dashStartTime = 0f; // Reset the timer
-        }
-        else
-        {
-            // If minimum duration hasn't passed, schedule another reset check
-            float remainingTime = minDashDuration - (Time.time - dashStartTime);
-            Invoke("ResetDash", remainingTime);
-        }
+        ClimbingEnabled = false;
+        yield return new WaitForSeconds(duration);
+        ClimbingEnabled = true;
     }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        tr.emitting = true;
+        float dashStartTime = Time.time;
+        while (Time.time < dashStartTime + dashingTime)
+        {
+            rb.linearVelocity = new Vector2(horizontalMovement * dashingPower, 0f);
+
+            // Cast a ray in the dash direction
+            Vector2 dashDirection = new Vector2(horizontalMovement, -0.364f).normalized; // -0.364 ≈ tan(20°)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, 1.5f, dashStopLayer);
+
+            if (hit.collider != null)
+            {
+                float angle = Vector2.Angle(hit.normal, Vector2.up);
+                Debug.Log($"Dash interrupted by slanted surface: {hit.collider.name}, angle: {angle}");
+                // Stop dash if surface is slanted (not flat or vertical)
+                if (angle > 10f && angle < 80f)
+                {
+                    Debug.Log($"Dash interrupted by slanted surface: {hit.collider.name}, angle: {angle}");
+                    break;
+                }
+            }
+
+            yield return null;
+        }
+
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooledown);
+        canDash = true;
+    }
+
     private bool IsClimbable()
     {
         if (Physics2D.OverlapBox(wallCheckRight.position, wallCheckRadius, 0f, climbableLayer) ||
@@ -217,6 +274,10 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+
+    /*
+     * check ground methods
+     */
     private bool IsGrounded()
     {
         float lastGrounded = 0f;
@@ -241,8 +302,6 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Player triggered with " + collision.name);
-
-        
     }
 
 }
