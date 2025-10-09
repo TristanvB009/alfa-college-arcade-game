@@ -62,10 +62,7 @@ public class PlayerController : MonoBehaviour
 
 
         Gravity();
-        if (!IsClimbable())
-        {
-            rb.gravityScale = baseGravity;
-        }
+
         if (IsGrounded())
         {
             isJumping = false;
@@ -75,11 +72,10 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-
         if (isDashing) return;
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
-
     }
+
     private void Movement()
     {
         if (!InputEnabled) return;
@@ -219,7 +215,6 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-
     private bool IsClimbable()
     {
         if (Physics2D.OverlapBox(wallCheckRight.position, wallCheckRadius, 0f, climbableLayer) ||
@@ -230,6 +225,10 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+
+    /*
+     * check ground methods
+     */
     private bool IsGrounded()
     {
         float lastGrounded = 0f;
