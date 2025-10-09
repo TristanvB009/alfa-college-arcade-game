@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Knockback : MonoBehaviour
 {
-    public float knockbackTime = 0.2f;
-    public float hitDirectionForce = 10f;
-    public float constForce = 5f;
-    private float imputForce = 7.5f;
+    public float knockbackTime;
+    public float hitDirectionForce;
+    public float constForce;
+    private float imputForce;
 
     private Rigidbody2D rb;
+
+    private Coroutine knockbackCoroutine;
 
     void Start()
     {
@@ -33,9 +35,9 @@ public class Knockback : MonoBehaviour
 
         _hitForce = hitDirection * hitDirectionForce;
         _constantForce = constantForceDirection * constForce;
-        
+
         float _elapsedTime = 0f;
-        while(_elapsedTime < knockbackTime)
+        while (_elapsedTime < knockbackTime)
         {
             //iterate the timer
             _elapsedTime += Time.fixedDeltaTime;
@@ -55,8 +57,17 @@ public class Knockback : MonoBehaviour
 
             //apply knockback
             rb.linearVelocity = _combinedForce;
-            
+
             yield return new WaitForFixedUpdate();
-		}
+        }
+        
+        // Reset knockback state when finished
+        IsBeingKnockedBack = false;
+    }
+    
+    public void CallKnockback(Vector2 hitDirection, Vector2 constantForceDirection, float inputDirection)
+	{
+		Debug.Log($"Knockback called - Hit Direction: {hitDirection}, Constant Force: {constantForceDirection}, Input: {inputDirection}");
+		knockbackCoroutine = StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));
 	}
 }

@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
+        
+        // Debug check for missing components
+        if (knockback == null)
+        {
+            Debug.LogWarning("Knockback component not found on " + gameObject.name);
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +74,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isDashing) return;
 
+        if (knockback == null || !knockback.IsBeingKnockedBack)
+        {
+            Movement();
+        }
 
         Gravity();
 
@@ -75,17 +85,22 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
-
-        Movement();
     }
     void FixedUpdate()
     {
         if (isDashing) return;
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        
+        // Don't override velocity if being knocked back
+        if (knockback == null || !knockback.IsBeingKnockedBack)
+        {
+            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        }
     }
 
     private void Movement()
     {
+        UpdateAnimationStates();
+                
         if (!InputEnabled) return;
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
@@ -96,8 +111,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-        
-        UpdateAnimationStates();
     }
 
     private void Gravity()
@@ -125,10 +138,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isDashing", false);
         animator.SetBool("isClimbing", false);
 
-        // Check if dash animation should stay active (minimum duration enforcement)
-        bool dashAnimationActive = isDashingActive || (dashStartTime > 0f && Time.time - dashStartTime < minDashDuration);
-        
-        if (dashAnimationActive)
+        // Dash animation has priority - if we're dashing, only show dash animation
+        if (isDashing)
         {
             animator.SetBool("isDashing", true);
             return; // No other animations can activate while dashing
