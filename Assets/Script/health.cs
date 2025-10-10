@@ -158,11 +158,13 @@ public class Health : MonoBehaviour
     // On death, run Die()
     private void Die()
     {
+        Health playerHealth = gameObject.GetComponent<Health>();
         if (gameObject.CompareTag("Player"))
         {
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex); // On death, reset scene
             //If the player dies, set the player gameObject to the RespawnPoint location
             transform.position = RespawnPoint.position;
+            playerHealth.Heal(playerHealth.maxHealth); 
             return;
         }
     }

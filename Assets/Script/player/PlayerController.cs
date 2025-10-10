@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool isDashing = false;
     public float dashingPower = 20f;
-    public float dashingTime = 0.2f;
+    public float dashingTime = 1f;
+    public float dashAnimationMinDuration = 0.2f; // Minimum time isDashing animation bool should stay true
     public float dashingCooledown = 1f;
     public LayerMask dashStopLayer;
     private TrailRenderer tr;
+    private float dashAnimationEndTime = 0f; // Time when dash animation should end
 
 
     [Header("Ground Check")]
@@ -137,21 +139,31 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
         
-        // Reset all animation bools first
+        // Check if dash animation should still be active (minimum dashAnimationMinDuration seconds)
+        bool shouldShowDashAnimation = isDashing || Time.time < dashAnimationEndTime;
+        
+        // If we should show dash animation, ONLY set isDashing to true and exit
+        if (shouldShowDashAnimation)
+        {
+            // Reset all other animations to false
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
+            animator.SetBool("isClimbing", false);
+            // Set dash to true
+            animator.SetBool("isDashing", true);
+            return; // Don't process any other animations
+        }
+        
+        // If we reach here, dash animation should not be active
+        // Reset all animation bools including isDashing
         animator.SetBool("isWalking", false);
         animator.SetBool("isJumping", false);
         animator.SetBool("isFalling", false);
-        animator.SetBool("isDashing", false);
         animator.SetBool("isClimbing", false);
-
-        // Dash animation has priority - if we're dashing, only show dash animation
-        if (isDashing)
-        {
-            animator.SetBool("isDashing", true);
-            return; // No other animations can activate while dashing
-        }
+        animator.SetBool("isDashing", false);
         
-        // Only check other animations if NOT dashing
+        // Now set the appropriate animation based on current state
         if (rb.linearVelocity.y < -0.1f && !IsGrounded() && !isClimbing)
         {
             animator.SetBool("isFalling", true);
@@ -252,6 +264,9 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        // Set the minimum time the dash animation should stay active using the configurable duration
+        dashAnimationEndTime = Time.time + dashAnimationMinDuration;
+        animator.SetBool ("isDashing", true);
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         tr.emitting = true;

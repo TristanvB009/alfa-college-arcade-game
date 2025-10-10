@@ -1595,6 +1595,10 @@ PrefabInstance:
       propertyPath: baseGravity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1820318957135127313, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
+      propertyPath: dashAnimationMinDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3607634281017606059, guid: 897b8cce94c30addf9907b2aa4d0cad2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -116484,7 +116488,7 @@ Tilemap:
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -25, y: 7, z: 0}

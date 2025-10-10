@@ -9,7 +9,7 @@ public class hazardDamage : MonoBehaviour
     {
         Debug.Log("Hazard collision with " + trigger.gameObject.name);
         Health health = trigger.gameObject.GetComponent<Health>();
-        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        PlayerController playerController = trigger.gameObject.GetComponent<PlayerController>();
 
         
         if (health != null)
@@ -31,7 +31,7 @@ public class hazardDamage : MonoBehaviour
             Debug.Log("No Health component found on " + trigger.gameObject.name);
 
             // If the object is the player and has health over 0, respawn at last grounded
-            if (collision.gameObject.CompareTag("Player") && health.currentHealth > 0 && playerController != null)
+            if (trigger.gameObject.CompareTag("Player") && health.currentHealth > 0 && playerController != null)
             {
                 playerController.LastGroundedRespawn();
             }
