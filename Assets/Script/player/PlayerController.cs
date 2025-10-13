@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     public float dashingPower = 20f;
     public float dashingTime = 1f;
-    public float dashAnimationMinDuration = 0.2f; // Minimum time isDashing animation bool should stay true
+    public float dashAnimationMinDuration = 1f; // Minimum time isDashing animation bool should stay true (0.2 seconds)
     public float dashingCooledown = 1f;
     public LayerMask dashStopLayer;
     private TrailRenderer tr;
