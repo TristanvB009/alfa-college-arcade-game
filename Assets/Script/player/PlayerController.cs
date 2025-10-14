@@ -139,24 +139,18 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
         
-        // Check if dash animation should still be active (minimum dashAnimationMinDuration seconds)
-        bool shouldShowDashAnimation = isDashing || Time.time < dashAnimationEndTime;
+        bool startDashAnimation = isDashing || Time.time < dashAnimationEndTime;
         
-        // If we should show dash animation, ONLY set isDashing to true and exit
-        if (shouldShowDashAnimation)
+        if (startDashAnimation)
         {
-            // Reset all other animations to false
             animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", false);
             animator.SetBool("isFalling", false);
             animator.SetBool("isClimbing", false);
-            // Set dash to true
             animator.SetBool("isDashing", true);
             return; // Don't process any other animations
         }
         
-        // If we reach here, dash animation should not be active
-        // Reset all animation bools including isDashing
         animator.SetBool("isWalking", false);
         animator.SetBool("isJumping", false);
         animator.SetBool("isFalling", false);
@@ -345,7 +339,7 @@ public class PlayerController : MonoBehaviour
     public void LastGroundedRespawn()
     {
         transform.position = new Vector3(lastGroundedPosition.x, lastGroundedPosition.y, transform.position.z);
-
+        Debug.Log("Player triggered setback to last grounded position");
     }
 
 }

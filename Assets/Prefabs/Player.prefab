@@ -523,6 +523,7 @@ MonoBehaviour:
   coyoteTime: 0.3
   dashingPower: 20
   dashingTime: 0.2
+  dashAnimationMinDuration: 1
   dashingCooledown: 1
   dashStopLayer:
     serializedVersion: 2
@@ -532,6 +533,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
+  lastGroundedPosition: {x: 0, y: 0, z: 0}
+  realGrounded: 0
   baseGravity: 3.5
   maxFallSpeed: 30
   fallSpeedMultiplier: 1
