@@ -106,6 +106,19 @@ public class Health : MonoBehaviour
         currentHealth -= damage;
         Debug.Log($"Health reduced to: {currentHealth}");
         
+        // Update health bar immediately
+        HealthBar healthBar = FindFirstObjectByType<HealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.ForceUpdate();
+        }
+        
+        // Trigger screen shake when player takes damage
+        if (ScreenShake.Instance != null)
+        {
+            ScreenShake.Instance.Shake();
+        }
+        
         // Trigger damage animation
         if (animator != null)
         {
@@ -184,6 +197,13 @@ public class Health : MonoBehaviour
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
+        }
+        
+        // Update health bar immediately after healing
+        HealthBar healthBar = FindFirstObjectByType<HealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.ForceUpdate();
         }
     }
     // On death, run Die()

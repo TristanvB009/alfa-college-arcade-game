@@ -177,6 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <damageAmount>k__BackingField: 10
+  damageEffectPrefab: {fileID: 8425520075398882230, guid: ff668830709b73e4182c7c73ad20974d, type: 3}
+  effectDuration: 0.2
+  yOffset: 0.5
 --- !u!95 &7408629381949879446
 Animator:
   serializedVersion: 7
