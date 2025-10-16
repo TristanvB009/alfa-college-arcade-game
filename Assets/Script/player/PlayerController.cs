@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask dashStopLayer;
     private TrailRenderer tr;
 
-
     [Header("Ground Check")]
     public Transform groundCheck;
     public Vector2 groundCheckRadius = new Vector2(0.5f, 0.1f);
@@ -129,7 +128,6 @@ public class PlayerController : MonoBehaviour
         if (!IsGrounded() && !isClimbing) return;
 
 
-        Debug.Log("Jump performed");
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         isJumping = true;
     }
@@ -163,7 +161,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isClimbing)
         {
-            Debug.Log("Jumping off wall");
             StopClimbing();
             StartCoroutine(ClimbCooldown(0.2f));
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 1.2f);
@@ -207,15 +204,12 @@ public class PlayerController : MonoBehaviour
             if (hit.collider != null)
             {
                 float angle = Vector2.Angle(hit.normal, Vector2.up);
-                Debug.Log($"Dash interrupted by slanted surface: {hit.collider.name}, angle: {angle}");
                 // Stop dash if surface is slanted (not flat or vertical)
                 if (angle > 10f && angle < 80f)
                 {
-                    Debug.Log($"Dash interrupted by slanted surface: {hit.collider.name}, angle: {angle}");
                     break;
                 }
             }
-
             yield return null;
         }
 
