@@ -62037,7 +62037,7 @@ Transform:
   m_GameObject: {fileID: 669417428}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -20.083796, y: 6.16063, z: -11.266021}
+  m_LocalPosition: {x: -20.083796, y: 6.16063, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115765,7 +115765,7 @@ Tilemap:
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 25, y: 10, z: 0}
@@ -115918,7 +115918,7 @@ Tilemap:
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 78, y: 25, z: 0}
@@ -117274,7 +117274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631ae52dae5ab5746b1da735f698b1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: {fileID: 102900000, guid: 331bc8da1461afe05a0489850c6af2e4, type: 3}
+  levelToLoadName: Tutorial
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
