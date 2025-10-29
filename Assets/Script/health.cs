@@ -59,6 +59,12 @@ public class Health : MonoBehaviour
 
         currentHealth -= damage;
         
+        // Clamp health to not go below 0
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        
         // Trigger damage animation
         if (animator != null)
         {
@@ -104,6 +110,13 @@ public class Health : MonoBehaviour
         }
 
         currentHealth -= damage;
+        
+        // Clamp health to not go below 0
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        
         Debug.Log($"Health reduced to: {currentHealth}");
         
         // Update health bar immediately

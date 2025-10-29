@@ -10,11 +10,10 @@ public class HealthBar : MonoBehaviour
     [Tooltip("Reference to the player's Health component")]
     public Health playerHealth;
     
-    private int lastKnownHealth = -1; // Track the last known health to avoid unnecessary updates
+    private int lastKnownHealth = -1; // Track the last known health
     
     private void Start()
     {
-        // Find the player's Health component if not assigned
         if (playerHealth == null)
         {
             playerHealth = FindFirstObjectByType<Health>();
@@ -25,10 +24,8 @@ public class HealthBar : MonoBehaviour
             }
         }
         
-        // Validate health bar parts array
         ValidateHealthBarParts();
         
-        // Initial health bar update
         UpdateHealthBar();
     }
     
@@ -41,15 +38,13 @@ public class HealthBar : MonoBehaviour
         }
     }
     
-    /// <summary>
     /// Updates the health bar visibility based on current health
-    /// </summary>
     public void UpdateHealthBar()
     {
         if (playerHealth == null) return;
         
-        int currentHealth = playerHealth.currentHealth;
-        lastKnownHealth = currentHealth;
+        int currentHealth = Mathf.Clamp(playerHealth.currentHealth, 0, playerHealth.maxHealth);
+        lastKnownHealth = playerHealth.currentHealth; // Store the actual value for comparison
         
         // Update each health bar part
         for (int i = 0; i < healthBarParts.Length; i++)
@@ -67,18 +62,14 @@ public class HealthBar : MonoBehaviour
         Debug.Log($"HealthBar: Updated for {currentHealth}/{playerHealth.maxHealth} health");
     }
     
-    /// <summary>
-    /// Manually update the health bar (useful for immediate updates after damage/healing)
-    /// </summary>
+    /// Manually update the health bar
     public void ForceUpdate()
     {
         lastKnownHealth = -1; // Force update on next frame
         UpdateHealthBar();
     }
     
-    /// <summary>
     /// Validates that all health bar parts are assigned
-    /// </summary>
     private void ValidateHealthBarParts()
     {
         bool allPartsAssigned = true;
@@ -95,32 +86,6 @@ public class HealthBar : MonoBehaviour
         if (allPartsAssigned)
         {
             Debug.Log("HealthBar: All 8 health bar parts are properly assigned.");
-        }
-    }
-    
-    /// <summary>
-    /// Test function to simulate health changes (for testing purposes)
-    /// </summary>
-    [ContextMenu("Test - Simulate Damage")]
-    public void TestDamage()
-    {
-        if (playerHealth != null && playerHealth.currentHealth > 0)
-        {
-            playerHealth.currentHealth--;
-            UpdateHealthBar();
-        }
-    }
-    
-    /// <summary>
-    /// Test function to simulate healing (for testing purposes)
-    /// </summary>
-    [ContextMenu("Test - Simulate Heal")]
-    public void TestHeal()
-    {
-        if (playerHealth != null && playerHealth.currentHealth < playerHealth.maxHealth)
-        {
-            playerHealth.currentHealth++;
-            UpdateHealthBar();
         }
     }
 }

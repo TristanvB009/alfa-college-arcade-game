@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
     public float climbSpeed = 5f;
     private float verticalMovement;
     
+    [Header("Facing Direction")]
+    private int facingDirection = 0; // 0 = right, 1 = left
+    private float lastHorizontalInput = 0f; // Track last input to determine facing
+    
     [Header("Dialogue")]
     private DialogueManager dialogueManager;
     public Transform wallCheckRight;
@@ -72,6 +76,13 @@ public class PlayerController : MonoBehaviour
         
         // Find DialogueManager in scene
         dialogueManager = FindFirstObjectByType<DialogueManager>();
+        
+        // Initialize facing direction (default to right)
+        facingDirection = 0;
+        if (animator != null)
+        {
+            animator.SetInteger("facingDirection", facingDirection);
+        }
         
         // Debug check for missing components
         if (knockback == null)
@@ -130,6 +141,10 @@ public class PlayerController : MonoBehaviour
         if (!InputEnabled) return;
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
+        
+        // Update facing direction based on horizontal input
+        UpdateFacingDirection();
+        
         Jump();
         Climbing();
 
@@ -151,6 +166,43 @@ public class PlayerController : MonoBehaviour
         {
             rb.gravityScale = baseGravity;
         }
+    }
+    
+    private void UpdateFacingDirection()
+    {
+        // Update facing direction if there's any horizontal input (even small amounts)
+        if (Mathf.Abs(horizontalMovement) > 0.01f)
+        {
+            int newFacingDirection = horizontalMovement > 0 ? 0 : 1; // 0 = right, 1 = left
+            
+            // Update immediately when direction changes
+            if (newFacingDirection != facingDirection)
+            {
+                facingDirection = newFacingDirection;
+                
+                // Update animator parameter immediately
+                if (animator != null)
+                {
+                    animator.SetInteger("facingDirection", facingDirection);
+                }
+            }
+        }
+        // If no input, maintain the current facing direction (don't change it)
+        
+        lastHorizontalInput = horizontalMovement;
+    }
+
+    /// Get the current facing direction
+    public int GetFacingDirection()
+    {
+        return facingDirection;
+    }
+    
+    /// Get facing direction as a multiplier
+    /// 0 = right, 1 = left
+    public float GetFacingDirectionMultiplier()
+    {
+        return facingDirection == 0 ? 1f : -1f;
     }
 
     private void UpdateAnimationStates()
@@ -212,6 +264,22 @@ public class PlayerController : MonoBehaviour
         Vector2 movementInput = context.ReadValue<Vector2>();
         horizontalMovement = movementInput.x;
         verticalMovement = movementInput.y;
+        
+        // Update facing direction immediately when input changes
+        if (InputEnabled && Mathf.Abs(horizontalMovement) > 0.01f)
+        {
+            int newFacingDirection = horizontalMovement > 0 ? 0 : 1; // 0 = right, 1 = left
+            
+            if (newFacingDirection != facingDirection)
+            {
+                facingDirection = newFacingDirection;
+                
+                if (animator != null)
+                {
+                    animator.SetInteger("facingDirection", facingDirection);
+                }
+            }
+        }
     }
 
     public void Jump()
@@ -401,16 +469,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator LastGroundedRespawnCoroutine()
     {
-        // Disable player input immediately
         SetInputEnabled(false);
         
-        // Don't stop knockback here since we want it to finish naturally
-        // The hazard damage script will wait for knockback to complete before calling this
-        
-        // Wait for 0.3 seconds before respawning
         yield return new WaitForSeconds(0.3f);
         
-        // Now stop any remaining knockback and reset physics
         if (knockback != null)
         {
             knockback.StopKnockback();
@@ -426,7 +488,6 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         isClimbing = false;
         
-        // Wait additional 0.2 seconds (total 0.5 seconds of disabled input)
         yield return new WaitForSeconds(0.2f);
         
         // Re-enable player input
