@@ -48,15 +48,17 @@ public class Knockback : MonoBehaviour
             //combine knockbackForce with inputForce
             if (inputDirection != 0)
             {
-                _combinedForce = _knockbackForce + new Vector2(inputDirection, 0f);
+                // Reduce input influence during knockback for more consistent behavior
+                _combinedForce = _knockbackForce + new Vector2(inputDirection * 0.3f, 0f);
             }
             else
             {
                 _combinedForce = _knockbackForce;
             }
 
-            //apply knockback
-            rb.linearVelocity = _combinedForce;
+            //apply knockback - preserve some vertical velocity to maintain consistent knockback
+            Vector2 currentVelocity = rb.linearVelocity;
+            rb.linearVelocity = new Vector2(_combinedForce.x, Mathf.Max(_combinedForce.y, currentVelocity.y * 0.1f));
 
             yield return new WaitForFixedUpdate();
         }

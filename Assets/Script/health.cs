@@ -65,6 +65,9 @@ public class Health : MonoBehaviour
             currentHealth = 0;
         }
         
+        // Set invincible immediately to prevent animation interference
+        isInvincible = true;
+        
         // Trigger damage animation
         if (animator != null)
         {
@@ -119,6 +122,9 @@ public class Health : MonoBehaviour
         
         Debug.Log($"Health reduced to: {currentHealth}");
         
+        // Set invincible immediately to prevent animation interference
+        isInvincible = true;
+        
         // Update health bar immediately
         HealthBar healthBar = FindFirstObjectByType<HealthBar>();
         if (healthBar != null)
@@ -131,6 +137,9 @@ public class Health : MonoBehaviour
         {
             ScreenShake.Instance.Shake();
         }
+        
+        // Set invincible immediately to prevent animation interference
+        isInvincible = true;
         
         // Trigger damage animation
         if (animator != null)
@@ -177,8 +186,9 @@ public class Health : MonoBehaviour
         // Calculate direction from damage source to player
         Vector2 directionToPlayer = (transform.position - damageSource.position).normalized;
         
-        // Add a slight upward component to make knockback feel better
-        Vector2 hitDirection = new Vector2(directionToPlayer.x, Mathf.Abs(directionToPlayer.y) + 0.5f);
+        // Ensure a minimum upward force for consistent knockback, especially when grounded
+        float minUpwardForce = 0.6f; // Increased from 0.5f for better visibility
+        Vector2 hitDirection = new Vector2(directionToPlayer.x, Mathf.Max(Mathf.Abs(directionToPlayer.y), minUpwardForce));
         
         // Normalize the result
         return hitDirection.normalized;
@@ -288,8 +298,8 @@ public class Health : MonoBehaviour
 
     private System.Collections.IEnumerator BecomeTemporarilyInvincible()
     {
-        isInvincible = true;
-        UnityEngine.Debug.Log($"Player became invincible for {invincibilityDuration} seconds");
+        // isInvincible is already set to true before this coroutine starts
+        UnityEngine.Debug.Log($"Player invincibility timer started for {invincibilityDuration} seconds");
         
         yield return new WaitForSeconds(invincibilityDuration);
         

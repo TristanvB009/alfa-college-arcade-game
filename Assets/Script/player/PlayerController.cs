@@ -64,6 +64,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Knockback")]
     private Knockback knockback;
+    
+    [Header("Health")]
+    private Health health;
 
     
 
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
+        health = GetComponent<Health>();
         
         // Find DialogueManager in scene
         dialogueManager = FindFirstObjectByType<DialogueManager>();
@@ -88,6 +92,11 @@ public class PlayerController : MonoBehaviour
         if (knockback == null)
         {
             Debug.LogWarning("Knockback component not found on " + gameObject.name);
+        }
+        
+        if (health == null)
+        {
+            Debug.LogWarning("Health component not found on " + gameObject.name);
         }
         
         if (dialogueManager == null)
@@ -106,15 +115,19 @@ public class PlayerController : MonoBehaviour
             verticalMovement = 0;
         }
         
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
         realGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckRadius, 0f, groundLayer);
 
         if (isDashing) return;
 
+        // Don't override velocity if being knocked back
         if (knockback == null || !knockback.IsBeingKnockedBack)
         {
+            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
             Movement();
         }
+
+        // Always call UpdateAnimationStates, but let it handle its own protection logic
+        UpdateAnimationStates();
 
         Gravity();
 
@@ -136,8 +149,6 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        UpdateAnimationStates();
-                
         if (!InputEnabled) return;
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
@@ -208,6 +219,20 @@ public class PlayerController : MonoBehaviour
     private void UpdateAnimationStates()
     {
         if (animator == null) return;
+        
+        // Check if player is taking damage - this takes priority over other animations
+        if (health != null && health.isInvincibleStatus())
+        {
+            // Don't override damage animation - let Health component handle it
+            return;
+        }
+        
+        // Check if player is being knocked back - this takes priority over movement animations
+        if (knockback != null && knockback.IsBeingKnockedBack)
+        {
+            // Don't override animations during knockback
+            return;
+        }
         
         // Check if player is sitting - this takes priority over other animations
         bool isSitting = animator.GetBool("isSitting");
