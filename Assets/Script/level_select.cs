@@ -1,10 +1,11 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level_select : MonoBehaviour
 {
+
     [SerializeField]
-    SceneAsset levelToLoad;
+    private string levelToLoadName;
 
     private bool playerInside = false;
 
@@ -28,10 +29,10 @@ public class Level_select : MonoBehaviour
     {
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
-            if (levelToLoad != null)
+            if (!string.IsNullOrEmpty(levelToLoadName))
             {
-                Debug.Log("Loading level: " + levelToLoad.name);
-                LoadLevel(levelToLoad.name);
+                Debug.Log("Loading level: " + levelToLoadName);
+                LoadLevel(levelToLoadName);
             }
             else
             {
@@ -42,6 +43,12 @@ public class Level_select : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
+        if (string.IsNullOrEmpty(levelName))
+        {
+            Debug.LogWarning("LoadLevel called with empty scene name on " + gameObject.name);
+            return;
+        }
+
+        SceneManager.LoadScene(levelName);
     }
 }
