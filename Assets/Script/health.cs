@@ -33,14 +33,14 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
         
-        // Debug check for missing knockback component
+        // Check for missing knockback component
         if (knockback == null)
         {
-            Debug.LogError("Knockback component not found on " + gameObject.name + "! Make sure to add the Knockback script to this GameObject.");
+            // Knockback component not found
         }
         else
         {
-            Debug.Log("Knockback component found on " + gameObject.name);
+            // Knockback component found
         }
     }
     public bool isInvincibleStatus()
@@ -94,11 +94,9 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage, Transform damageSource, bool playTimelineOnRespawn)
     {
-        Debug.Log($"TakeDamage called with damage: {damage}, source: {(damageSource != null ? damageSource.name : "null")}, timeline: {playTimelineOnRespawn}");
         
         if (isInvincible) 
         {
-            Debug.Log("Player is invincible, damage blocked");
             return;
         }
 
@@ -109,7 +107,7 @@ public class Health : MonoBehaviour
         // Play timeline animation if this damage will result in respawn
         if (shouldPlayTimeline && timelineDirector != null && damageBeforeRespawnTimeline != null)
         {
-            StartCoroutine(PlayTimelineWithImageActivation());
+            StartCoroutine(PlayDamageTimeline());
         }
 
         currentHealth -= damage;
@@ -120,7 +118,6 @@ public class Health : MonoBehaviour
             currentHealth = 0;
         }
         
-        Debug.Log($"Health reduced to: {currentHealth}");
         
         // Set invincible immediately to prevent animation interference
         isInvincible = true;
@@ -153,16 +150,14 @@ public class Health : MonoBehaviour
         }
 
         Vector2 hitDirection = CalculateHitDirection(damageSource);
-        Debug.Log($"Hit direction calculated: {hitDirection}");
         
         if (knockback != null)
         {
-            Debug.Log("Calling knockback...");
             knockback.CallKnockback(hitDirection, Vector2.up, Input.GetAxisRaw("Horizontal"));
         }
         else
         {
-            Debug.LogError("Knockback component is null! Cannot apply knockback.");
+            // Knockback component is null
         }
 
         // Store the coroutine reference to manage it properly
@@ -173,43 +168,18 @@ public class Health : MonoBehaviour
         invincibilityCoroutine = StartCoroutine(BecomeTemporarilyInvincible());
     }
 
-    // Calculates the hit direction from a damage source to the player.
-    // Returns a normalized Vector2 indicating the direction the player should be knocked back.
     private Vector2 CalculateHitDirection(Transform damageSource)
     {
         if (damageSource == null)
         {
-            // Default knockback direction (left) if no source is provided
             return Vector2.left;
         }
 
         // Calculate direction from damage source to player
         Vector2 directionToPlayer = (transform.position - damageSource.position).normalized;
-        
-        // Ensure a minimum upward force for consistent knockback, especially when grounded
-        float minUpwardForce = 0.6f; // Increased from 0.5f for better visibility
+
+        float minUpwardForce = 0.6f;
         Vector2 hitDirection = new Vector2(directionToPlayer.x, Mathf.Max(Mathf.Abs(directionToPlayer.y), minUpwardForce));
-        
-        // Normalize the result
-        return hitDirection.normalized;
-    }
-
-    // Alternative hit direction calculation with custom upward force.
-    private Vector2 CalculateHitDirection(Transform damageSource, float upwardForce)
-    {
-        if (damageSource == null)
-        {
-            return new Vector2(-1f, upwardForce).normalized;
-        }
-
-        // Calculate horizontal direction from damage source to player
-        float horizontalDirection = transform.position.x - damageSource.position.x;
-        
-        // Determine knockback direction (away from damage source)
-        Vector2 hitDirection = new Vector2(
-            horizontalDirection > 0 ? 1f : -1f, // Push right if source is left, push left if source is right
-            upwardForce
-        );
         
         return hitDirection.normalized;
     }
@@ -293,30 +263,25 @@ public class Health : MonoBehaviour
         // Reset the dead flag
         isDead = false;
         
-        Debug.Log("Player respawned at checkpoint");
     }
 
     private System.Collections.IEnumerator BecomeTemporarilyInvincible()
     {
         // isInvincible is already set to true before this coroutine starts
-        UnityEngine.Debug.Log($"Player invincibility timer started for {invincibilityDuration} seconds");
         
         yield return new WaitForSeconds(invincibilityDuration);
         
         isInvincible = false;
         invincibilityCoroutine = null; // Clear the reference when done
-        UnityEngine.Debug.Log("Player is no longer invincible.");
     }
 
-    private System.Collections.IEnumerator PlayTimelineWithImageActivation()
+    private System.Collections.IEnumerator PlayDamageTimeline()
     {
-        Debug.Log("Playing damage before respawn timeline animation");
         
         // Activate the transition image
         if (transitionImage != null)
         {
             transitionImage.SetActive(true);
-            Debug.Log("Transition image activated");
         }
         
         // Play the timeline
@@ -329,7 +294,6 @@ public class Health : MonoBehaviour
         if (transitionImage != null)
         {
             transitionImage.SetActive(false);
-            Debug.Log("Transition image deactivated");
         }
     }
 }

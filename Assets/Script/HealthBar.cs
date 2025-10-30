@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
             playerHealth = FindFirstObjectByType<Health>();
             if (playerHealth == null)
             {
-                Debug.LogError("HealthBar: No Health component found! Please assign the player's Health component.");
+                // No Health component found
                 return;
             }
         }
@@ -58,8 +58,7 @@ public class HealthBar : MonoBehaviour
             }
         }
         
-        // Debug log for testing
-        Debug.Log($"HealthBar: Updated for {currentHealth}/{playerHealth.maxHealth} health");
+        // Health bar updated
     }
     
     /// Manually update the health bar
@@ -78,14 +77,14 @@ public class HealthBar : MonoBehaviour
         {
             if (healthBarParts[i] == null)
             {
-                Debug.LogWarning($"HealthBar: Health bar part {i + 1} is not assigned!");
+                // Health bar part not assigned
                 allPartsAssigned = false;
             }
         }
         
         if (allPartsAssigned)
         {
-            Debug.Log("HealthBar: All 8 health bar parts are properly assigned.");
+            // All health bar parts are properly assigned
         }
     }
 }

@@ -14,18 +14,15 @@ public class hazardDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        Debug.Log("Hazard collision with " + trigger.gameObject.name);
         Health health = trigger.gameObject.GetComponent<Health>();
         PlayerController playerController = trigger.gameObject.GetComponent<PlayerController>();
 
         
         if (health != null)
         {
-            Debug.Log("Health component found on " + trigger.gameObject.name);
         //If the object has a health component, apply damage
             if (health.isInvincibleStatus() == false)
             {
-                Debug.Log($"Calling TakeDamage({damageAmount}, {this.transform.name}, true) - with timeline");
                 
                 // Calculate collision position (between player and hazard)
                 Vector3 collisionPosition = Vector3.Lerp(trigger.transform.position, this.transform.position, 0.5f);
@@ -56,7 +53,7 @@ public class hazardDamage : MonoBehaviour
             }
             else
             {
-                Debug.Log("Player is invincible, hazard damage blocked");
+                // Player is invincible
             }
         }
     }
@@ -82,7 +79,6 @@ public class hazardDamage : MonoBehaviour
         // Check if the player died during the damage - if so, don't respawn to last grounded
         if (health != null && health.IsDeadOrRespawning())
         {
-            Debug.Log("Player died to hazard, skipping last grounded respawn");
             yield break; // Exit the coroutine without calling LastGroundedRespawn
         }
         

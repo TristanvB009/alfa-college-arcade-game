@@ -56,7 +56,7 @@ public class DialogueStarter : MonoBehaviour
         playerController = FindFirstObjectByType<PlayerController>();
         if (playerController == null)
         {
-            Debug.LogWarning("PlayerController not found in scene! Player movement blocking won't work.");
+            // PlayerController not found
         }
     }
     
@@ -108,7 +108,7 @@ public class DialogueStarter : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No valid dialogue found! Check DialogueStarter configuration.");
+            // No valid dialogue found
         }
     }
     
@@ -191,11 +191,10 @@ public class DialogueStarter : MonoBehaviour
         if (availableDialogues != null && newIndex >= 0 && newIndex < availableDialogues.Count)
         {
             selectedDialogueIndex = newIndex;
-            Debug.Log($"Switched to dialogue: {availableDialogues[newIndex].dialogueName}");
         }
         else
         {
-            Debug.LogWarning($"Cannot switch to dialogue index {newIndex}. Index out of range.");
+            // Cannot switch to dialogue index - out of range
         }
     }
     

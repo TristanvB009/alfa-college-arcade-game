@@ -42,7 +42,7 @@ public class ScreenShake : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ScreenShake: No camera found! Please attach this script to a camera or ensure Camera.main exists.");
+            // No camera found
         }
     }
     

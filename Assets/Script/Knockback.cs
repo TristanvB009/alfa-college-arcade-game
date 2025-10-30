@@ -69,7 +69,6 @@ public class Knockback : MonoBehaviour
     
     public void CallKnockback(Vector2 hitDirection, Vector2 constantForceDirection, float inputDirection)
 	{
-		Debug.Log($"Knockback called - Hit Direction: {hitDirection}, Constant Force: {constantForceDirection}, Input: {inputDirection}");
 		knockbackCoroutine = StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));
 	}
 	
@@ -81,6 +80,5 @@ public class Knockback : MonoBehaviour
 			knockbackCoroutine = null;
 		}
 		IsBeingKnockedBack = false;
-		Debug.Log("Knockback stopped");
 	}
 }

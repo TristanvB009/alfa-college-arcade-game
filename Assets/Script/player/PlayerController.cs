@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [Header("Climbing")]
     public float climbSpeed = 5f;
     private float verticalMovement;
+    private float climbableObjectXPosition; // Store the X position of the climbable object
+    private bool isXPositionLocked = false; // Track if X position is locked during climbing
     
     [Header("Facing Direction")]
     private int facingDirection = 0; // 0 = right, 1 = left
@@ -88,20 +91,20 @@ public class PlayerController : MonoBehaviour
             animator.SetInteger("facingDirection", facingDirection);
         }
         
-        // Debug check for missing components
+        // Check for missing components
         if (knockback == null)
         {
-            Debug.LogWarning("Knockback component not found on " + gameObject.name);
+            // Knockback component not found
         }
         
         if (health == null)
         {
-            Debug.LogWarning("Health component not found on " + gameObject.name);
+            // Health component not found
         }
         
         if (dialogueManager == null)
         {
-            Debug.LogWarning("DialogueManager not found in scene! Dialogue-jump prevention won't work.");
+            // DialogueManager not found in scene
         }
     }
 
@@ -119,10 +122,19 @@ public class PlayerController : MonoBehaviour
 
         if (isDashing) return;
 
-        // Don't override velocity if being knocked back
+        // Don't override velocity if being knocked back or if X position is locked during climbing
         if (knockback == null || !knockback.IsBeingKnockedBack)
         {
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            if (isXPositionLocked && isClimbing)
+            {
+                // During climbing, don't apply horizontal movement - position is locked
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+            else
+            {
+                // Normal horizontal movement when not climbing
+                rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            }
             Movement();
         }
 
@@ -140,10 +152,19 @@ public class PlayerController : MonoBehaviour
     {
         if (isDashing) return;
         
-        // Don't override velocity if being knocked back
+        // Don't override velocity if being knocked back or if X position is locked during climbing
         if (knockback == null || !knockback.IsBeingKnockedBack)
         {
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            if (isXPositionLocked && isClimbing)
+            {
+                // During climbing, don't apply horizontal movement - position is locked
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+            else
+            {
+                // Normal horizontal movement when not climbing
+                rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            }
         }
     }
 
@@ -224,13 +245,6 @@ public class PlayerController : MonoBehaviour
         if (health != null && health.isInvincibleStatus())
         {
             // Don't override damage animation - let Health component handle it
-            return;
-        }
-        
-        // Check if player is being knocked back - this takes priority over movement animations
-        if (knockback != null && knockback.IsBeingKnockedBack)
-        {
-            // Don't override animations during knockback
             return;
         }
         
@@ -350,17 +364,26 @@ public class PlayerController : MonoBehaviour
             StopClimbing();
             return;
         }
+        
         if (verticalMovement != 0)
         {
             isClimbing = true;
+            isXPositionLocked = true;
             rb.gravityScale = 0f; // turns off gravity while climbing so the player doesn't fall
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalMovement * climbSpeed);
+            
+            // Lock X position to the climbable object and only allow Y movement
+            Vector3 lockedPosition = new Vector3(climbableObjectXPosition, transform.position.y, transform.position.z);
+            transform.position = lockedPosition;
+            rb.linearVelocity = new Vector2(0f, verticalMovement * climbSpeed); // Force X velocity to 0
         }
 
         if (verticalMovement == 0 && isClimbing)
         {
             rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+            // Keep X position locked and stop Y movement
+            Vector3 lockedPosition = new Vector3(climbableObjectXPosition, transform.position.y, transform.position.z);
+            transform.position = lockedPosition;
+            rb.linearVelocity = new Vector2(0f, 0f); // Stop all movement
         }
 
         if (Input.GetButtonDown("Jump") && isClimbing)
@@ -369,7 +392,6 @@ public class PlayerController : MonoBehaviour
             if (dialogueManager != null && dialogueManager.IsDialogueActive) return;
             if (DialogueStarter.IsPlayerInAnyDialogueRange()) return;
             
-            Debug.Log("Jumping off wall");
             StopClimbing();
             StartCoroutine(ClimbCooldown(0.2f));
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 1.2f);
@@ -384,6 +406,7 @@ public class PlayerController : MonoBehaviour
     private void StopClimbing()
     {
         isClimbing = false;
+        isXPositionLocked = false; // Unlock X position
         rb.gravityScale = baseGravity;
     }
 
@@ -434,18 +457,56 @@ public class PlayerController : MonoBehaviour
 
     private bool IsClimbable()
     {
-        if (Physics2D.OverlapBox(wallCheckRight.position, wallCheckRadius, 0f, climbableLayer) ||
-            Physics2D.OverlapBox(wallCheckLeft.position, wallCheckRadius, 0f, climbableLayer))
+        Collider2D rightWall = Physics2D.OverlapBox(wallCheckRight.position, wallCheckRadius, 0f, climbableLayer);
+        Collider2D leftWall = Physics2D.OverlapBox(wallCheckLeft.position, wallCheckRadius, 0f, climbableLayer);
+        
+        if (rightWall != null)
         {
+            climbableObjectXPosition = GetClimbableTileXPosition(rightWall, wallCheckRight.position);
             return true;
         }
+        else if (leftWall != null)
+        {
+            climbableObjectXPosition = GetClimbableTileXPosition(leftWall, wallCheckLeft.position);
+            return true;
+        }
+        
         return false;
+    }
+    
+    private float GetClimbableTileXPosition(Collider2D climbableCollider, Vector3 checkPosition)
+    {
+        // Check if it's a tilemap
+        TilemapCollider2D tilemapCollider = climbableCollider.GetComponent<TilemapCollider2D>();
+        if (tilemapCollider != null)
+        {
+            // Get the tilemap and grid components
+            Tilemap tilemap = climbableCollider.GetComponent<Tilemap>();
+            Grid grid = tilemap.layoutGrid;
+            
+            if (tilemap != null && grid != null)
+            {
+                // Convert world position to cell position
+                Vector3Int cellPosition = grid.WorldToCell(checkPosition);
+                
+                // Get the world position of the center of this specific tile
+                Vector3 tileWorldPos = grid.CellToWorld(cellPosition);
+                
+                // Add half cell size to get the center of the tile
+                tileWorldPos.x += grid.cellSize.x * 0.5f;
+                
+                return tileWorldPos.x;
+            }
+        }
+        
+        // Fallback for regular colliders (not tilemaps)
+        return climbableCollider.transform.position.x;
     }
 
 
-    /*
-     * check ground methods
-     */
+
+    // check ground methods
+
     private bool IsGrounded()
     {
         float lastGrounded = 0f;
@@ -469,7 +530,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player triggered with " + collision.name);
+        // Player triggered with collision
     }
 
     public void ResetAnimations()
@@ -527,7 +588,6 @@ public class PlayerController : MonoBehaviour
         // Re-enable player input
         SetInputEnabled(true);
         
-        Debug.Log("Player respawned at last grounded position");
     }
 
 }

@@ -143,7 +143,6 @@ public class CheckpointScript : MonoBehaviour
         {
             playerHealth.RespawnPoint = this.transform;
             playerHealth.Heal(playerHealth.maxHealth); 
-            Debug.Log("Checkpoint activated! Player sitting animation triggered and respawn point updated.");
         }
         
         // Reset timer to allow reactivation
@@ -177,7 +176,6 @@ public class CheckpointScript : MonoBehaviour
         }
         
         isPlayerSitting = false;
-        Debug.Log("Player stopped sitting - isSitting set to false");
     }
 
     private void OnDrawGizmosSelected()

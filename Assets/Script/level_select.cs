@@ -30,12 +30,11 @@ public class Level_select : MonoBehaviour
         {
             if (levelToLoad != null)
             {
-                Debug.Log("Loading level: " + levelToLoad.name);
                 LoadLevel(levelToLoad.name);
             }
             else
             {
-                Debug.LogWarning("No level assigned to Level_select on " + gameObject.name);
+                // No level assigned
             }
         }
     }
