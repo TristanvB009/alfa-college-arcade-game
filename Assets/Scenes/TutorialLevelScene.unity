@@ -61530,18 +61530,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3483492225435222049, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
-      propertyPath: m_Size.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483492225435222049, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5861905700404618735, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
-      propertyPath: interactionRadius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8599052565137063070, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
       propertyPath: m_Name
       value: CheckpointPreHazardPit
@@ -116375,7 +116363,7 @@ Tilemap:
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 9, y: 5, z: 0}
@@ -116494,7 +116482,7 @@ Tilemap:
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: 975423156, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 69, y: 12, z: 0}
@@ -116545,7 +116533,7 @@ Tilemap:
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
       - {fileID: -1240626031211899577, guid: 76b4ee3e7af644b45b3abd62fddfb81f, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 62, y: 19, z: 0}
@@ -116968,14 +116956,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3483492225435222049, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
-      propertyPath: m_Size.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483492225435222049, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8599052565137063070, guid: 6c71fd883d4b56649a0474561470c1e9, type: 3}
       propertyPath: m_Name
       value: CheckpointJohnBusinessArea
@@ -117081,10 +117061,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3263175614833953919, guid: 89e3e5466d3307c429b216b96243c689, type: 3}
-      propertyPath: speed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3263175614833953919, guid: 89e3e5466d3307c429b216b96243c689, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1147626684}
@@ -117092,14 +117068,6 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 1135236730}
-    - target: {fileID: 4139623247807327189, guid: 89e3e5466d3307c429b216b96243c689, type: 3}
-      propertyPath: m_Size.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4139623247807327189, guid: 89e3e5466d3307c429b216b96243c689, type: 3}
-      propertyPath: m_Size.y
-      value: 0.925
-      objectReference: {fileID: 0}
     - target: {fileID: 5903191455718190286, guid: 89e3e5466d3307c429b216b96243c689, type: 3}
       propertyPath: m_Name
       value: FrontVacuumBot
@@ -117525,29 +117493,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2469802820753201992, guid: db606b965863c9c46b90b4ebe34623bc, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 2636545058400467455}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db606b965863c9c46b90b4ebe34623bc, type: 3}
---- !u!1 &2636545058400467454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2469802820753201992, guid: db606b965863c9c46b90b4ebe34623bc, type: 3}
-  m_PrefabInstance: {fileID: 2636545058400467453}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2636545058400467455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2636545058400467454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 631ae52dae5ab5746b1da735f698b1d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelToLoadName: 
 --- !u!1001 &4115084190154939851
 PrefabInstance:
   m_ObjectHideFlags: 0
