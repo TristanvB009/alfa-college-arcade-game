@@ -25,6 +25,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI puzzleNameText;
     [SerializeField] private Button submitButton;
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button resetButton;
     [SerializeField] private TextMeshProUGUI feedbackText;
     
     [Header("Puzzle System")]
@@ -87,8 +88,8 @@ public class PowerTerminalMinigame : MonoBehaviour
         CodePuzzle puzzle2 = new CodePuzzle
         {
             puzzleName = "Open Energy Gates",
-            brokenCode = "openGate(0);\n// 0 = Closed  |  1 = Open\n",
-            correctCode = "openGate(1);\n// 0 = Closed  |  1 = Open\n",
+            brokenCode = "openGate(0);\n// (0 = Closed  |  1 = Open)\n",
+            correctCode = "openGate(1);\n// (0 = Closed  |  1 = Open)\n",
             hintText = "The gates need to be opened to allow passage. Change the parameter to open the gate."
         };
         
@@ -113,6 +114,9 @@ public class PowerTerminalMinigame : MonoBehaviour
         
         if (closeButton != null)
             closeButton.onClick.AddListener(CloseMinigame);
+        
+        if (resetButton != null)
+            resetButton.onClick.AddListener(ResetPuzzle);
     }
     
     public void StartMinigame(int terminalID, PowerTerminal powerTerminal)
@@ -191,6 +195,21 @@ public class PowerTerminalMinigame : MonoBehaviour
                    .Replace(" ", "")
                    .Replace("\t", "")
                    .ToLowerInvariant();
+    }
+    
+    public void ResetPuzzle()
+    {
+        // Reset the code input field to the original broken code
+        if (currentPuzzle != null && codeInputField != null)
+        {
+            codeInputField.text = currentPuzzle.brokenCode;
+        }
+        
+        // Clear feedback text
+        if (feedbackText != null)
+        {
+            feedbackText.text = "";
+        }
     }
     
     private void OnPuzzleSolved()
@@ -276,18 +295,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     {
         Debug.Log("🎉 ALL TERMINALS ACTIVATED! OBJECTIVE COMPLETED!");
         
-        // You can add more completion logic here:
-        // - Play completion sound
-        // - Trigger next objective
-        // - Open doors
-        // - Show completion UI
-        
-        // Example: Find and notify an objective manager if it exists
-        // ObjectiveManager objectiveManager = FindFirstObjectByType<ObjectiveManager>();
-        // if (objectiveManager != null)
-        // {
-        //     objectiveManager.CompleteObjective("ActivateAllTerminals");
-        // }
+        // You can add more completion logic here
     }
     
     public void CloseMinigame()

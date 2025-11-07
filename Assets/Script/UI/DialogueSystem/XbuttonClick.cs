@@ -17,6 +17,9 @@ public class XbuttonClick : MonoBehaviour
     [Tooltip("The PowerTerminal to close minigame panel on.")]
     public PowerTerminal powerTerminal;
     
+    [Tooltip("The PowerTerminalMinigame to close minigame on.")]
+    public PowerTerminalMinigame powerTerminalMinigame;
+    
     private Button button;
 
     public enum ActionType
@@ -76,7 +79,17 @@ public class XbuttonClick : MonoBehaviour
     
     private void SetupMinigameAction()
     {
-        // Find PowerTerminal if not assigned
+        // Find PowerTerminalMinigame if not assigned
+        if (powerTerminalMinigame == null)
+        {
+            powerTerminalMinigame = FindFirstObjectByType<PowerTerminalMinigame>();
+            if (powerTerminalMinigame == null)
+            {
+                // No PowerTerminalMinigame found
+            }
+        }
+        
+        // Find PowerTerminal if not assigned (backup)
         if (powerTerminal == null)
         {
             powerTerminal = FindFirstObjectByType<PowerTerminal>();
@@ -129,13 +142,19 @@ public class XbuttonClick : MonoBehaviour
     
     public void CloseMinigamePanel()
     {
-        if (powerTerminal != null)
+        // Prefer PowerTerminalMinigame's CloseMinigame method as it properly handles player controls
+        if (powerTerminalMinigame != null)
         {
+            powerTerminalMinigame.CloseMinigame();
+        }
+        else if (powerTerminal != null)
+        {
+            // Fallback to PowerTerminal method (but this won't re-enable player controls)
             powerTerminal.CloseMinigamePanel();
         }
         else
         {
-            // PowerTerminal reference is null
+            // No references found
         }
     }
 }
