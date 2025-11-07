@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
 public class MovingTile : MonoBehaviour
 {
@@ -15,7 +15,11 @@ public class MovingTile : MonoBehaviour
 
     public void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        // Keep the reference but don't rely on parenting to move the player
+        var playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            playerController = playerObj.GetComponent<PlayerController>();
+
         rb = GetComponent<Rigidbody2D>();
         DirectionCalculate();
     }
@@ -29,16 +33,13 @@ public class MovingTile : MonoBehaviour
         }
         Vector3 targetPosition = waypoints[currentTargetIndex].position;
         float step = speed * Time.deltaTime;
-        // Move the tile towards the target position.
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
         DirectionCalculate();
-        // Check if the tile has reached the target position.
         if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
         {
-            // Update to the next waypoint, looping back to the start if necessary.
             currentTargetIndex = (currentTargetIndex + 1) % waypoints.Count;
         }
     }
+
     private void FixedUpdate()
     {
         rb.linearVelocity = moveDirection * speed;
@@ -49,23 +50,43 @@ public class MovingTile : MonoBehaviour
         moveDirection = (waypoints[currentTargetIndex].position - transform.position).normalized;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    // Use collision to notify the player controller instead of changing the transform parent.
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("test");
-            playerController.isOnMovingTile = true;
-            playerController.movingTileRigidbody = GetComponent<Rigidbody2D>();
+            var pc = collision.gameObject.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.isOnMovingTile = true;
+                pc.movingTileRigidbody = rb;
+            }
         }
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            playerController.isOnMovingTile = false;
-            playerController.movingTileRigidbody = null;
+            var pc = collision.gameObject.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.isOnMovingTile = false;
+                pc.movingTileRigidbody = null;
+            }
         }
+    }
 
+    private void OnDrawGizmos()
+    {
+        // Draw lines between waypoints for visualization in the editor
+        if (waypoints == null || waypoints.Count < 2) return;
+        Gizmos.color = Color.green;
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            Vector3 current = waypoints[i].position;
+            Vector3 next = waypoints[(i + 1) % waypoints.Count].position;
+            Gizmos.DrawLine(current, next);
+        }
     }
 }

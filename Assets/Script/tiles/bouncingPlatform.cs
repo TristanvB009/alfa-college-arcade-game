@@ -4,7 +4,7 @@ public class bouncingPlatform : MonoBehaviour
 {
     public GameObject Player;
     public Rigidbody2D playerRb;
-    public float BounceFactor;
+    public float BounceForce;
 
     public void Awake()
     {
@@ -16,7 +16,7 @@ public class bouncingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerRb.AddForce(new Vector2(0, BounceFactor * 100));
+            playerRb.AddForce(new Vector2(0, BounceForce * 10),ForceMode2D.Impulse );
         }
     }
 }

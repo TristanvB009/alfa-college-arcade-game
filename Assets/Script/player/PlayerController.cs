@@ -137,21 +137,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         }
 
-        // Determine target horizontal velocity
-        float targetXVelocity;
-        if (isOnMovingTile && movingTileRigidbody != null)
-        {
-            Debug.Log("On moving tile, adjusting velocity");
-            targetXVelocity = horizontalMovement + movingTileRigidbody.linearVelocity.x * moveSpeed;
-
-        }
-        else
-        {
-            targetXVelocity = horizontalMovement * moveSpeed;
-        }
-
-        // Apply horizontal velocity while preserving current vertical velocity
-        rb.linearVelocity = new Vector2(targetXVelocity, rb.linearVelocity.y);
+        // Remove velocity assignment from Update. Final horizontal velocity is set in FixedUpdate.
         Movement();
 
         // Always call UpdateAnimationStates, but let it handle its own protection logic
@@ -167,20 +153,26 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (isDashing) return;
-        
-        // Don't override velocity if being knocked back or if X position is locked during climbing
-        if (knockback == null || !knockback.IsBeingKnockedBack)
+
+        // Don't override velocity if being knocked back
+        if (knockback != null && knockback.IsBeingKnockedBack) return;
+
+        // compute platform velocity to add (do not multiply by moveSpeed)
+        float platformVelX = 0f;
+        if (isOnMovingTile && movingTileRigidbody != null)
         {
-            if (isXPositionLocked && isClimbing)
-            {
-                // During climbing, don't apply horizontal movement - position is locked
-                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-            }
-            else
-            {
-                // Normal horizontal movement when not climbing
-                rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
-            }
+            platformVelX = movingTileRigidbody.linearVelocity.x;
+        }
+
+        if (isXPositionLocked && isClimbing)
+        {
+            // During climbing, don't apply horizontal movement - position is locked
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        }
+        else
+        {
+            // Normal horizontal movement when not climbing
+            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
         }
     }
 
@@ -519,8 +511,6 @@ public class PlayerController : MonoBehaviour
         return climbableCollider.transform.position.x;
     }
 
-
-
     // check ground methods
 
     private bool IsGrounded()
@@ -541,12 +531,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawCube(groundCheck.position, groundCheckRadius);
         Gizmos.DrawCube(wallCheckRight.position, wallCheckRadius);
         Gizmos.DrawCube(wallCheckLeft.position, wallCheckRadius);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Player triggered with collision
     }
 
     public void ResetAnimations()

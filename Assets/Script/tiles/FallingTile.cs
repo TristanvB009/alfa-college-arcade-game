@@ -6,15 +6,21 @@ public class FallingTile : MonoBehaviour
     private Vector3 initialPosition;
     public float fallDelay;
     public float resetDelay;
+    private bool hasFallen = false;
+
+
     private Rigidbody2D rb;
     private Animation anim;
-    private bool hasFallen = false;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D col;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
+        col = GetComponent<Collider2D>();
         anim = GetComponent<Animation>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -49,8 +55,9 @@ public class FallingTile : MonoBehaviour
         transform.position = initialPosition;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        // re-enable the collider
-        var col = GetComponent<Collider2D>();
-        if (col != null) col.enabled = true;
+        anim.Stop();
+        spriteRenderer.enabled = true;
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        col.enabled = true;
     }
 }
