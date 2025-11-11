@@ -62,7 +62,7 @@ public class PowerTerminalMinigame : MonoBehaviour
             InitializeSharedPuzzles();
         }
         
-        // Ensure we have the right number of solved states
+        // Ensure the right number of solved states
         while (puzzlesSolved.Count < totalTerminals)
         {
             puzzlesSolved.Add(false);
@@ -75,7 +75,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     {
         sharedPuzzles.Clear();
         
-        // Puzzle 1: Variable Assignment
+        // Puzzle 1
         CodePuzzle puzzle1 = new CodePuzzle
         {
             puzzleName = "Power Core Initialization",
@@ -84,7 +84,7 @@ public class PowerTerminalMinigame : MonoBehaviour
             hintText = "The power level needs to be sufficient to activate the core. Try a higher value."
         };
         
-        // Puzzle 2: Logic Fix
+        // Puzzle 2
         CodePuzzle puzzle2 = new CodePuzzle
         {
             puzzleName = "Open Energy Gates",
@@ -93,7 +93,7 @@ public class PowerTerminalMinigame : MonoBehaviour
             hintText = "The gates need to be opened to allow passage. Change the parameter to open the gate."
         };
         
-        // Puzzle 3: Function Call
+        // Puzzle 3
         CodePuzzle puzzle3 = new CodePuzzle
         {
             puzzleName = "System Activation",
@@ -129,14 +129,13 @@ public class PowerTerminalMinigame : MonoBehaviour
             InitializePuzzleSystem();
         }
         
-        // Check if this terminal is already solved
+        // Check if the terminal is already solved
         if (currentTerminalID < puzzlesSolved.Count && puzzlesSolved[currentTerminalID])
         {
             ShowAlreadySolvedMessage();
             return;
         }
         
-        // Load the puzzle for this terminal
         LoadPuzzle();
         
         if (minigamePanel != null)
@@ -144,7 +143,6 @@ public class PowerTerminalMinigame : MonoBehaviour
             minigamePanel.SetActive(true);
         }
         
-        // Disable player movement and terminal interactions
         DisablePlayerControls();
     }
     
@@ -154,7 +152,7 @@ public class PowerTerminalMinigame : MonoBehaviour
         {
             currentPuzzle = sharedPuzzles[currentTerminalID];
             
-            // Update UI with puzzle data
+            // Update UI with the puzzle data
             if (puzzleNameText != null)
                 puzzleNameText.text = currentPuzzle.puzzleName;
             
@@ -176,7 +174,7 @@ public class PowerTerminalMinigame : MonoBehaviour
         string submittedCode = codeInputField.text.Trim();
         string correctCode = currentPuzzle.correctCode.Trim();
         
-        // Check if the code matches (ignoring whitespace differences)
+        // Check if the code matches
         if (NormalizeCode(submittedCode) == NormalizeCode(correctCode))
         {
             OnPuzzleSolved();
@@ -189,7 +187,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private string NormalizeCode(string code)
     {
-        // Remove extra whitespaces, normalize line endings, and make case-insensitive for comparison
+        // Remove extra whitespaces, normalize line endings, and make capital letter insensitive for the comparison
         return code.Replace("\r\n", "\n")
                    .Replace("\r", "\n")
                    .Replace(" ", "")
@@ -199,13 +197,11 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     public void ResetPuzzle()
     {
-        // Reset the code input field to the original broken code
         if (currentPuzzle != null && codeInputField != null)
         {
             codeInputField.text = currentPuzzle.brokenCode;
         }
         
-        // Clear feedback text
         if (feedbackText != null)
         {
             feedbackText.text = "";
@@ -214,7 +210,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private void OnPuzzleSolved()
     {
-        // Mark this terminal as solved
+        // Mark the terminal as solved
         if (currentTerminalID < puzzlesSolved.Count)
         {
             puzzlesSolved[currentTerminalID] = true;
@@ -226,7 +222,7 @@ public class PowerTerminalMinigame : MonoBehaviour
             feedbackText.color = Color.green;
         }
         
-        // Close minigame and activate terminal
+        // Close minigame panel and activate terminal
         Invoke(nameof(CompletePuzzle), 1.5f);
     }
     
@@ -240,7 +236,6 @@ public class PowerTerminalMinigame : MonoBehaviour
             currentPowerTerminal.OnMinigameComplete();
         }
         
-        // Check if all terminals are solved
         CheckAllTerminalsCompleted();
     }
     
@@ -252,7 +247,6 @@ public class PowerTerminalMinigame : MonoBehaviour
             feedbackText.color = Color.red;
         }
         
-        // Clear feedback after 2 seconds
         Invoke(nameof(ClearFeedback), 2f);
     }
     
@@ -293,7 +287,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private void OnAllTerminalsCompleted()
     {
-        Debug.Log("🎉 ALL TERMINALS ACTIVATED! OBJECTIVE COMPLETED!");
+        Debug.Log("ALL TERMINALS ACTIVATED! OBJECTIVE COMPLETED!");
         
         // You can add more completion logic here
     }
@@ -305,13 +299,12 @@ public class PowerTerminalMinigame : MonoBehaviour
             minigamePanel.SetActive(false);
         }
         
-        // Notify the power terminal to show UI again
+        // Show UI again
         if (currentPowerTerminal != null)
         {
             currentPowerTerminal.CloseMinigamePanel();
         }
         
-        // Re-enable player controls
         EnablePlayerControls();
     }
     
@@ -334,7 +327,7 @@ public class PowerTerminalMinigame : MonoBehaviour
         return terminalID >= 0 && terminalID < puzzlesSolved.Count && puzzlesSolved[terminalID];
     }
     
-    // Debug method to reset all puzzles (for testing)
+    // Debug method to reset all puzzles
     [ContextMenu("Reset All Puzzles")]
     public void ResetAllPuzzles()
     {
@@ -345,9 +338,6 @@ public class PowerTerminalMinigame : MonoBehaviour
         Debug.Log("All puzzles reset!");
     }
     
-    /// <summary>
-    /// Disables player movement and terminal interactions
-    /// </summary>
     private void DisablePlayerControls()
     {
         isMinigameActive = true;
@@ -360,7 +350,7 @@ public class PowerTerminalMinigame : MonoBehaviour
         
         if (playerController != null)
         {
-            // Disable player input (assuming PlayerController has InputEnabled field)
+            // Disable player input
             var inputEnabledField = typeof(PlayerController).GetField("InputEnabled", 
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             if (inputEnabledField != null)
@@ -384,9 +374,6 @@ public class PowerTerminalMinigame : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Re-enables player movement and terminal interactions
-    /// </summary>
     private void EnablePlayerControls()
     {
         isMinigameActive = false;
@@ -415,9 +402,6 @@ public class PowerTerminalMinigame : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Check if minigame is currently active
-    /// </summary>
     public bool IsMinigameActive()
     {
         return isMinigameActive;
