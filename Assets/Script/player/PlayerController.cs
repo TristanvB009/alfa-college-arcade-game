@@ -51,6 +51,21 @@ public class PlayerController : MonoBehaviour
     private bool isClimbing = false;
     private bool ClimbingEnabled = true;
 
+<<<<<<< Updated upstream
+=======
+    [Header("Knockback")]
+    private Knockback knockback;
+    
+    [Header("Health")]
+    private Health health;
+
+    [Header("Audio")]
+    [SerializeField] private float footstepInterval = 0.20f; // seconds between footsteps
+    [SerializeField] private float footstepMoveThreshold = 0.05f; // min horizontal speed to consider "moving"
+    private float _footstepTimer = 0f;
+
+
+>>>>>>> Stashed changes
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -78,7 +93,48 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (isDashing) return;
+<<<<<<< Updated upstream
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+=======
+
+        // Don't override velocity if being knocked back or if X position is locked during climbing
+        if (knockback == null || !knockback.IsBeingKnockedBack)
+        {
+            if (isXPositionLocked && isClimbing)
+            {
+                // During climbing, don't apply horizontal movement - position is locked
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+            else
+            {
+                // Normal horizontal movement when not climbing
+                rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            }
+        }
+
+        // Footstep audio logic (runs every FixedUpdate for consistent timing)
+        bool isMoving = Mathf.Abs(rb.linearVelocity.x) > footstepMoveThreshold;
+        bool onGround = IsGrounded() && !isClimbing;
+        bool canPlayFootsteps = (knockback == null || !knockback.IsBeingKnockedBack);
+
+        if (isMoving && onGround && canPlayFootsteps)
+        {
+            _footstepTimer += Time.fixedDeltaTime;
+            if (_footstepTimer >= footstepInterval)
+            {
+                // lower footsteps volume to 60% of master SFX
+                SoundEffectManager.Play("Footsteps", 0.3f);
+                _footstepTimer = 0f;
+            }
+        }
+        else
+        {
+            // Reset timer so footsteps don't immediately trigger after a brief stop.
+            // If you prefer an immediate footstep when movement resumes, set to footstepInterval instead:
+            // _footstepTimer = footstepInterval;
+            _footstepTimer = 0f;
+        }
+>>>>>>> Stashed changes
     }
 
     private void Movement()
@@ -129,6 +185,7 @@ public class PlayerController : MonoBehaviour
 
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        SoundEffectManager.Play("Jump");
         isJumping = true;
     }
     public void cutJumpShort()
@@ -189,6 +246,13 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+<<<<<<< Updated upstream
+=======
+        // Set the minimum time the dash animation should stay active using the configurable duration
+        dashAnimationEndTime = Time.time + dashAnimationMinDuration;
+        animator.SetBool ("isDashing", true);
+        SoundEffectManager.Play("Dash");
+>>>>>>> Stashed changes
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         tr.emitting = true;
