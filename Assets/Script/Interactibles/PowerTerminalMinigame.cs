@@ -287,9 +287,27 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private void OnAllTerminalsCompleted()
     {
-        Debug.Log("ALL TERMINALS ACTIVATED! OBJECTIVE COMPLETED!");
+        Debug.Log("🎉 ALL TERMINALS ACTIVATED! OBJECTIVE COMPLETED!");
         
-        // You can add more completion logic here
+        // Find and trigger all TilemapChanger scripts to change tiles to colored versions
+        TilemapChanger[] tilemapChangers = FindObjectsByType<TilemapChanger>(FindObjectsSortMode.None);
+        
+        if (tilemapChangers.Length > 0)
+        {
+            Debug.Log($"Found {tilemapChangers.Length} TilemapChanger(s). Changing tiles to colored versions...");
+            
+            foreach (TilemapChanger tilemapChanger in tilemapChangers)
+            {
+                if (tilemapChanger != null)
+                {
+                    tilemapChanger.ChangeTilesToColored();
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No TilemapChanger scripts found in the scene.");
+        }
     }
     
     public void CloseMinigame()
