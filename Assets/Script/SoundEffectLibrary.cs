@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -37,14 +38,45 @@ public class SoundEffectLibrary : MonoBehaviour
     public void PreloadAll()
     {
         if (soundEffectGroups == null) return;
+
+        // Kick off load for each clip; start a coroutine to wait until loading completes.
         foreach (var group in soundEffectGroups)
         {
             if (group.audioClips == null) continue;
             foreach (var clip in group.audioClips)
             {
                 if (clip == null) continue;
+                if (clip.loadState == AudioDataLoadState.Unloaded)
+                    clip.LoadAudioData(); // request load/decompression
             }
         }
+
+        // Optional: wait until all clips are loaded (runs asynchronously)
+        StartCoroutine(WaitForAllLoads());
+    }
+
+    private IEnumerator WaitForAllLoads()
+    {
+        bool anyLoading;
+        do
+        {
+            anyLoading = false;
+            foreach (var group in soundEffectGroups)
+            {
+                if (group.audioClips == null) continue;
+                foreach (var clip in group.audioClips)
+                {
+                    if (clip == null) continue;
+                    if (clip.loadState == AudioDataLoadState.Loading)
+                    {
+                        anyLoading = true;
+                        break;
+                    }
+                }
+                if (anyLoading) break;
+            }
+            yield return null;
+        } while (anyLoading);
     }
 }
 

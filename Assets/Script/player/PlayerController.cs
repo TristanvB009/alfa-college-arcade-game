@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Health")]
     private Health health;
+    [Header("Audio")]
+    [SerializeField] private float footstepInterval = 0.20f; // seconds between footsteps
+    [SerializeField] private float footstepMoveThreshold = 0.1f; // min horizontal speed to consider "moving"
+    private float _footstepTimer = 0f;
+
+
 
     public Rigidbody2D movingTileRigidbody;
 
@@ -146,7 +152,28 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
+
+        // Footstep audio
+        UpdateFootstepAudio();
     }
+
+    private void UpdateFootstepAudio()
+    {
+        // Only play footsteps if grounded and moving horizontally
+        if (!IsGrounded() || Mathf.Abs(horizontalMovement) < footstepMoveThreshold)
+        {
+            _footstepTimer = 0f; // reset timer when not moving
+            return;
+        }
+
+        _footstepTimer += Time.deltaTime;
+        if (_footstepTimer >= footstepInterval)
+        {
+            SoundEffectManager.Play("Footsteps", 0.4f); // slightly quieter than full volume
+            _footstepTimer = 0f;
+        }
+    }
+
     void FixedUpdate()
     {
         if (isDashing) return;
@@ -351,6 +378,7 @@ public class PlayerController : MonoBehaviour
 
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        SoundEffectManager.Play("Jump");
         isJumping = true;
     }
     public void cutJumpShort()
@@ -419,7 +447,7 @@ public class PlayerController : MonoBehaviour
         ClimbingEnabled = false;
         yield return new WaitForSeconds(duration);
         ClimbingEnabled = true;
-    }
+    }  
 
     private IEnumerator Dash()
     {
@@ -428,6 +456,7 @@ public class PlayerController : MonoBehaviour
         // Set the minimum time the dash animation should stay active using the configurable duration
         dashAnimationEndTime = Time.time + dashAnimationMinDuration;
         animator.SetBool("isDashing", true);
+        SoundEffectManager.Play("Dash");
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         tr.emitting = true;
