@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float footstepMoveThreshold = 0.05f; // min horizontal speed to consider "moving"
     private float _footstepTimer = 0f;
 
+    [Header("Audio")]
+    [SerializeField] private float footstepInterval = 0.20f; // seconds between footsteps
+    [SerializeField] private float footstepMoveThreshold = 0.05f; // min horizontal speed to consider "moving"
+    private float _footstepTimer = 0f;
+
 
 >>>>>>> Stashed changes
     private void Awake()
@@ -185,6 +190,7 @@ public class PlayerController : MonoBehaviour
 
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        SoundEffectManager.Play("Jump");
         SoundEffectManager.Play("Jump");
         isJumping = true;
     }
