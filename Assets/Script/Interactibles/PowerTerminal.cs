@@ -10,6 +10,11 @@ public class PowerTerminal : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator terminalAnimator;
     
+    [Header("Lighting")]
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D spotlight;
+    [SerializeField] private Color offColor = Color.red;
+    [SerializeField] private Color onColor = Color.green;
+    
     [Header("UI References")]
     [SerializeField] private HealthBar playerHealthBar;
     [SerializeField] private GameObject[] uiElementsToHide;
@@ -33,6 +38,18 @@ public class PowerTerminal : MonoBehaviour
         if (terminalAnimator == null)
         {
             terminalAnimator = GetComponent<Animator>();
+        }
+        
+        // Get the spotlight component if not assigned
+        if (spotlight == null)
+        {
+            spotlight = GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>();
+        }
+        
+        // Set initial light color to red (off state)
+        if (spotlight != null)
+        {
+            spotlight.color = offColor;
         }
     }
     
@@ -126,6 +143,12 @@ public class PowerTerminal : MonoBehaviour
         if (terminalAnimator != null)
         {
             terminalAnimator.SetBool("IsOn", true);
+        }
+        
+        // Change spotlight color from red to green
+        if (spotlight != null)
+        {
+            spotlight.color = onColor;
         }
         
         // Mark terminal as activated

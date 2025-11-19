@@ -40,6 +40,13 @@ public class PowerTerminalMinigame : MonoBehaviour
     [Header("Static Puzzle Data")]
     [SerializeField] private bool initializePuzzles = false;
     
+    [Header("Global Lighting")]
+    [Tooltip("Global Light 2D to set intensity to 1 when all terminals complete")]
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D globalLight;
+    
+    [Tooltip("Spotlight 2D to disable when all terminals complete")]
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D spotlightToDisable;
+    
     private CodePuzzle currentPuzzle;
     [Header("Player Control")]
     private PlayerController playerController;
@@ -307,6 +314,62 @@ public class PowerTerminalMinigame : MonoBehaviour
         else
         {
             Debug.Log("No TilemapChanger scripts found in the scene.");
+        }
+        
+        // Control global lighting
+        ControlGlobalLighting();
+    }
+
+    private void ControlGlobalLighting()
+    {
+        // Set global light intensity to 1 (full brightness)
+        if (globalLight == null)
+        {
+            // Try to find a global light automatically
+            UnityEngine.Rendering.Universal.Light2D[] allLights = FindObjectsByType<UnityEngine.Rendering.Universal.Light2D>(FindObjectsSortMode.None);
+            foreach (var light in allLights)
+            {
+                if (light.lightType == UnityEngine.Rendering.Universal.Light2D.LightType.Global)
+                {
+                    globalLight = light;
+                    break;
+                }
+            }
+        }
+        
+        if (globalLight != null)
+        {
+            globalLight.intensity = 1f;
+            Debug.Log($"Set Global Light '{globalLight.name}' intensity to 1.0");
+        }
+        else
+        {
+            Debug.Log("No Global Light 2D found in the scene.");
+        }
+        
+        // Disable the specified spotlight
+        if (spotlightToDisable == null)
+        {
+            // Try to find a spotlight to disable automatically (look for one with "disable" in name)
+            UnityEngine.Rendering.Universal.Light2D[] allLights = FindObjectsByType<UnityEngine.Rendering.Universal.Light2D>(FindObjectsSortMode.None);
+            foreach (var light in allLights)
+            {
+                if (light.name.ToLower().Contains("disable") || light.name.ToLower().Contains("main") || light.name.ToLower().Contains("darkness"))
+                {
+                    spotlightToDisable = light;
+                    break;
+                }
+            }
+        }
+        
+        if (spotlightToDisable != null)
+        {
+            spotlightToDisable.enabled = false;
+            Debug.Log($"Disabled Spotlight '{spotlightToDisable.name}'");
+        }
+        else
+        {
+            Debug.Log("No Spotlight 2D to disable found in the scene.");
         }
     }
     
