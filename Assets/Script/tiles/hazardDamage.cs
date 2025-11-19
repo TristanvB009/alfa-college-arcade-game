@@ -85,8 +85,10 @@ public class hazardDamage : MonoBehaviour
         // Now call the respawn after knockback is finished (only if player didn't die)
         if (playerController != null)
         {
-            playerController.LastGroundedRespawn();
+            playerController.SubCheckpoints();
         }
+
+
     }
     
     private IEnumerator SpawnDamageEffect(Vector3 position, float facingDirection)
