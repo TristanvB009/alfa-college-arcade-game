@@ -720,9 +720,13 @@ MonoBehaviour:
   targetTilemap: {fileID: 76469953}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 220aafbc62fdc03448896dcac085e651, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: a285247f0faf68445ac16a3822d844cb, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 5cdb540f7c842ba4c8de635dce392765, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 89932f64c31aac64a8f83da118b6a7e4, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -1187,17 +1191,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 97288110}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: ab69fa3f9a363ff47b163a8d39ec9317, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9b0acbf28e859aa4385acd58de475d48, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 73c8670a04e71d4438899a00faac4f48, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c02f0548d8625344caae18e75a73a32d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 1f967a75d43e9a34bbbfa0bd4bc67565, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ebb254e1f666de24996023616abc8256, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 351835cdc9662614d9d69a4aa20d79d8, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: d22a5383d2c929041a1037275f086e2d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 3fedd7af802dc4b46b86118a6a307e2f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 7a8e354d00a61464995252e45f59b723, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: a5d1ff8d0022ea043a2ab90435c59b6f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: dbc2dad125a1e2245a6133f4c6afb8a4, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -3202,31 +3218,57 @@ MonoBehaviour:
   targetTilemap: {fileID: 133708119}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: ffe14e11d3574d4488d8a078f3b41d27, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e2adc378168e72447afef47e0653bcdc, type: 2}
+    coloredPrefab: {fileID: 4012391572437334332, guid: 22dd73d07640f2b418562aa14c44b3c2, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16caa25663660d046bd2a6ad5d10ba5e, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 31155a09ed2183148976b199a0f9ef00, type: 2}
+    coloredPrefab: {fileID: 8159766691928290508, guid: 8b9bf66ce24f552459e90e549c10f6a3, type: 3}
   - defaultTile: {fileID: 11400000, guid: 45b99d665e7927e4c8d4ff2c811fb35b, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e3240686b19fee34eb658b7bdcc149c2, type: 2}
+    coloredPrefab: {fileID: 2844426496751128188, guid: 051070639636dad42a90a28966584e19, type: 3}
   - defaultTile: {fileID: 11400000, guid: 4bf768fbac080de4a8b72e68c92d0107, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e2b754c0de3b97c488e129fb254a58f0, type: 2}
+    coloredPrefab: {fileID: 6440776024986252636, guid: 7798aa88fb4a3954e8ac943f2505a098, type: 3}
   - defaultTile: {fileID: 11400000, guid: ec81e3763f95cf249882e191bb6a0dc4, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: cf87670c79486a645a59194bd4ec4766, type: 2}
+    coloredPrefab: {fileID: 1804484813941616920, guid: 957cc31bca411d84b8e4da7a5599b148, type: 3}
   - defaultTile: {fileID: 11400000, guid: 3192c1a988bd7614690a8a0ac42c77ea, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: f484865d4ffa0cb44b46cbb7d7e63336, type: 2}
+    coloredPrefab: {fileID: 2170589941302376036, guid: f3635e79c79001748a0f925afbd16d38, type: 3}
   - defaultTile: {fileID: 11400000, guid: ed392f9b955ede140a4311a20583dfc9, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 197293965b187bb4389bb2aab11918aa, type: 2}
+    coloredPrefab: {fileID: 4025819414264400754, guid: 8da1973e2dddd064982d5e768e656af2, type: 3}
   - defaultTile: {fileID: 11400000, guid: b8a2efc410ff5be4e84afb768d7115a0, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 7735c83c00f9c324b933690bd11bd721, type: 2}
+    coloredPrefab: {fileID: 7194704628983705836, guid: d0802fac9b218cf4796edc3f4441e0eb, type: 3}
   - defaultTile: {fileID: 11400000, guid: e0bd20f5b11d2a944a110b851c56c012, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 41e7766e2a18715458757b3f4f495fcb, type: 2}
+    coloredPrefab: {fileID: 2464528858614082298, guid: 06abece1fecd1694ea42f54756963232, type: 3}
   - defaultTile: {fileID: 11400000, guid: 89fd9a98f750a754a84efc0e5d9d84e1, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9286f38c14bdee940a2b4526cec60e7c, type: 2}
+    coloredPrefab: {fileID: 1325015538299258603, guid: b682281e02bed1b48b79394ed15404cf, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6da64ddb17ec7234ab8308a4cc13464f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 14654a07c7cba0f448639095c7a75066, type: 2}
+    coloredPrefab: {fileID: 287533020644331261, guid: 8023ab89782096c45b475a8b6367d36d, type: 3}
   - defaultTile: {fileID: 11400000, guid: 362cb8760a150974db210d96f6f87614, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: bdcfdd312f78fe143a5e35d39162d438, type: 2}
+    coloredPrefab: {fileID: 8675684306284562007, guid: a41d5678fef81144eb66f404f7599b9f, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16e742de1db07ce44b52df7af3005758, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 40b0af06b9e3b7e4a8d3f01a899ded86, type: 2}
+    coloredPrefab: {fileID: 8646138367632838660, guid: b19f3b221b7cade42b7caa35856ceecb, type: 3}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -7501,31 +7543,57 @@ MonoBehaviour:
   targetTilemap: {fileID: 195145163}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: ffe14e11d3574d4488d8a078f3b41d27, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9efc46406d61a0647839f3d22caf6115, type: 2}
+    coloredPrefab: {fileID: 2479412285538827314, guid: bc50f4fe2a5712845998f51aff666b3a, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16caa25663660d046bd2a6ad5d10ba5e, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 33f5438ada1729c4eafe3b6a3d7e55d8, type: 2}
+    coloredPrefab: {fileID: 1986993083028159121, guid: 61992280e71671f4f8d6d80a71c3885b, type: 3}
   - defaultTile: {fileID: 11400000, guid: 45b99d665e7927e4c8d4ff2c811fb35b, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 66c48c6e9bae4ce41a068ed6d89cb43f, type: 2}
+    coloredPrefab: {fileID: 7401176693223733038, guid: e0b46ebe770e93649821cfdc0186f5a2, type: 3}
   - defaultTile: {fileID: 11400000, guid: 4bf768fbac080de4a8b72e68c92d0107, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 04804d6b2a0e0fb429f2eac4553e6b45, type: 2}
+    coloredPrefab: {fileID: 5744792119599802219, guid: 3b2026850d096fe4ca108ae6f3195d11, type: 3}
   - defaultTile: {fileID: 11400000, guid: ec81e3763f95cf249882e191bb6a0dc4, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 50ba7e3acedc0e246a7a1f106237f641, type: 2}
+    coloredPrefab: {fileID: 1815051752396244912, guid: 62f432c2a2288844f986dca00f31127b, type: 3}
   - defaultTile: {fileID: 11400000, guid: 3192c1a988bd7614690a8a0ac42c77ea, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: d623ec0220633b04bb6aebee4f439b07, type: 2}
+    coloredPrefab: {fileID: 6636122621747784677, guid: a170568d72d7a7446be44e79d9c0dd2d, type: 3}
   - defaultTile: {fileID: 11400000, guid: ed392f9b955ede140a4311a20583dfc9, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9b38d93fb51f4a845b4c5dcfe107bc34, type: 2}
+    coloredPrefab: {fileID: 8726374484206666816, guid: 0e8d75e59bb73274cbc5a6e8480f85ad, type: 3}
   - defaultTile: {fileID: 11400000, guid: b8a2efc410ff5be4e84afb768d7115a0, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: f26938eaf2d2c784a94eedb313dd723b, type: 2}
+    coloredPrefab: {fileID: 8180549728694121866, guid: f0bc97c39078053409f85ff3e624c2fa, type: 3}
   - defaultTile: {fileID: 11400000, guid: e0bd20f5b11d2a944a110b851c56c012, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 48963dbfc3acca14388901afefaca355, type: 2}
+    coloredPrefab: {fileID: 3018253734624728423, guid: 8338981b716444a4781e5b056bebd14e, type: 3}
   - defaultTile: {fileID: 11400000, guid: 89fd9a98f750a754a84efc0e5d9d84e1, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 1d1924470f7de384eb7c9331b5949230, type: 2}
+    coloredPrefab: {fileID: 76247880741432919, guid: 8e329c7be4f5fb742bf4d1f8c66eba35, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6da64ddb17ec7234ab8308a4cc13464f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: bda7251e2f6219f46ba1a0bfe7fbb07c, type: 2}
+    coloredPrefab: {fileID: 6455230459978198817, guid: c68ef275b66932b4fbc38a39e8bff628, type: 3}
   - defaultTile: {fileID: 11400000, guid: 362cb8760a150974db210d96f6f87614, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 8768a6b375c700e43abfdc77be746752, type: 2}
+    coloredPrefab: {fileID: 3197858912728031515, guid: c344c15d9356f7747885d252467c5756, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16e742de1db07ce44b52df7af3005758, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 32883b6986909994a9a7fd05e92b34cc, type: 2}
+    coloredPrefab: {fileID: 3025588177340525027, guid: 955664cc448179548a5e769b57ffed0e, type: 3}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -9196,9 +9264,13 @@ MonoBehaviour:
   targetTilemap: {fileID: 253771561}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 220aafbc62fdc03448896dcac085e651, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 1f37b1bda106b3f4aba553c2dbe0b7eb, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 5cdb540f7c842ba4c8de635dce392765, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 52fcc4cd09a722149b29f5e35548fc05, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -9252,17 +9324,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 312409288}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: f178e370da8ae73439c9e4c5d61f2edf, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 40f4372c85c53774cac6a9968082a5f9, type: 2}
+    coloredPrefab: {fileID: 6529194999386394304, guid: 9c1260123c8096a469ed0d5c8d92024d, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6956c9bc1537ddd409db4a47c6df9678, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ef6643729ae8cfd4ebd9da3128465378, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 645e7acd16b423a47bdbe31d16e5da24, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c53d6eb8302b55d469f83cbce333c73d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 55c1a07a8a667ac408610ca3f2fb59fb, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 59507557609817841814825146ae83e1, type: 2}
+    coloredPrefab: {fileID: 2968605814981099849, guid: 15bbac9376528a84faca22d2c22c6d91, type: 3}
   - defaultTile: {fileID: 11400000, guid: 58222036e3f2d884bab41afa77fa2395, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e934a5d7e37f29144b915422ba4c18b3, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 895369820dd2c2442971127c47784d98, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 247e85c451c0e474dbb8466f42969729, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -13073,31 +13157,57 @@ MonoBehaviour:
   targetTilemap: {fileID: 558112712}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: ffe14e11d3574d4488d8a078f3b41d27, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 8a43e60dfb116554a9cc68b87da7f708, type: 2}
+    coloredPrefab: {fileID: 3117470134426600898, guid: fcce4909f4e43bf45b8f51d51ffa923c, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16caa25663660d046bd2a6ad5d10ba5e, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 320fdd2c233ac72429c6bbfad323b374, type: 2}
+    coloredPrefab: {fileID: 3672967709243123387, guid: be2fc1aca0979e6429f367b9f4360775, type: 3}
   - defaultTile: {fileID: 11400000, guid: 45b99d665e7927e4c8d4ff2c811fb35b, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c89216ff73cadaf498521f69f6218baa, type: 2}
+    coloredPrefab: {fileID: 121371936837578462, guid: 2c72849b79f79064396b05d02f5a15c1, type: 3}
   - defaultTile: {fileID: 11400000, guid: 4bf768fbac080de4a8b72e68c92d0107, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c404a677c5d6fa04eb66b46c3a82842b, type: 2}
+    coloredPrefab: {fileID: 7288493450769391789, guid: 257aa8aef74bd20418b61fbeb3803726, type: 3}
   - defaultTile: {fileID: 11400000, guid: ec81e3763f95cf249882e191bb6a0dc4, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 27e583281b348a547a1c4984bed262f0, type: 2}
+    coloredPrefab: {fileID: 4134513268237054953, guid: 702a3ed30bc62324683297859c2eeb5d, type: 3}
   - defaultTile: {fileID: 11400000, guid: 3192c1a988bd7614690a8a0ac42c77ea, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: b515f34aafb4a4844a4252351ea3bc37, type: 2}
+    coloredPrefab: {fileID: 5249795310930368265, guid: 7d7470bce5b15c243b5202f10e9e3c7c, type: 3}
   - defaultTile: {fileID: 11400000, guid: ed392f9b955ede140a4311a20583dfc9, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 862467abfc5158540876a7c17896fd05, type: 2}
+    coloredPrefab: {fileID: 830930002706271132, guid: 121d3590c6687bf478c65c906a51e701, type: 3}
   - defaultTile: {fileID: 11400000, guid: b8a2efc410ff5be4e84afb768d7115a0, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c0c938268df8e0e449bffa0de03f05e2, type: 2}
+    coloredPrefab: {fileID: 1329883405965354163, guid: 9a0687ca82d96d842b78c3a94867d82f, type: 3}
   - defaultTile: {fileID: 11400000, guid: e0bd20f5b11d2a944a110b851c56c012, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: a1da0ffacb8bdcc4b94ee607a84f2df2, type: 2}
+    coloredPrefab: {fileID: 1355922409862153033, guid: 12d0a817b6ddfe04ab91bb8a23a30da6, type: 3}
   - defaultTile: {fileID: 11400000, guid: 89fd9a98f750a754a84efc0e5d9d84e1, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 1bef508fb0506fa40a445eb08bdf2191, type: 2}
+    coloredPrefab: {fileID: 8238295081714346711, guid: 95a1c1845e02ac445b7b4eb3c8b0d855, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6da64ddb17ec7234ab8308a4cc13464f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 5c410f5fcd93e8045826d9d61af78339, type: 2}
+    coloredPrefab: {fileID: 2293790030502234563, guid: 6ca4dcab682d5274687b3177931d356a, type: 3}
   - defaultTile: {fileID: 11400000, guid: 362cb8760a150974db210d96f6f87614, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: f6ca74c503f886a479cf4ec3973b1366, type: 2}
+    coloredPrefab: {fileID: 7620567441992451123, guid: 93be01615c6211748856bde14e441446, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16e742de1db07ce44b52df7af3005758, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: a95df58f76ef412469f51d52ba215ab7, type: 2}
+    coloredPrefab: {fileID: 9204036516793719093, guid: 8b6051b8ce7ba5e48abcea396daf93fb, type: 3}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -13151,17 +13261,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 570994553}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: f178e370da8ae73439c9e4c5d61f2edf, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: edbac569cfab60e468892447f4a98181, type: 2}
+    coloredPrefab: {fileID: 5349847688148405896, guid: 5b4673bb7325c9c4c8eb04e963752e90, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6956c9bc1537ddd409db4a47c6df9678, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ef6643729ae8cfd4ebd9da3128465378, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 645e7acd16b423a47bdbe31d16e5da24, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c53d6eb8302b55d469f83cbce333c73d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 55c1a07a8a667ac408610ca3f2fb59fb, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 144026f012ff3844eb98f2b344abd6a2, type: 2}
+    coloredPrefab: {fileID: 4452783457607644088, guid: 4e6d040b7392077468cf822615ce9638, type: 3}
   - defaultTile: {fileID: 11400000, guid: 58222036e3f2d884bab41afa77fa2395, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e934a5d7e37f29144b915422ba4c18b3, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 895369820dd2c2442971127c47784d98, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 247e85c451c0e474dbb8466f42969729, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -14472,9 +14594,13 @@ MonoBehaviour:
   targetTilemap: {fileID: 588492267}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 220aafbc62fdc03448896dcac085e651, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: cd80602ce7d41264d8264361012c62e2, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 5cdb540f7c842ba4c8de635dce392765, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ecdb0325cccdaa14286e54981ec05680, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -15982,17 +16108,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 999222810}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 8f5e285450af6754b862ea376304fcca, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 074297f160c545c4fbf97dafd254d6a3, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 54f540812dedc3d4e94ae0dec47c734c, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 7052d5faa750580479f7e3204f15c42d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: fc67546eec3335a4db0aed799fd9edc2, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ac287eaf71798d44abf308e93b8d08f5, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 9750026d4fb911542a5e44e775a9c064, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 155a8cf27feef9e4ca21286e10a29a49, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 2092474ca298544458e18f2f864143b1, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ebe6a97f2bb71bc46ba0dcd808352443, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 3af8ccfc823c69b4c842a965b4eaa3c9, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 795e4e5e93cc3844db6d02669faf4de1, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -16123,17 +16261,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 1095824309}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: f178e370da8ae73439c9e4c5d61f2edf, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: fbe42f1360f9de842acfc17e243f9a63, type: 2}
+    coloredPrefab: {fileID: 1050805369638681001, guid: 11e33e763c8aa194bbaf5c87aaa67e14, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6956c9bc1537ddd409db4a47c6df9678, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ef6643729ae8cfd4ebd9da3128465378, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 645e7acd16b423a47bdbe31d16e5da24, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c53d6eb8302b55d469f83cbce333c73d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 55c1a07a8a667ac408610ca3f2fb59fb, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c2664a2042c589340b23559748a7111f, type: 2}
+    coloredPrefab: {fileID: 1390404132941366135, guid: 1f0961282ba4cfb4bad4190359855836, type: 3}
   - defaultTile: {fileID: 11400000, guid: 58222036e3f2d884bab41afa77fa2395, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e934a5d7e37f29144b915422ba4c18b3, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 895369820dd2c2442971127c47784d98, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 247e85c451c0e474dbb8466f42969729, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -17602,17 +17752,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 1461592200}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 75595b8b3384340488f1d0284dc33dd8, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: a18ae21710e77a3499095468a3e47c9d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 886b0c7f8856958459ed89ae3ef0dfa5, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: af668d591dbd09c4bb883f9e5c95c182, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: d893a8862f5c60148a23b6c1cf492d21, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 4d2ef63b54e8d0445bf80cb86b2e9164, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 7afd33ddf06d04243872ad0e186f552d, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 500ef8a92c9c3f046a3d486446f1832a, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: e04f75b46c744054588d223c3469cad2, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 5707ed5a76dc52f47a1a1ef495c11977, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: e4a05b19c55247d42852a6c94bf78438, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 823f0ed8911f9e046b4217c7a3edf6a5, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -17734,6 +17896,8 @@ MonoBehaviour:
   resetButton: {fileID: 2113303099}
   feedbackText: {fileID: 1227300577}
   initializePuzzles: 0
+  globalLight: {fileID: 0}
+  spotlightToDisable: {fileID: 0}
 --- !u!114 &1597906373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72959,7 +73123,9 @@ MonoBehaviour:
   targetTilemap: {fileID: 1821608028}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 2e8d43957a35a364bb8b97e19d76465f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 49ccfdc08d3522d4eb39e649868b7e55, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -73364,31 +73530,57 @@ MonoBehaviour:
   targetTilemap: {fileID: 1844881973}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: ffe14e11d3574d4488d8a078f3b41d27, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 1b140560e43c02244a8f3a3b21fa7d32, type: 2}
+    coloredPrefab: {fileID: 1408008235036213903, guid: 0c20d34f3d1a8764caaf077d1483f4c1, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16caa25663660d046bd2a6ad5d10ba5e, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 0fee020d9a83bb44aad69ef9f5dd4c32, type: 2}
+    coloredPrefab: {fileID: 5041430692742629118, guid: 99e5c8eff49688343ab2f8bc23ac4342, type: 3}
   - defaultTile: {fileID: 11400000, guid: 45b99d665e7927e4c8d4ff2c811fb35b, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: fba61ddbc400a58449e3cfe7cffbd4ae, type: 2}
+    coloredPrefab: {fileID: 4066536014817102676, guid: da466702295326d4fb8659c2627a471c, type: 3}
   - defaultTile: {fileID: 11400000, guid: 4bf768fbac080de4a8b72e68c92d0107, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: da03f837b6240784ca00ea6a6bef89ee, type: 2}
+    coloredPrefab: {fileID: 9170902193726885268, guid: 87b3f22f8120b8f47aef8efa82152f85, type: 3}
   - defaultTile: {fileID: 11400000, guid: ec81e3763f95cf249882e191bb6a0dc4, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 6e4e305a1eef9dd4b80634340c7edbb7, type: 2}
+    coloredPrefab: {fileID: 1929109858434089535, guid: e45ec14f08a32cd4ebb72f15811752ba, type: 3}
   - defaultTile: {fileID: 11400000, guid: 3192c1a988bd7614690a8a0ac42c77ea, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 8490c4b175d60e5408256dd349754de5, type: 2}
+    coloredPrefab: {fileID: 6839052356050469037, guid: 219a5a9b0b32dfb4b82e10455315f2f4, type: 3}
   - defaultTile: {fileID: 11400000, guid: ed392f9b955ede140a4311a20583dfc9, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 06917938559e48d418ddcb286a057b73, type: 2}
+    coloredPrefab: {fileID: 2986302846992634527, guid: 9d6e413f5e93f3c428d957d2d505b86e, type: 3}
   - defaultTile: {fileID: 11400000, guid: b8a2efc410ff5be4e84afb768d7115a0, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ce48f4c0b95cf9c4b8a006c24fa0bedf, type: 2}
+    coloredPrefab: {fileID: 2822214092558693519, guid: a878b6661f0041b4b9cca09a1bd11748, type: 3}
   - defaultTile: {fileID: 11400000, guid: e0bd20f5b11d2a944a110b851c56c012, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 5ef008acaf084df4ca6154513abefbd0, type: 2}
+    coloredPrefab: {fileID: 8439528591201569625, guid: b9a74e4ec13a46440bc0c70a43bed23d, type: 3}
   - defaultTile: {fileID: 11400000, guid: 89fd9a98f750a754a84efc0e5d9d84e1, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 27e8c4766557ee34280dfdb8bde0b783, type: 2}
+    coloredPrefab: {fileID: 8904953263857961671, guid: 80dc36150c5f3ae4482947962e8f07a7, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6da64ddb17ec7234ab8308a4cc13464f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 1696100ce43664a4a95eefcaad353fb2, type: 2}
+    coloredPrefab: {fileID: 5674350271035978721, guid: 7fb65d00660be8942ade6cb12dbea709, type: 3}
   - defaultTile: {fileID: 11400000, guid: 362cb8760a150974db210d96f6f87614, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ff204278a9c586c43838511078009236, type: 2}
+    coloredPrefab: {fileID: 6336472857226610903, guid: a7e98a2be054e72409996e198cd3326f, type: 3}
   - defaultTile: {fileID: 11400000, guid: 16e742de1db07ce44b52df7af3005758, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: f4bdd78589a78b44f89d1cf3a564fca0, type: 2}
+    coloredPrefab: {fileID: 632769069778408753, guid: 1e0c8d269d5703d40987ba1a1e61ffc3, type: 3}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -73442,17 +73634,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 1873499216}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: f178e370da8ae73439c9e4c5d61f2edf, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 0832c5355068d694f99d4efef87e5e6c, type: 2}
+    coloredPrefab: {fileID: 2223185731212458216, guid: 60ea0bd5d434cc14d97919c5992c26ab, type: 3}
   - defaultTile: {fileID: 11400000, guid: 6956c9bc1537ddd409db4a47c6df9678, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: ef6643729ae8cfd4ebd9da3128465378, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 645e7acd16b423a47bdbe31d16e5da24, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c53d6eb8302b55d469f83cbce333c73d, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 55c1a07a8a667ac408610ca3f2fb59fb, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: c3b342f11cf62bc45bcd32ba07f1fe1e, type: 2}
+    coloredPrefab: {fileID: 4040307878380584027, guid: 56d47879a52800849b115bceb0003844, type: 3}
   - defaultTile: {fileID: 11400000, guid: 58222036e3f2d884bab41afa77fa2395, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: e934a5d7e37f29144b915422ba4c18b3, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 895369820dd2c2442971127c47784d98, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 247e85c451c0e474dbb8466f42969729, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -73820,7 +74024,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.05
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -122841,7 +123045,9 @@ MonoBehaviour:
   targetTilemap: {fileID: 1941636311}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 2e8d43957a35a364bb8b97e19d76465f, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 6820e702def027c49b465a31702d9862, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -123854,17 +124060,29 @@ MonoBehaviour:
   targetTilemap: {fileID: 2005232838}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 1ba47dfb0033ae34783bdd87170895d7, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 01e9d6e9642dbbb4f918d2d39684e444, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: f5b269da97004c44f9bb5921d9f5a6f7, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 65408fe1655b85b4ca69b2e908fcbf61, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 58c7e1d66b9caad41b10597cc85d7ca5, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 59da916477a72d34a9125bf57bff3e61, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 34e7f2008781de94d8ab2043bfc3ab75, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9c4d93239685fdb478c799c60502104f, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: fa5c43d1d0649dc46ac2b10fec1c4f6b, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 665ede8f748b09641866f7399dc51416, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 87045be68caf2a44eb620d7344be0933, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: 9347101aafa71e84382fd77abd0e55c5, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
@@ -124645,9 +124863,13 @@ MonoBehaviour:
   targetTilemap: {fileID: 2043848149}
   tileMappings:
   - defaultTile: {fileID: 11400000, guid: 220aafbc62fdc03448896dcac085e651, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: aece422bff4dd45448a4cd809e3a3e2b, type: 2}
+    coloredPrefab: {fileID: 0}
   - defaultTile: {fileID: 11400000, guid: 5cdb540f7c842ba4c8de635dce392765, type: 2}
+    defaultPrefab: {fileID: 0}
     coloredTile: {fileID: 11400000, guid: feb6a06168607fe4b9ebb956ec1b2761, type: 2}
+    coloredPrefab: {fileID: 0}
   autoCheckTerminals: 1
   checkInterval: 1
   showDebugLogs: 1
