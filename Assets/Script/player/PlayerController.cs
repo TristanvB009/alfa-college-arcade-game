@@ -75,6 +75,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float footstepMoveThreshold = 0.1f; // min horizontal speed to consider "moving"
     private float _footstepTimer = 0f;
 
+    [Header("SubCheckpoints")]
+    private Vector2 SubCheckPointPos;
+
 
 
     public Rigidbody2D movingTileRigidbody;
@@ -566,37 +569,24 @@ public class PlayerController : MonoBehaviour
         InputEnabled = enabled;
     }
 
-    public void LastGroundedRespawn()
+    public void SubCheckpoints()
     {
-        StartCoroutine(LastGroundedRespawnCoroutine());
+        SubCheckPointRespawn();
     }
 
-    private IEnumerator LastGroundedRespawnCoroutine()
+    private void OnTriggerEnter2D (Collider2D other)
     {
-        SetInputEnabled(false);
-
-        yield return new WaitForSeconds(0.3f);
-
-        if (knockback != null)
+        //SubCheckPoint
+        if (other.CompareTag("SubCheckPoints"))
         {
-            knockback.StopKnockback();
+            SubCheckPointPos = other.transform.position;
         }
-        rb.linearVelocity = Vector2.zero;
 
-        // Move to last grounded position
-        transform.position = new Vector3(lastGroundedPosition.x, lastGroundedPosition.y, transform.position.z);
+    }
 
-        // Reset animations and states
-        ResetAnimations();
-        isJumping = false;
-        isDashing = false;
-        isClimbing = false;
-
-        yield return new WaitForSeconds(0.2f);
-
-        // Re-enable player input
-        SetInputEnabled(true);
-
+    public void SubCheckPointRespawn()
+    {
+        transform.position = SubCheckPointPos; 
     }
 
 }
