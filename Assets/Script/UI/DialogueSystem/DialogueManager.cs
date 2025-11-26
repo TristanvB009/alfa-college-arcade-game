@@ -27,6 +27,13 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueTextContainer;
     public GameObject xButton;
     
+    [Header("UI References")]
+    [Tooltip("Reference to the player's health bar to hide during dialogue")]
+    public HealthBar playerHealthBar;
+    
+    [Tooltip("Additional UI elements to hide during dialogue (e.g., health bar fill, UI panels)")]
+    public GameObject[] uiElementsToHide;
+    
     [Header("Dialogue State")]
     public bool IsDialogueActive { get; private set; } = false;
     
@@ -58,6 +65,48 @@ public class DialogueManager : MonoBehaviour
         IsDialogueActive = true;
         dialogueNodes = nodes;
         currentNodeIndex = 0;
+        
+        // Activate UI panels and ensure they're interactable
+        if (DialogueTextContainer != null)
+        {
+            DialogueTextContainer.SetActive(true);
+            
+            // Ensure Canvas Group doesn't block interactions
+            var canvasGroup = DialogueTextContainer.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+            }
+        }
+        
+        if (xButton != null)
+        {
+            xButton.SetActive(true);
+            
+            // Ensure Canvas Group doesn't block interactions
+            var canvasGroup = xButton.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+            }
+            
+            // Ensure button component is interactable
+            var button = xButton.GetComponent<UnityEngine.UI.Button>();
+            if (button != null)
+            {
+                button.interactable = true;
+            }
+        }
+        
+        // choicesContainer will be activated when needed in DisplayNode
+        
+        // Hide the health bar during dialogue
+        HideHealthBar();
+        
         DisplayNode();
     }
 
@@ -107,11 +156,28 @@ public class DialogueManager : MonoBehaviour
         skipRequested = false;
         
         // Now create the choice buttons after typing is complete
-        foreach (var choice in node.choices)
+        if (node.choices.Count > 0)
         {
-            Button choiceButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
-            choiceButton.GetComponentInChildren<Text>().text = choice.choiceText;
-            choiceButton.onClick.AddListener(() => SelectChoice(choice.nextNodeIndex));
+            // Activate choices container and ensure it's interactable
+            choicesContainer.SetActive(true);
+            
+            var canvasGroup = choicesContainer.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+            }
+            
+            foreach (var choice in node.choices)
+            {
+                Button choiceButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
+                choiceButton.GetComponentInChildren<Text>().text = choice.choiceText;
+                choiceButton.onClick.AddListener(() => SelectChoice(choice.nextNodeIndex));
+                
+                // Ensure choice button is interactable
+                choiceButton.interactable = true;
+            }
         }
 
         if (node.choices.Count == 0)
@@ -158,11 +224,66 @@ public class DialogueManager : MonoBehaviour
         {
             xButton.SetActive(false);
         }
+        
+        // Show the health bar again when dialogue ends
+        ShowHealthBar();
     }
 
     private IEnumerator HideDialogueAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         EndDialogue();
+    }
+    
+    /// <summary>
+    /// Hides the player's health bar and additional UI elements during dialogue
+    /// </summary>
+    private void HideHealthBar()
+    {
+        if (playerHealthBar == null)
+        {
+            // Try to find the health bar automatically
+            playerHealthBar = FindFirstObjectByType<HealthBar>();
+        }
+        
+        if (playerHealthBar != null)
+        {
+            playerHealthBar.gameObject.SetActive(false);
+        }
+        
+        // Hide additional UI elements
+        if (uiElementsToHide != null)
+        {
+            foreach (GameObject uiElement in uiElementsToHide)
+            {
+                if (uiElement != null)
+                {
+                    uiElement.SetActive(false);
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Shows the player's health bar and additional UI elements when dialogue ends
+    /// </summary>
+    private void ShowHealthBar()
+    {
+        if (playerHealthBar != null)
+        {
+            playerHealthBar.gameObject.SetActive(true);
+        }
+        
+        // Show additional UI elements
+        if (uiElementsToHide != null)
+        {
+            foreach (GameObject uiElement in uiElementsToHide)
+            {
+                if (uiElement != null)
+                {
+                    uiElement.SetActive(true);
+                }
+            }
+        }
     }
 }
