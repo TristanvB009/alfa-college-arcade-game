@@ -20,6 +20,10 @@ public class ElevatorTile : MonoBehaviour
     public Transform platform;
     public float speed;
     public float waitBeforeMove = 1.5f; // seconds to wait before elevator starts moving
+    
+    [Header("Sidegate Objects")]
+    [Tooltip("Sidegate objects that will open when player enters and close when elevator reaches destination")]
+    public Animator[] sidegateAnimators = new Animator[2];
 
 
     private Vector2 previousPosition;
@@ -41,6 +45,7 @@ public class ElevatorTile : MonoBehaviour
     public void OnPlayerEnteredZone(int zoneId, Transform playerTransform)
     {
         Debug.Log($"ElevatorTile received entry event from zone {zoneId}");
+        
         // You can now trigger movement, animation, etc.
         StartCoroutine(GoToNextPoint(zoneId));
 
@@ -63,6 +68,9 @@ public class ElevatorTile : MonoBehaviour
             // Already at the requested zone, go to the next one
             targetIndex = (index + 1) % elevatorEntries.Count;
 
+            // Open sidegates since we're about to move
+            OpenSidegates();
+
             // wait so the player has a chance to get on before it starts moving
             yield return new WaitForSeconds(waitBeforeMove);
         }
@@ -70,6 +78,9 @@ public class ElevatorTile : MonoBehaviour
         {
             // Go to the requested zone
             targetIndex = zoneId;
+            
+            // Open sidegates since we're about to move
+            OpenSidegates();
         }
 
         nextPoint = elevatorEntries[targetIndex].transform;
@@ -92,6 +103,63 @@ public class ElevatorTile : MonoBehaviour
         // Snap to final position and update index
         //rb.MovePosition(nextPoint.position);
         index = targetIndex;
+        
+        // Close sidegates when elevator reaches destination
+        CloseSidegates();
+    }
+    
+    /// <summary>
+    /// Open sidegates when player enters elevator zone
+    /// </summary>
+    private void OpenSidegates()
+    {
+        if (sidegateAnimators != null && sidegateAnimators.Length > 0)
+        {
+            foreach (Animator sidegateAnimator in sidegateAnimators)
+            {
+                if (sidegateAnimator != null)
+                {
+                    sidegateAnimator.SetBool("Open", true);
+                    sidegateAnimator.SetBool("Close", false);
+                    Debug.Log($"Set Open=true, Close=false on sidegate: {sidegateAnimator.gameObject.name}");
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Close sidegates when elevator reaches destination
+    /// </summary>
+    private void CloseSidegates()
+    {
+        if (sidegateAnimators != null && sidegateAnimators.Length > 0)
+        {
+            foreach (Animator sidegateAnimator in sidegateAnimators)
+            {
+                if (sidegateAnimator != null)
+                {
+                    sidegateAnimator.SetBool("Open", false);
+                    sidegateAnimator.SetBool("Close", true);
+                    Debug.Log($"Set Open=false, Close=true on sidegate: {sidegateAnimator.gameObject.name}");
+                    
+                    // Reset Close to false after a short delay to allow the animation to play
+                    StartCoroutine(ResetCloseBool(sidegateAnimator));
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Reset the Close bool to false after the closing animation has time to play
+    /// </summary>
+    private System.Collections.IEnumerator ResetCloseBool(Animator animator)
+    {
+        yield return new WaitForSeconds(0.3f); // Wait for animation to start
+        if (animator != null)
+        {
+            animator.SetBool("Close", false);
+            Debug.Log($"Reset Close=false on sidegate: {animator.gameObject.name}");
+        }
     }
 
 
