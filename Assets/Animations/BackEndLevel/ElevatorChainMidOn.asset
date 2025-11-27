@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ElevatorChainMidOn
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -808221458, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-  - {fileID: -1257039280, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: 97011388, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: -1339928111, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0

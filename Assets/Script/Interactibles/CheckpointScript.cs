@@ -9,13 +9,9 @@ public class CheckpointScript : MonoBehaviour
     
     [Header("Interaction Settings")]
     [SerializeField] private float interactionRadius = 2f;
-    [SerializeField] private float standStillTime = 1f;
-    [SerializeField] private float movementThreshold = 0.1f; // How much movement is considered "standing still"
     [SerializeField] private Vector3 playerSittingOffset = Vector3.up; // Offset from checkpoint position where player sits
     
     private Transform playerTransform;
-    private Vector3 lastPlayerPosition;
-    private float standStillTimer = 0f;
     private bool isPlayerInRange = false;
     
     // Animation functionality
@@ -47,13 +43,9 @@ public class CheckpointScript : MonoBehaviour
             }
             else
             {
-                // Only check for sitting if not already sitting
-                CheckStandingStill();
+                // Check for W key input to sit at checkpoint
+                CheckForSitInput();
             }
-        }
-        else
-        {
-            ResetStandStillTimer();
         }
     }
 
@@ -72,8 +64,6 @@ public class CheckpointScript : MonoBehaviour
                     // Player just entered range
                     isPlayerInRange = true;
                     playerTransform = player.transform;
-                    lastPlayerPosition = playerTransform.position;
-                    standStillTimer = 0f;
                 }
             }
             else
@@ -83,31 +73,18 @@ public class CheckpointScript : MonoBehaviour
                     // Player left range
                     isPlayerInRange = false;
                     playerTransform = null;
-                    ResetStandStillTimer();
                 }
             }
         }
     }
 
-    private void CheckStandingStill()
+    private void CheckForSitInput()
     {
-        float movementDistance = Vector3.Distance(playerTransform.position, lastPlayerPosition);
-        
-        if (movementDistance <= movementThreshold)
+        // Check for W key input only (no axis input to avoid conflicts)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            // Player is standing still
-            standStillTimer += Time.deltaTime;
-            
-            if (standStillTimer >= standStillTime)
-            {
-                ActivateCheckpoint();
-            }
-        }
-        else
-        {
-            // Player moved too much, reset timer
-            standStillTimer = 0f;
-            lastPlayerPosition = playerTransform.position;
+            Debug.Log("W key pressed - attempting to sit at checkpoint");
+            ActivateCheckpoint();
         }
     }
 
@@ -144,25 +121,20 @@ public class CheckpointScript : MonoBehaviour
             playerHealth.RespawnPoint = this.transform;
             playerHealth.Heal(playerHealth.maxHealth); 
         }
-        
-        // Reset timer to allow reactivation
-        ResetStandStillTimer();
-    }
-
-    private void ResetStandStillTimer()
-    {
-        standStillTimer = 0f;
     }
     
     private void CheckForPlayerMovement()
     {
-        // Check for horizontal input
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        // Check for specific key inputs instead of axis values to avoid residual input issues
+        bool leftInput = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        bool rightInput = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        bool downInput = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        bool jumpInput = Input.GetKeyDown(KeyCode.Space);
         
-        // If player is trying to move, stop sitting
-        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+        // If player is pressing movement keys (but not W), stop sitting
+        if (leftInput || rightInput || downInput || jumpInput)
         {
+            Debug.Log("Player movement detected, stopping sitting");
             StopSitting();
         }
     }
@@ -173,9 +145,16 @@ public class CheckpointScript : MonoBehaviour
         {
             // Set sitting state to false
             playerAnimator.SetBool("isSitting", false);
+            
+            // Add a standing up trigger to ensure proper transition
+            playerAnimator.SetTrigger("standingUp");
+            
+            // Force update the animator to ensure immediate transition
+            playerAnimator.Update(0f);
         }
         
         isPlayerSitting = false;
+        Debug.Log("Player stopped sitting");
     }
 
     private void OnDrawGizmosSelected()

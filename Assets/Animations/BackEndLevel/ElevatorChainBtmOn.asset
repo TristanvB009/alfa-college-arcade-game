@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ElevatorChainBtmOn
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 8910682082935861488, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-  - {fileID: 1129776248284790588, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: 3563173184596530728, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: 7996055221314195315, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0
