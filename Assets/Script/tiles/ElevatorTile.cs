@@ -24,11 +24,24 @@ public class ElevatorTile : MonoBehaviour
     [Header("Sidegate Objects")]
     [Tooltip("Sidegate objects that will open when player enters and close when elevator reaches destination")]
     public Animator[] sidegateAnimators = new Animator[2];
-
+    
+    [Header("Button System")]
+    [Tooltip("Button animator to control button press animations")]
+    public Animator buttonAnimator;
+    
+    [Tooltip("The actual button GameObject/Collider that player must stand on")]
+    public Collider2D buttonCollider;
+    
+    [Tooltip("Time in seconds the player must stand on button to activate elevator")]
+    public float buttonPressTime = 2f;
 
     private Vector2 previousPosition;
     private Rigidbody2D rb;
     private Transform nextPoint;
+    private bool isPlayerOnButton = false;
+    private float buttonTimer = 0f;
+    private bool elevatorActivated = false;
+    private Transform currentPlayerTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,14 +54,108 @@ public class ElevatorTile : MonoBehaviour
         rb = platform.GetComponent<Rigidbody2D>();
         previousPosition = rb.position;
     }
+    
+    void Update()
+    {
+        // Check if player is standing on the button
+        CheckPlayerOnButton();
+    }
+    
+    /// <summary>
+    /// Check if player is currently standing on the button
+    /// </summary>
+    private void CheckPlayerOnButton()
+    {
+        if (buttonCollider == null || elevatorActivated) return;
+        
+        // Find the player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+        
+        // Check if player's collider overlaps with button collider
+        Collider2D playerCollider = player.GetComponent<Collider2D>();
+        if (playerCollider != null && buttonCollider.bounds.Intersects(playerCollider.bounds))
+        {
+            // Player is on button
+            if (!isPlayerOnButton)
+            {
+                // Player just stepped on button
+                isPlayerOnButton = true;
+                currentPlayerTransform = player.transform;
+                Debug.Log("Player stepped on button - starting activation timer");
+                
+                // Start button activation for current zone
+                int currentZoneId = index; // Use current elevator position as zone ID
+                StartCoroutine(ButtonActivationProcess(currentZoneId));
+            }
+        }
+        else
+        {
+            // Player left button before activation
+            if (isPlayerOnButton && !elevatorActivated)
+            {
+                // Player left button before activation
+                isPlayerOnButton = false;
+                buttonTimer = 0f;
+                
+                Debug.Log("Player left button - cancelling activation");
+                
+                // No need to reset button animation since it never went down
+            }
+        }
+    }
 
+    /// <summary>
+    /// Legacy method - now button detection is handled in Update()
+    /// Keep this for compatibility but it no longer triggers elevator movement
+    /// </summary>
     public void OnPlayerEnteredZone(int zoneId, Transform playerTransform)
     {
-        Debug.Log($"ElevatorTile received entry event from zone {zoneId}");
+        Debug.Log($"Player entered elevator zone {zoneId} - use button to activate elevator");
+    }
+    
+    /// <summary>
+    /// Legacy method - now handled in Update()
+    /// </summary>
+    public void OnPlayerExitedZone(int zoneId, Transform playerTransform)
+    {
+        Debug.Log($"Player exited elevator zone {zoneId}");
+    }
+    
+    /// <summary>
+    /// Handle button activation process - player must stand on button for specified time
+    /// </summary>
+    private IEnumerator ButtonActivationProcess(int zoneId)
+    {
+        buttonTimer = 0f;
         
-        // You can now trigger movement, animation, etc.
-        StartCoroutine(GoToNextPoint(zoneId));
-
+        while (isPlayerOnButton && buttonTimer < buttonPressTime && !elevatorActivated)
+        {
+            buttonTimer += Time.deltaTime;
+            
+            Debug.Log($"Button timer: {buttonTimer:F1}/{buttonPressTime}");
+            yield return null;
+        }
+        
+        // Check if button was held long enough
+        if (isPlayerOnButton && buttonTimer >= buttonPressTime && !elevatorActivated)
+        {
+            Debug.Log("Button activated! Pressing button and starting elevator movement.");
+            elevatorActivated = true;
+            
+            // NOW animate button down when timer completes
+            if (buttonAnimator != null)
+            {
+                buttonAnimator.SetBool("ButtonDown", true);
+            }
+            
+            // Start elevator movement
+            StartCoroutine(GoToNextPoint(zoneId));
+        }
+        else
+        {
+            Debug.Log("Button activation cancelled - player left too early");
+        }
     }
 
     public IEnumerator GoToNextPoint(int zoneId)
@@ -106,6 +213,33 @@ public class ElevatorTile : MonoBehaviour
         
         // Close sidegates when elevator reaches destination
         CloseSidegates();
+        
+        // Reset button and allow reactivation
+        if (buttonAnimator != null)
+        {
+            buttonAnimator.SetBool("ButtonUp", true);
+            buttonAnimator.SetBool("ButtonDown", false);
+        }
+        
+        elevatorActivated = false;
+        isPlayerOnButton = false;
+        buttonTimer = 0f;
+        
+        // Reset ButtonUp after a short delay
+        StartCoroutine(ResetButtonUpAnimation());
+    }
+    
+    /// <summary>
+    /// Reset ButtonUp animation after a short delay
+    /// </summary>
+    private IEnumerator ResetButtonUpAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        if (buttonAnimator != null)
+        {
+            buttonAnimator.SetBool("ButtonUp", false);
+        }
     }
     
     /// <summary>
