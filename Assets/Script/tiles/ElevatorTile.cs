@@ -42,6 +42,8 @@ public class ElevatorTile : MonoBehaviour
     private float buttonTimer = 0f;
     private bool elevatorActivated = false;
     private Transform currentPlayerTransform;
+    private bool requirePlayerToLeaveButton = false; // Prevents immediate re-activation after elevator movement
+    private bool waitingForPlayerToLeaveZone = false; // Waiting for player to leave elevator zone before resetting button
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,6 +61,12 @@ public class ElevatorTile : MonoBehaviour
     {
         // Check if player is standing on the button
         CheckPlayerOnButton();
+        
+        // Check if we're waiting for player to leave the elevator zone
+        if (waitingForPlayerToLeaveZone)
+        {
+            CheckPlayerInElevatorZone();
+        }
     }
     
     /// <summary>
@@ -82,6 +90,14 @@ public class ElevatorTile : MonoBehaviour
                 // Player just stepped on button
                 isPlayerOnButton = true;
                 currentPlayerTransform = player.transform;
+                
+                // Check if we need to wait for player to leave first
+                if (requirePlayerToLeaveButton)
+                {
+                    Debug.Log("Player on button but must leave first after elevator movement");
+                    return; // Don't start activation yet
+                }
+                
                 Debug.Log("Player stepped on button - starting activation timer");
                 
                 // Start button activation for current zone
@@ -91,16 +107,51 @@ public class ElevatorTile : MonoBehaviour
         }
         else
         {
-            // Player left button before activation
-            if (isPlayerOnButton && !elevatorActivated)
+            // Player left button
+            if (isPlayerOnButton)
             {
-                // Player left button before activation
+                // Player left button - reset state
                 isPlayerOnButton = false;
                 buttonTimer = 0f;
+                requirePlayerToLeaveButton = false; // Player has left, can now reactivate when they return
                 
-                Debug.Log("Player left button - cancelling activation");
+                Debug.Log("Player left button - resetting button state");
                 
-                // No need to reset button animation since it never went down
+                // No need to reset button animation since it never went down during activation
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Check if player is still in the elevator zone - used after elevator movement
+    /// </summary>
+    private void CheckPlayerInElevatorZone()
+    {
+        // Find the player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+        
+        // Check if player is still in the current elevator zone
+        Collider2D currentZoneCollider = elevatorEntries[index].collider;
+        if (currentZoneCollider != null)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null && !currentZoneCollider.bounds.Intersects(playerCollider.bounds))
+            {
+                // Player has left the elevator zone - now we can reset the button
+                Debug.Log("Player left elevator zone - resetting button");
+                
+                if (buttonAnimator != null)
+                {
+                    buttonAnimator.SetBool("ButtonUp", true);
+                    buttonAnimator.SetBool("ButtonDown", false);
+                }
+                
+                waitingForPlayerToLeaveZone = false;
+                requirePlayerToLeaveButton = true; // Still require them to leave button area before next activation
+                
+                // Reset ButtonUp after a short delay
+                StartCoroutine(ResetButtonUpAnimation());
             }
         }
     }
@@ -208,25 +259,20 @@ public class ElevatorTile : MonoBehaviour
         }
 
         // Snap to final position and update index
-        //rb.MovePosition(nextPoint.position);
+        rb.MovePosition(nextPoint.position);
+        rb.linearVelocity = Vector2.zero; // Stop the elevator completely
         index = targetIndex;
         
         // Close sidegates when elevator reaches destination
         CloseSidegates();
         
-        // Reset button and allow reactivation
-        if (buttonAnimator != null)
-        {
-            buttonAnimator.SetBool("ButtonUp", true);
-            buttonAnimator.SetBool("ButtonDown", false);
-        }
-        
+        // Don't reset button immediately - wait for player to leave elevator zone
         elevatorActivated = false;
-        isPlayerOnButton = false;
         buttonTimer = 0f;
+        waitingForPlayerToLeaveZone = true; // Wait for player to leave zone before resetting button
         
-        // Reset ButtonUp after a short delay
-        StartCoroutine(ResetButtonUpAnimation());
+        // Don't reset isPlayerOnButton here - let CheckPlayerOnButton handle player state naturally
+        // Button will be reset when player leaves the elevator zone
     }
     
     /// <summary>
