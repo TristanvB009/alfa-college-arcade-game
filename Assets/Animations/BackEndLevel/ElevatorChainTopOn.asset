@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ElevatorChainTopOn
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -1343426454, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-  - {fileID: 1817476271, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: -1220812947, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
+  - {fileID: -1694017168, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0

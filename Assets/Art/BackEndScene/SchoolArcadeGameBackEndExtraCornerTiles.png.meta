@@ -1,19 +1,37 @@
 fileFormatVersion: 2
-guid: fefebc95a2a37c64cb358897d44415c4
+guid: 9aed38fe4c0472440861b2b37f67c3f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8910682082935861488
-    second: SchoolArcadeGameBackEndElevatorChain_0
+      213: 4535029178120584421
+    second: SchoolArcadeGameBackEndExtraCornerTiles_0
   - first:
-      213: 1129776248284790588
-    second: SchoolArcadeGameBackEndElevatorChain_1
+      213: 7669800979372145098
+    second: SchoolArcadeGameBackEndExtraCornerTiles_1
   - first:
-      213: 3563173184596530728
-    second: SchoolArcadeGameBackEndElevatorChain_2
+      213: -6545103873175085460
+    second: SchoolArcadeGameBackEndExtraCornerTiles_2
   - first:
-      213: 7996055221314195315
-    second: SchoolArcadeGameBackEndElevatorChain_3
+      213: -2220462344418882091
+    second: SchoolArcadeGameBackEndExtraCornerTiles_3
+  - first:
+      213: -5489209750840545917
+    second: SchoolArcadeGameBackEndExtraCornerTiles_4
+  - first:
+      213: 1752166081108849867
+    second: SchoolArcadeGameBackEndExtraCornerTiles_5
+  - first:
+      213: 2365763787965080236
+    second: SchoolArcadeGameBackEndExtraCornerTiles_6
+  - first:
+      213: -5694259229727526849
+    second: SchoolArcadeGameBackEndExtraCornerTiles_7
+  - first:
+      213: 8842991566940678928
+    second: SchoolArcadeGameBackEndExtraCornerTiles_8
+  - first:
+      213: 6415127699882511497
+    second: SchoolArcadeGameBackEndExtraCornerTiles_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,11 +127,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_0
+      name: SchoolArcadeGameBackEndExtraCornerTiles_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 66
+        y: 144
         width: 32
         height: 32
       alignment: 0
@@ -124,18 +142,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f074d3c42a19ab70800000000000000
-      internalID: 8910682082935861488
+      spriteID: 5ecb8e78209afee30800000000000000
+      internalID: 4535029178120584421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_1
+      name: SchoolArcadeGameBackEndExtraCornerTiles_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 66
+        x: 48
+        y: 144
         width: 32
         height: 32
       alignment: 0
@@ -146,146 +164,102 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3f30b21385cdaf00800000000000000
-      internalID: 1129776248284790588
+      spriteID: ac97b69ba5b907a60800000000000000
+      internalID: 7669800979372145098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 66
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 826d215022fe27130800000000000000
-      internalID: 3563173184596530728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 66
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 37f07dedbd1b7fe60800000000000000
-      internalID: 7996055221314195315
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_4
+      name: SchoolArcadeGameBackEndExtraCornerTiles_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 96
         width: 32
-        height: 34
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 877406e25f368754aa5e672b3b28978f
-      internalID: 1068195060
+      spriteID: c6e9d5d64be1b25a0800000000000000
+      internalID: -6545103873175085460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_5
+      name: SchoolArcadeGameBackEndExtraCornerTiles_3
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 48
+        y: 96
         width: 32
-        height: 34
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f8f62ebc1e84ea346aa5bfac5a6d1fe6
-      internalID: -1257033783
+      spriteID: 5dd08c323455f21e0800000000000000
+      internalID: -2220462344418882091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_6
+      name: SchoolArcadeGameBackEndExtraCornerTiles_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 0
+        y: 48
         width: 32
-        height: 34
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7c49763c064721747b885fa890553a14
-      internalID: 510915297
+      spriteID: 38de98f80d862d3b0800000000000000
+      internalID: -5489209750840545917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_7
+      name: SchoolArcadeGameBackEndExtraCornerTiles_5
       rect:
         serializedVersion: 2
-        x: 96
-        y: 32
+        x: 48
+        y: 48
         width: 32
-        height: 34
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 652a78affc046ad46807621287aad0a4
-      internalID: -1274708377
+      spriteID: bc43bf374c1f05810800000000000000
+      internalID: 1752166081108849867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_8
+      name: SchoolArcadeGameBackEndExtraCornerTiles_6
       rect:
         serializedVersion: 2
         x: 0
@@ -298,19 +272,19 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 971a08d225db1a64596f368a9082c646
-      internalID: -1025717489
+      spriteID: ca2242c71a1e4d020800000000000000
+      internalID: 2365763787965080236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_9
+      name: SchoolArcadeGameBackEndExtraCornerTiles_7
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
         width: 32
         height: 32
@@ -320,38 +294,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 6d8c640d900f21b4facbc584d5cd774e
-      internalID: 2136050601
+      spriteID: f30f919666de9f0b0800000000000000
+      internalID: -5694259229727526849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22a5e6cdc7e3b744f9cc561b0b4623f5
-      internalID: -1220812947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SchoolArcadeGameBackEndElevatorChain_11
+      name: SchoolArcadeGameBackEndExtraCornerTiles_8
       rect:
         serializedVersion: 2
         x: 96
@@ -364,10 +316,32 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2c4c237ad0cab2641858b7ca29f3b09d
-      internalID: -1694017168
+      spriteID: 01b264b5afd98ba70800000000000000
+      internalID: 8842991566940678928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndExtraCornerTiles_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98c044c77ac170950800000000000000
+      internalID: 6415127699882511497
       vertices: []
       indices: 
       edges: []
@@ -376,7 +350,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f1f0812b77e0d954c9f4b5eaeb33773f
+    spriteID: e88c7002b422c63458229bc9184d337e
     internalID: 0
     vertices: []
     indices: 
@@ -386,18 +360,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SchoolArcadeGameBackEndElevatorChain_0: 8910682082935861488
-      SchoolArcadeGameBackEndElevatorChain_1: 1129776248284790588
-      SchoolArcadeGameBackEndElevatorChain_10: -1220812947
-      SchoolArcadeGameBackEndElevatorChain_11: -1694017168
-      SchoolArcadeGameBackEndElevatorChain_2: 3563173184596530728
-      SchoolArcadeGameBackEndElevatorChain_3: 7996055221314195315
-      SchoolArcadeGameBackEndElevatorChain_4: 1068195060
-      SchoolArcadeGameBackEndElevatorChain_5: -1257033783
-      SchoolArcadeGameBackEndElevatorChain_6: 510915297
-      SchoolArcadeGameBackEndElevatorChain_7: -1274708377
-      SchoolArcadeGameBackEndElevatorChain_8: -1025717489
-      SchoolArcadeGameBackEndElevatorChain_9: 2136050601
+      SchoolArcadeGameBackEndExtraCornerTiles_0: 4535029178120584421
+      SchoolArcadeGameBackEndExtraCornerTiles_1: 7669800979372145098
+      SchoolArcadeGameBackEndExtraCornerTiles_2: -6545103873175085460
+      SchoolArcadeGameBackEndExtraCornerTiles_3: -2220462344418882091
+      SchoolArcadeGameBackEndExtraCornerTiles_4: -5489209750840545917
+      SchoolArcadeGameBackEndExtraCornerTiles_5: 1752166081108849867
+      SchoolArcadeGameBackEndExtraCornerTiles_6: 2365763787965080236
+      SchoolArcadeGameBackEndExtraCornerTiles_7: -5694259229727526849
+      SchoolArcadeGameBackEndExtraCornerTiles_8: 8842991566940678928
+      SchoolArcadeGameBackEndExtraCornerTiles_9: 6415127699882511497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
