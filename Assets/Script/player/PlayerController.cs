@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 lastGroundedPosition;    //tracks the vector of the last location the player was grounded
     public bool realGrounded;               //Grounded bool without coyote time
+    private float lastGroundedTime = 0f;    //Time when player was last touching ground for coyote time
 
     [Header("Gravity")]
     public float baseGravity;
@@ -527,13 +528,12 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        float lastGrounded = 0f;
-        if (Physics2D.OverlapBox(groundCheck.position, groundCheckRadius, 0f, groundLayer))
+        if (realGrounded)
         {
-            lastGrounded = Time.time;
+            lastGroundedTime = Time.time;
         }
 
-        return Time.time - lastGrounded < coyoteTime;
+        return Time.time - lastGroundedTime < coyoteTime;
     }
 
     // Visualize ground and wall check areas in the editor when the player is selected

@@ -641,7 +641,7 @@ public class PowerTerminalMinigame : MonoBehaviour
         
         // Now trigger completion effects spread across multiple frames to avoid lag
         
-        // Frame 1: Change tiles (this is the most expensive operation)
+        // Frame 1: Change tiles and sprites (these are the most expensive operations)
         TilemapChanger[] tilemapChangers = FindObjectsByType<TilemapChanger>(FindObjectsSortMode.None);
         if (tilemapChangers.Length > 0)
         {
@@ -650,6 +650,18 @@ public class PowerTerminalMinigame : MonoBehaviour
                 if (tilemapChanger != null)
                 {
                     tilemapChanger.ChangeTilesToColored();
+                }
+            }
+        }
+        
+        SpriteChanger[] spriteChangers = FindObjectsByType<SpriteChanger>(FindObjectsSortMode.None);
+        if (spriteChangers.Length > 0)
+        {
+            foreach (SpriteChanger spriteChanger in spriteChangers)
+            {
+                if (spriteChanger != null)
+                {
+                    spriteChanger.ChangeSpritesToColored();
                 }
             }
         }

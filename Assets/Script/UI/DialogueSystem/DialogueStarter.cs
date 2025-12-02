@@ -40,6 +40,7 @@ public class DialogueStarter : MonoBehaviour
     public bool Carlo = false;
     public bool Maik = false;
     public bool Sjoerd = false;
+    public bool Auke = false;
     [SerializeField] private bool EvilIds = false; // Using SerializeField with different name for "Evil Ids"
     
     [Header("Character Animations")]
@@ -68,6 +69,10 @@ public class DialogueStarter : MonoBehaviour
     // Sjoerd animations
     public string SjoerdIdle = "SjoerdIdle";
     public string SjoerdTalking = "SjoerdTalking";
+    
+    // Auke animations
+    public string AukeIdle = "AukeIdle";
+    public string AukeTalking = "AukeTalking";
     
     // Evil Ids animations
     public string EvilIdsIdle = "EvilIdsIdle";
@@ -339,6 +344,10 @@ public class DialogueStarter : MonoBehaviour
         {
             characterAnimator.SetBool(SjoerdIdle, true);
         }
+        else if (Auke)
+        {
+            characterAnimator.SetBool(AukeIdle, true);
+        }
         else if (EvilIds)
         {
             characterAnimator.SetBool(EvilIdsIdle, true);
@@ -449,6 +458,13 @@ public class DialogueStarter : MonoBehaviour
             else
                 characterAnimator.SetBool(SjoerdIdle, true);
         }
+        else if (Auke)
+        {
+            if (isTalking)
+                characterAnimator.SetBool(AukeTalking, true);
+            else
+                characterAnimator.SetBool(AukeIdle, true);
+        }
         else if (EvilIds)
         {
             if (isTalking)
@@ -489,6 +505,10 @@ public class DialogueStarter : MonoBehaviour
         // Reset Sjoerd animations
         characterAnimator.SetBool(SjoerdIdle, false);
         characterAnimator.SetBool(SjoerdTalking, false);
+        
+        // Reset Auke animations
+        characterAnimator.SetBool(AukeIdle, false);
+        characterAnimator.SetBool(AukeTalking, false);
         
         // Reset Evil Ids animations
         characterAnimator.SetBool(EvilIdsIdle, false);
