@@ -1,0 +1,1065 @@
+fileFormatVersion: 2
+guid: 61ecfd16776e0e149ba86c8b124131ce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5376394564008425071
+    second: SchoolArcadeGameBackEndDoorLight_0
+  - first:
+      213: 7283376472508508204
+    second: SchoolArcadeGameBackEndDoorLight_1
+  - first:
+      213: -2729765304493087583
+    second: SchoolArcadeGameBackEndDoorLight_2
+  - first:
+      213: 5548825416757840763
+    second: SchoolArcadeGameBackEndDoorLight_3
+  - first:
+      213: 660497764498281674
+    second: SchoolArcadeGameBackEndDoorLight_4
+  - first:
+      213: -5072956574281841024
+    second: SchoolArcadeGameBackEndDoorLight_5
+  - first:
+      213: -8643205197997728715
+    second: SchoolArcadeGameBackEndDoorLight_6
+  - first:
+      213: 7382142562592564421
+    second: SchoolArcadeGameBackEndDoorLight_7
+  - first:
+      213: 7260574149597576520
+    second: SchoolArcadeGameBackEndDoorLight_8
+  - first:
+      213: -2675187342928587434
+    second: SchoolArcadeGameBackEndDoorLight_9
+  - first:
+      213: 3302578076176954840
+    second: SchoolArcadeGameBackEndDoorLight_10
+  - first:
+      213: -858357282686951718
+    second: SchoolArcadeGameBackEndDoorLight_11
+  - first:
+      213: -1611547628305742158
+    second: SchoolArcadeGameBackEndDoorLight_12
+  - first:
+      213: 8999453653839430699
+    second: SchoolArcadeGameBackEndDoorLight_13
+  - first:
+      213: 3804834088117921770
+    second: SchoolArcadeGameBackEndDoorLight_14
+  - first:
+      213: 7365228993836689528
+    second: SchoolArcadeGameBackEndDoorLight_15
+  - first:
+      213: 1104601228812889965
+    second: SchoolArcadeGameBackEndDoorLight_16
+  - first:
+      213: -8584405386122236668
+    second: SchoolArcadeGameBackEndDoorLight_17
+  - first:
+      213: 5403298257607285060
+    second: SchoolArcadeGameBackEndDoorLight_18
+  - first:
+      213: 1613150833797367356
+    second: SchoolArcadeGameBackEndDoorLight_19
+  - first:
+      213: 3050293912243794646
+    second: SchoolArcadeGameBackEndDoorLight_20
+  - first:
+      213: 4998778667861863444
+    second: SchoolArcadeGameBackEndDoorLight_21
+  - first:
+      213: 4585921058408457039
+    second: SchoolArcadeGameBackEndDoorLight_22
+  - first:
+      213: 8445696614388687964
+    second: SchoolArcadeGameBackEndDoorLight_23
+  - first:
+      213: 4654138582635864292
+    second: SchoolArcadeGameBackEndDoorLight_24
+  - first:
+      213: -4506813395499632504
+    second: SchoolArcadeGameBackEndDoorLight_25
+  - first:
+      213: -7639796536451746755
+    second: SchoolArcadeGameBackEndDoorLight_26
+  - first:
+      213: 687699218840311339
+    second: SchoolArcadeGameBackEndDoorLight_27
+  - first:
+      213: 1703485662058993830
+    second: SchoolArcadeGameBackEndDoorLight_28
+  - first:
+      213: -2433751676965232982
+    second: SchoolArcadeGameBackEndDoorLight_29
+  - first:
+      213: 7651384964593842754
+    second: SchoolArcadeGameBackEndDoorLight_30
+  - first:
+      213: 1059863180297440142
+    second: SchoolArcadeGameBackEndDoorLight_31
+  - first:
+      213: 7613226791882929893
+    second: SchoolArcadeGameBackEndDoorLight_32
+  - first:
+      213: -7154858836081988179
+    second: SchoolArcadeGameBackEndDoorLight_33
+  - first:
+      213: -3791590738308124422
+    second: SchoolArcadeGameBackEndDoorLight_34
+  - first:
+      213: 4186665586349109971
+    second: SchoolArcadeGameBackEndDoorLight_35
+  - first:
+      213: -853025716350753303
+    second: SchoolArcadeGameBackEndDoorLight_36
+  - first:
+      213: 5037538044132134659
+    second: SchoolArcadeGameBackEndDoorLight_37
+  - first:
+      213: 5448177387754329022
+    second: SchoolArcadeGameBackEndDoorLight_38
+  - first:
+      213: 4935049728231101792
+    second: SchoolArcadeGameBackEndDoorLight_39
+  - first:
+      213: 4150672056752126567
+    second: SchoolArcadeGameBackEndDoorLight_40
+  - first:
+      213: -8221253766728758458
+    second: SchoolArcadeGameBackEndDoorLight_41
+  - first:
+      213: 5042701398573423673
+    second: SchoolArcadeGameBackEndDoorLight_42
+  - first:
+      213: 6207346039824004648
+    second: SchoolArcadeGameBackEndDoorLight_43
+  - first:
+      213: 1394356934996479118
+    second: SchoolArcadeGameBackEndDoorLight_44
+  - first:
+      213: -2807814766655310225
+    second: SchoolArcadeGameBackEndDoorLight_45
+  - first:
+      213: -6834851852426636010
+    second: SchoolArcadeGameBackEndDoorLight_46
+  - first:
+      213: 8880138339162747262
+    second: SchoolArcadeGameBackEndDoorLight_47
+  - first:
+      213: -2704546840968295128
+    second: SchoolArcadeGameBackEndDoorLight_48
+  - first:
+      213: 7019345589962552363
+    second: SchoolArcadeGameBackEndDoorLight_49
+  - first:
+      213: 3043823643526553588
+    second: SchoolArcadeGameBackEndDoorLight_50
+  - first:
+      213: -4615915290411925570
+    second: SchoolArcadeGameBackEndDoorLight_51
+  - first:
+      213: 4105045008237032092
+    second: SchoolArcadeGameBackEndDoorLight_52
+  - first:
+      213: 4257329859557027501
+    second: SchoolArcadeGameBackEndDoorLight_53
+  - first:
+      213: 1063192936826689798
+    second: SchoolArcadeGameBackEndDoorLight_54
+  - first:
+      213: 8690314937027709446
+    second: SchoolArcadeGameBackEndDoorLight_55
+  - first:
+      213: -5301954451856166887
+    second: SchoolArcadeGameBackEndDoorLight_56
+  - first:
+      213: -4851717207186424649
+    second: SchoolArcadeGameBackEndDoorLight_57
+  - first:
+      213: 5061501487406895864
+    second: SchoolArcadeGameBackEndDoorLight_58
+  - first:
+      213: 4435463522483761479
+    second: SchoolArcadeGameBackEndDoorLight_59
+  - first:
+      213: -4802609168105557429
+    second: SchoolArcadeGameBackEndDoorLight_60
+  - first:
+      213: -7504670747017152851
+    second: SchoolArcadeGameBackEndDoorLight_61
+  - first:
+      213: -2005362391315827720
+    second: SchoolArcadeGameBackEndDoorLight_62
+  - first:
+      213: 442092152730222456
+    second: SchoolArcadeGameBackEndDoorLight_63
+  - first:
+      213: 3235151647592978047
+    second: SchoolArcadeGameBackEndDoorLight_64
+  - first:
+      213: -4228604289724457678
+    second: SchoolArcadeGameBackEndDoorLight_65
+  - first:
+      213: -7577320564121003642
+    second: SchoolArcadeGameBackEndDoorLight_66
+  - first:
+      213: 2484755733322853745
+    second: SchoolArcadeGameBackEndDoorLight_67
+  - first:
+      213: 3234129593749806279
+    second: SchoolArcadeGameBackEndDoorLight_68
+  - first:
+      213: 299985415660561770
+    second: SchoolArcadeGameBackEndDoorLight_69
+  - first:
+      213: 6173014263921631856
+    second: SchoolArcadeGameBackEndDoorLight_70
+  - first:
+      213: 7603681534863687206
+    second: SchoolArcadeGameBackEndDoorLight_71
+  - first:
+      213: -5021923933984595184
+    second: SchoolArcadeGameBackEndDoorLight_72
+  - first:
+      213: 4734040912042840709
+    second: SchoolArcadeGameBackEndDoorLight_73
+  - first:
+      213: 5598967869972837612
+    second: SchoolArcadeGameBackEndDoorLight_74
+  - first:
+      213: 6680167758122992412
+    second: SchoolArcadeGameBackEndDoorLight_75
+  - first:
+      213: 3337909502077371361
+    second: SchoolArcadeGameBackEndDoorLight_76
+  - first:
+      213: 7130130337970395240
+    second: SchoolArcadeGameBackEndDoorLight_77
+  - first:
+      213: 335820345521618479
+    second: SchoolArcadeGameBackEndDoorLight_78
+  - first:
+      213: -4048260164090322230
+    second: SchoolArcadeGameBackEndDoorLight_79
+  - first:
+      213: 5763694882338640847
+    second: SchoolArcadeGameBackEndDoorLight_80
+  - first:
+      213: 2810642069391587847
+    second: SchoolArcadeGameBackEndDoorLight_81
+  - first:
+      213: -5715590987328481989
+    second: SchoolArcadeGameBackEndDoorLight_82
+  - first:
+      213: 8976351880183282956
+    second: SchoolArcadeGameBackEndDoorLight_83
+  - first:
+      213: -3768160195071576902
+    second: SchoolArcadeGameBackEndDoorLight_84
+  - first:
+      213: -5350302658675817906
+    second: SchoolArcadeGameBackEndDoorLight_85
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f663010ee5acc9a40800000000000000
+      internalID: 5376394564008425071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c28ae411050c31560800000000000000
+      internalID: 7283376472508508204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a4e0812beced1ad0800000000000000
+      internalID: -2729765304493087583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b828e4153610d40800000000000000
+      internalID: 5548825416757840763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac41cd3a73f8a2900800000000000000
+      internalID: 660497764498281674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 480
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 086c2f49fdc3999b0800000000000000
+      internalID: -5072956574281841024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53c19848aaa2d0880800000000000000
+      internalID: -8643205197997728715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 400
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c42f946c83a27660800000000000000
+      internalID: 7382142562592564421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 400
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84db52c88bdb2c460800000000000000
+      internalID: 7260574149597576520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 400
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 655de1d0943dfdad0800000000000000
+      internalID: -2675187342928587434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d53581334d15dd20800000000000000
+      internalID: 3302578076176954840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 320
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade131369908614f0800000000000000
+      internalID: -858357282686951718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 320
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6863c68f1a2a9e0800000000000000
+      internalID: -1611547628305742158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 320
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b24c0b1ca6b74ec70800000000000000
+      internalID: 8999453653839430699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae7e09bb17c7dc430800000000000000
+      internalID: 3804834088117921770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8782b0b4fbc863660800000000000000
+      internalID: 7365228993836689528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 240
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6f2ad517f4545f00800000000000000
+      internalID: 1104601228812889965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_17
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40deb3098c01ed880800000000000000
+      internalID: -8584405386122236668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4495b2c232f5cfa40800000000000000
+      internalID: 5403298257607285060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 160
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c360e91f220136610800000000000000
+      internalID: 1613150833797367356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2f3dbe622d45a20800000000000000
+      internalID: 3050293912243794646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_21
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 160
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41ce4b8b6ba3f5540800000000000000
+      internalID: 4998778667861863444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f436b66c7e674af30800000000000000
+      internalID: 4585921058408457039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_23
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c546b55d254253570800000000000000
+      internalID: 8445696614388687964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_24
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e06379d162d69040800000000000000
+      internalID: 4654138582635864292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_25
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888b54c48159471c0800000000000000
+      internalID: -4506813395499632504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d34b888078df9f590800000000000000
+      internalID: -7639796536451746755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b265a43cbc23b8900800000000000000
+      internalID: 687699218840311339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_28
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a85ff62f2ff3a710800000000000000
+      internalID: 1703485662058993830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SchoolArcadeGameBackEndDoorLight_29
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaed9fe8eb3993ed0800000000000000
+      internalID: -2433751676965232982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c65ef877ab04db848a29346fe2237694
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SchoolArcadeGameBackEndDoorLight_0: 5376394564008425071
+      SchoolArcadeGameBackEndDoorLight_1: 7283376472508508204
+      SchoolArcadeGameBackEndDoorLight_10: 3302578076176954840
+      SchoolArcadeGameBackEndDoorLight_11: -858357282686951718
+      SchoolArcadeGameBackEndDoorLight_12: -1611547628305742158
+      SchoolArcadeGameBackEndDoorLight_13: 8999453653839430699
+      SchoolArcadeGameBackEndDoorLight_14: 3804834088117921770
+      SchoolArcadeGameBackEndDoorLight_15: 7365228993836689528
+      SchoolArcadeGameBackEndDoorLight_16: 1104601228812889965
+      SchoolArcadeGameBackEndDoorLight_17: -8584405386122236668
+      SchoolArcadeGameBackEndDoorLight_18: 5403298257607285060
+      SchoolArcadeGameBackEndDoorLight_19: 1613150833797367356
+      SchoolArcadeGameBackEndDoorLight_2: -2729765304493087583
+      SchoolArcadeGameBackEndDoorLight_20: 3050293912243794646
+      SchoolArcadeGameBackEndDoorLight_21: 4998778667861863444
+      SchoolArcadeGameBackEndDoorLight_22: 4585921058408457039
+      SchoolArcadeGameBackEndDoorLight_23: 8445696614388687964
+      SchoolArcadeGameBackEndDoorLight_24: 4654138582635864292
+      SchoolArcadeGameBackEndDoorLight_25: -4506813395499632504
+      SchoolArcadeGameBackEndDoorLight_26: -7639796536451746755
+      SchoolArcadeGameBackEndDoorLight_27: 687699218840311339
+      SchoolArcadeGameBackEndDoorLight_28: 1703485662058993830
+      SchoolArcadeGameBackEndDoorLight_29: -2433751676965232982
+      SchoolArcadeGameBackEndDoorLight_3: 5548825416757840763
+      SchoolArcadeGameBackEndDoorLight_4: 660497764498281674
+      SchoolArcadeGameBackEndDoorLight_5: -5072956574281841024
+      SchoolArcadeGameBackEndDoorLight_6: -8643205197997728715
+      SchoolArcadeGameBackEndDoorLight_7: 7382142562592564421
+      SchoolArcadeGameBackEndDoorLight_8: 7260574149597576520
+      SchoolArcadeGameBackEndDoorLight_9: -2675187342928587434
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
