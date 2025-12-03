@@ -34,7 +34,7 @@ public class PowerTerminalMinigame : MonoBehaviour
     [Header("Puzzle System")]
     [SerializeField] private static List<CodePuzzle> sharedPuzzles = new List<CodePuzzle>();
     [SerializeField] private static List<bool> puzzlesSolved = new List<bool>();
-    [SerializeField] private static int totalTerminals = 3;
+    [SerializeField] private static int totalTerminals = 4;
     
     [Header("Terminal Configuration")]
     private int currentTerminalID = -1; // Set dynamically when minigame starts
@@ -132,9 +132,19 @@ public class PowerTerminalMinigame : MonoBehaviour
             hintText = "The system needs to be started with a true parameter. Change the boolean value."
         };
         
+        // Puzzle 4 - Placeholder for Terminal ID 3
+        CodePuzzle puzzle4 = new CodePuzzle
+        {
+            puzzleName = "Final Security Check",
+            brokenCode = "string currentClearanceLevel = [Clerk];\nif (currentClearanceLevel >= [Admin])\n UnlockSecurity();",
+            correctCode = "string currentClearanceLevel = [Admin];\nif (currentClearanceLevel >= [Admin])\n UnlockSecurity();",
+            hintText = "Higher Security clearance required. \n Clearance levels: [Student] < [Clerk] < [Teacher] < [Admin]"
+        };
+        
         sharedPuzzles.Add(puzzle1);
         sharedPuzzles.Add(puzzle2);
         sharedPuzzles.Add(puzzle3);
+        sharedPuzzles.Add(puzzle4);
     }
     
     private void SetupUI()
@@ -167,6 +177,9 @@ public class PowerTerminalMinigame : MonoBehaviour
         }
         
         LoadPuzzle();
+        
+        // Ensure panel is visible when starting a new minigame (fixes Terminal 3 invisible panel issue)
+        MakePanelVisible();
         
         if (minigamePanel != null)
         {
@@ -246,10 +259,11 @@ public class PowerTerminalMinigame : MonoBehaviour
             puzzlesSolved[currentTerminalID] = true;
         }
         
-        // NOW check if this makes all terminals completed
+        // NOW check if this makes the first 3 terminals completed (for screen transition effects)
+        // Terminal 3 is exclusively for Grand Gate, not for completion effects
         bool willBeAllCompleted = true;
         int completedCount = 0;
-        for (int i = 0; i < totalTerminals; i++)
+        for (int i = 0; i < 3; i++) // Only check terminals 0, 1, 2
         {
             if (i < puzzlesSolved.Count && puzzlesSolved[i])
             {
@@ -298,11 +312,12 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private void CompletePuzzle()
     {
-        // Check if this will be the final terminal before activating it
+        // Check if this will be the completion of the first 3 terminals (0, 1, 2)
+        // Terminal 3 is exclusively for Grand Gate, not for completion effects
         bool willBeAllCompleted = true;
         int completedCount = 0;
         
-        for (int i = 0; i < totalTerminals; i++)
+        for (int i = 0; i < 3; i++) // Only check terminals 0, 1, 2
         {
             if (i < puzzlesSolved.Count && puzzlesSolved[i])
             {
@@ -392,6 +407,24 @@ public class PowerTerminalMinigame : MonoBehaviour
         EnablePlayerControls();
     }
     
+    /// <summary>
+    /// Make the panel visible by restoring alpha to 1 and re-enabling interactions
+    /// </summary>
+    private void MakePanelVisible()
+    {
+        if (minigamePanel != null)
+        {
+            // Restore panel alpha to 1
+            CanvasGroup canvasGroup = minigamePanel.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 1f;
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }
+        }
+    }
+    
     private void ShowAlreadySolvedMessage()
     {
         if (feedbackText != null)
@@ -403,8 +436,10 @@ public class PowerTerminalMinigame : MonoBehaviour
     
     private void CheckAllTerminalsCompleted()
     {
+        // Only check terminals 0, 1, and 2 for completion effects
+        // Terminal 3 is exclusively for the Grand Gate
         bool allSolved = true;
-        for (int i = 0; i < totalTerminals; i++)
+        for (int i = 0; i < 3; i++) // Only check first 3 terminals (IDs 0, 1, 2)
         {
             if (i >= puzzlesSolved.Count || !puzzlesSolved[i])
             {
@@ -518,10 +553,12 @@ public class PowerTerminalMinigame : MonoBehaviour
         EnablePlayerControls();
     }
     
-    // Static method to get completion status
+    // Static method to get completion status (only checks terminals 0, 1, 2)
     public static bool AreAllTerminalsCompleted()
     {
-        for (int i = 0; i < totalTerminals; i++)
+        // Only check terminals 0, 1, and 2 for completion effects
+        // Terminal 3 is exclusively for the Grand Gate
+        for (int i = 0; i < 3; i++) // Only check first 3 terminals (IDs 0, 1, 2)
         {
             if (i >= puzzlesSolved.Count || !puzzlesSolved[i])
             {

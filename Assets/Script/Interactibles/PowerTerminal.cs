@@ -21,7 +21,11 @@ public class PowerTerminal : MonoBehaviour
     
     [Header("Interaction")]
     [SerializeField] private float interactionRadius = 2f;
-    [SerializeField] private int terminalID = 0; // 0, 1, or 2 for the three terminals
+    [SerializeField] private int terminalID = 0; // 0, 1, 2, or 3 for the four terminals
+    
+    [Header("Grand Gate Integration")]
+    [SerializeField] private GrandGate grandGate; // Reference to the grand gate
+    
     private bool playerInside = false;
     private bool isTerminalOn = false;
     private bool interactionEnabled = true;
@@ -153,6 +157,17 @@ public class PowerTerminal : MonoBehaviour
         
         // Mark terminal as activated
         isTerminalOn = true;
+        
+        // Notify the grand gate that this terminal has been activated
+        if (grandGate != null)
+        {
+            grandGate.OnTerminalActivated(terminalID);
+            Debug.Log($"Terminal {terminalID} notified GrandGate of activation");
+        }
+        else
+        {
+            Debug.LogWarning($"Terminal {terminalID}: No GrandGate reference assigned!");
+        }
     }
     
     /// <summary>
