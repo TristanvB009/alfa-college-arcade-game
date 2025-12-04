@@ -275,9 +275,11 @@ public class PowerTerminalMinigame : MonoBehaviour
             }
         }
         
-        if (willBeAllCompleted)
+        // Only trigger completion effects if this is the completion of the 3rd terminal (not Terminal 3)
+        // AND if we just completed one of the first 3 terminals (0, 1, or 2)
+        if (willBeAllCompleted && currentTerminalID < 3)
         {
-            // This is the final terminal - make panel invisible IMMEDIATELY
+            // This is the final terminal of the first 3 - make panel invisible IMMEDIATELY
             MakePanelInvisible();
             
             // Start timeline IMMEDIATELY while panel is invisible but still active

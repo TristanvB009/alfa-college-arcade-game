@@ -29,10 +29,39 @@ public class GrandGate : MonoBehaviour
     public GameObject allLightsObject;
     public Animator allLightsAnimator;
     
+    [Header("Gate Spotlights")]
+    [Tooltip("Additional spotlights to deactivate when gate opens")]
+    public GameObject[] gateSpotlights = new GameObject[4];
+    
+    [Header("Camera Pan System")]
+    [Tooltip("Main camera to pan (leave empty to auto-find)")]
+    public Camera mainCamera;
+    
+    [Tooltip("Transform to pan camera to when showing gate (position the camera should look at)")]
+    public Transform gateCameraTarget;
+    
+    [Tooltip("Duration of camera pan animation in seconds")]
+    public float panDuration = 2f;
+    
+    [Tooltip("How long to hold on gate view before panning back")]
+    public float holdDuration = 1.5f;
+    
+    [Tooltip("Ease curve for camera movement")]
+    public AnimationCurve panCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    
     // Track which terminals have been activated
     private bool[] terminalActivated = new bool[4]; // IDs 0, 1, 2, 3
     private bool[] lightsActivated = new bool[4]; // Track which lights are on
     private bool gateOpened = false;
+    
+    // Camera pan system
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+    private bool isPanning = false;
+    
+    // Player control management
+    private PlayerController playerController;
+    private bool playerControlsWereDisabled = false;
 
     void Start()
     {
@@ -41,6 +70,23 @@ public class GrandGate : MonoBehaviour
         {
             gateAnimator.SetBool("GateOffIdle", true);
             gateAnimator.SetBool("GateOnIdle", false);
+        }
+        
+        // Auto-find main camera if not assigned
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                mainCamera = FindFirstObjectByType<Camera>();
+            }
+        }
+        
+        // Store original camera position and rotation
+        if (mainCamera != null)
+        {
+            originalCameraPosition = mainCamera.transform.position;
+            originalCameraRotation = mainCamera.transform.rotation;
         }
     }
 
@@ -66,6 +112,12 @@ public class GrandGate : MonoBehaviour
 
         // Activate corresponding light based on terminal ID
         StartCoroutine(ActivateLight(terminalId));
+        
+        // Pan camera to show the gate lighting up
+        if (gateCameraTarget != null && !isPanning)
+        {
+            StartCoroutine(PanCameraToGate());
+        }
     }
 
     /// Activate light for specific terminal ID with proper animation sequence
@@ -102,6 +154,9 @@ public class GrandGate : MonoBehaviour
         }
 
         Debug.Log($"Activating {colorName} light for terminal {terminalId}");
+
+        // Wait 0.5 seconds to allow camera to pan to gate before lights activate
+        yield return new WaitForSeconds(1.5f);
 
         // Step 1: Activate the *Color*LightsActivate bool
         lightAnimator.SetBool($"{colorName}LightsActivate", true);
@@ -177,8 +232,127 @@ public class GrandGate : MonoBehaviour
         {
             allLightsObject.SetActive(false);
         }
+        
+        // Deactivate all gate spotlights
+        for (int i = 0; i < gateSpotlights.Length; i++)
+        {
+            if (gateSpotlights[i] != null)
+            {
+                gateSpotlights[i].SetActive(false);
+                Debug.Log($"Deactivated gate spotlight {i + 1}");
+            }
+        }
 
-        Debug.Log("Gate opened successfully and AllLights object deactivated!");
+        Debug.Log("Gate opened successfully, AllLights object and spotlights deactivated!");
+        
+        // Ensure player controls are enabled after gate opening (fixes softlock)
+        EnablePlayerControls();
+    }
+    
+    /// <summary>
+    /// Pan camera to show the gate, then back to original position
+    /// </summary>
+    private IEnumerator PanCameraToGate()
+    {
+        if (mainCamera == null || gateCameraTarget == null || isPanning)
+            yield break;
+            
+        isPanning = true;
+        
+        // Store current camera position (in case player moved)
+        Vector3 startPos = mainCamera.transform.position;
+        Quaternion startRot = mainCamera.transform.rotation;
+        
+        // Calculate target camera position and rotation
+        Vector3 targetPos = gateCameraTarget.position;
+        Quaternion targetRot = gateCameraTarget.rotation;
+        
+        // Pan to gate
+        yield return StartCoroutine(PanCamera(startPos, startRot, targetPos, targetRot, panDuration));
+        
+        // Hold on gate view
+        yield return new WaitForSeconds(holdDuration);
+        
+        // Pan back to original position
+        yield return StartCoroutine(PanCamera(targetPos, targetRot, startPos, startRot, panDuration));
+        
+        isPanning = false;
+        
+        // Re-enable player controls after camera pan if they were disabled
+        if (playerControlsWereDisabled)
+        {
+            EnablePlayerControls();
+            playerControlsWereDisabled = false;
+        }
+    }
+    
+    /// <summary>
+    /// Disable player controls during camera pan
+    /// </summary>
+    private void DisablePlayerControls()
+    {
+        if (playerController == null)
+        {
+            playerController = FindFirstObjectByType<PlayerController>();
+        }
+        
+        if (playerController != null)
+        {
+            var inputEnabledField = typeof(PlayerController).GetField("InputEnabled", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (inputEnabledField != null)
+            {
+                inputEnabledField.SetValue(playerController, false);
+                playerControlsWereDisabled = true;
+                Debug.Log("Player controls disabled for camera pan");
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Enable player controls after camera pan
+    /// </summary>
+    private void EnablePlayerControls()
+    {
+        if (playerController == null)
+        {
+            playerController = FindFirstObjectByType<PlayerController>();
+        }
+        
+        if (playerController != null)
+        {
+            var inputEnabledField = typeof(PlayerController).GetField("InputEnabled", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (inputEnabledField != null)
+            {
+                inputEnabledField.SetValue(playerController, true);
+                Debug.Log("Player controls enabled after camera pan");
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Smooth camera pan between two positions
+    /// </summary>
+    private IEnumerator PanCamera(Vector3 fromPos, Quaternion fromRot, Vector3 toPos, Quaternion toRot, float duration)
+    {
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            float easedT = panCurve.Evaluate(t);
+            
+            mainCamera.transform.position = Vector3.Lerp(fromPos, toPos, easedT);
+            mainCamera.transform.rotation = Quaternion.Lerp(fromRot, toRot, easedT);
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        // Ensure final position is exact
+        mainCamera.transform.position = toPos;
+        mainCamera.transform.rotation = toRot;
     }
 
     // For debugging - can be called from inspector or other scripts
