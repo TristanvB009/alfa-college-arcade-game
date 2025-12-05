@@ -9,6 +9,11 @@ public class SecurityCamera : MonoBehaviour
 
     private bool isRunningActivationCycle;
     
+    private void Start()
+    {
+        isActivated = true;
+        isRunningActivationCycle = false;
+    }
     private void Update()
     {
         if (isPowered && activationInterval > 0 && !isRunningActivationCycle)
@@ -27,5 +32,16 @@ public class SecurityCamera : MonoBehaviour
         Debug.Log("Camera Deactivated");
         yield return new WaitForSeconds(activationInterval);
         isRunningActivationCycle = false;
+    }
+
+    public void OnPlayerDetected()
+    {
+        if (isActivated && isPowered)
+        {
+            Debug.Log("Player Detected by camera");
+        } else
+        {
+            Debug.Log("Player in Camera FOV, but camera is deactivated/depowered");
+        }
     }
 }
