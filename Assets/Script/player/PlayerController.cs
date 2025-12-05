@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
 
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        SoundEffectManager.Play("Jump");
+        SoundEffectManager.Play("Jump", 0.4f);
         isJumping = true;
     }
     public void cutJumpShort()
