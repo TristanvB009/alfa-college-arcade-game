@@ -40,14 +40,13 @@ public class securityCameraVision : MonoBehaviour
 
     private void Update()
     {
-        if (!isRotationPaused)
+        if (!isRotationPaused && !PlayerInVision())
         {
             float step = rotationSpeed * Time.deltaTime;
             transform.Rotate(0, 0, step);
 
             if (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) < Math.Abs(step) + 0.1f)
             {
-                Debug.Log("Reached target rotation");
                 StartCoroutine(PauseAndSwitchTarget());
             }   
         }
@@ -58,10 +57,6 @@ public class securityCameraVision : MonoBehaviour
         origin = transform.position;
         startingAngle = GetAngleFromDirection(transform.right) - 90f;
         DrawFOV();
-        if (PlayerInVision())
-        {
-            securityCamera.OnPlayerDetected();
-        }
     }
 
     void DrawFOV()
@@ -125,25 +120,6 @@ public class securityCameraVision : MonoBehaviour
         return new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
     }
 
-
-    // private void OnTriggerEnter2D(Collider2D vision)
-    // {
-    //     if (vision.CompareTag(playerTag))
-    //     {
-    //         playerDetected = true;
-    //         Debug.Log("player in vision");
-    //     }
-    // }
-
-    // private void OnTriggerExit2D(Collider2D vision)
-    // {
-    //     if (vision.CompareTag(playerTag))
-    //     {
-    //         playerDetected = false;
-    //         Debug.Log("player out of vision");
-    //    }
-    // }
-
     IEnumerator PauseAndSwitchTarget()
     {
         isRotationPaused = true;
@@ -159,10 +135,9 @@ public class securityCameraVision : MonoBehaviour
                 targetAngle = rotationAngleEnd;
                 rotationSpeed = -rotationSpeed;
             }
-            Debug.Log("New target angle: " + targetAngle);
     }
 
-    bool PlayerInVision()
+    public bool PlayerInVision()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
         Collider2D playerCollider = player.GetComponent<Collider2D>();
@@ -196,27 +171,6 @@ public class securityCameraVision : MonoBehaviour
         }
 
         return false;
-        
-        // Vector3 dirToPlayer = (player.transform.position - origin);
-        // float distanceToPlayer = dirToPlayer.magnitude;
-
-        
-        // // Distance check
-        // if (distanceToPlayer > viewRadius) return false;
-        // dirToPlayer.Normalize();
-
-        // // Angle check
-        // Vector3 forward = Quaternion.Euler(0, 0, -90) * transform.right;
-        // float angleToPlayer = Vector3.Angle(forward, dirToPlayer);
-        // if (angleToPlayer > viewAngle / 2f) return false;
-
-        // // Obstacle check
-        // RaycastHit2D hit = Physics2D.Raycast(origin, dirToPlayer, distanceToPlayer, obstacleMask);
-        // if (hit.collider != null) return false;
-
-        // Debug.DrawLine(origin, player.transform.position, Color.red);
-
-        // return true;
     }
 }
 

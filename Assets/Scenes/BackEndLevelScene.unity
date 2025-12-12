@@ -15448,6 +15448,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7974cc02c666d0b458d161f3c3af20b1, type: 3}
+--- !u!1 &670743864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670743865}
+  - component: {fileID: 670743866}
+  m_Layer: 0
+  m_Name: hazardDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670743865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670743864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1947111428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670743866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670743864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910688267a81373fca04fbb47b7123ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <damageAmount>k__BackingField: 0
+  damageEffectPrefab: {fileID: 0}
+  effectDuration: 0.2
+  yOffset: 0.5
+  xOffset: 0.3
 --- !u!1 &762018423
 GameObject:
   m_ObjectHideFlags: 0
@@ -16255,7 +16304,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 120, y: -26, z: 0}
@@ -16264,7 +16313,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 120, y: -25, z: 0}
@@ -16273,7 +16322,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 120, y: -24, z: 0}
@@ -16471,7 +16520,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 99, y: -5, z: 0}
@@ -16543,7 +16592,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 99, y: 3, z: 0}
@@ -16552,7 +16601,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 1068195060, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
       - {fileID: -1257033783, guid: fefebc95a2a37c64cb358897d44415c4, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 99, y: 4, z: 0}
@@ -138082,6 +138131,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1199095130}
+  - {fileID: 670743865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1947111429
@@ -138099,6 +138149,9 @@ MonoBehaviour:
   activationInterval: 0
   isPowered: 1
   isActivated: 1
+  securityCameraVision: {fileID: 0}
+  hazardDamage: {fileID: 0}
+  DetectDelay: 2
 --- !u!1 &2005232833
 GameObject:
   m_ObjectHideFlags: 0
