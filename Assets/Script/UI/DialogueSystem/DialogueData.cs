@@ -12,4 +12,11 @@ public class DialogueData : ScriptableObject
     
     [Header("Dialogue Nodes")]
     public List<DialogueNode> dialogueNodes = new List<DialogueNode>();
+
+    [Header("Dialogue Actions")]
+    [Tooltip("Actions that run when this DialogueData starts")]
+    public List<DialogueAction> onDialogueStartActions = new List<DialogueAction>();
+
+    [Tooltip("Actions that run when this DialogueData ends")]
+    public List<DialogueAction> onDialogueEndActions = new List<DialogueAction>();
 }

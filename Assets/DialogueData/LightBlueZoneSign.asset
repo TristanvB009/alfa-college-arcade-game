@@ -20,9 +20,13 @@ MonoBehaviour:
     choices:
     - choiceText: Lees verder
       nextNodeIndex: 1
+      onSelectedActions: []
   - characterName: Bordje
     dialogueText: Het is wel geobserveerd dat mensen door muren heen liepen, we hebben
       hier beneden er nog geen onderzoek naar gedaan
     choices:
     - choiceText: OK
       nextNodeIndex: 999
+      onSelectedActions: []
+  onDialogueStartActions: []
+  onDialogueEndActions: []

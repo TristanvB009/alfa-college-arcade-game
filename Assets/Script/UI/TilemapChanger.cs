@@ -136,6 +136,106 @@ public class TilemapChanger : MonoBehaviour
     [Header("Tile Mappings")]
     [Tooltip("List of tile pairs - default tiles will be replaced with colored tiles")]
     [SerializeField] private List<TileMapping> tileMappings = new List<TileMapping>();
+
+    [Header("Secondary Tile Mappings")]
+    [Tooltip("List of tile pairs for secondary change - only these will be changed when triggered")] 
+    [SerializeField] private List<TileMapping> secondaryMappings = new List<TileMapping>();
+        /// <summary>
+        /// Change tiles according to secondaryMappings (can be triggered separately)
+        /// </summary>
+        [ContextMenu("Change Tiles to Secondary")]
+        public void ChangeTilesToSecondary()
+        {
+            if (targetTilemap == null)
+            {
+                Debug.LogError("TilemapChanger: No tilemap assigned!");
+                return;
+            }
+            if (secondaryMappings == null || secondaryMappings.Count == 0)
+            {
+                Debug.LogWarning("TilemapChanger: No secondary mappings configured.");
+                return;
+            }
+            BoundsInt bounds = targetTilemap.cellBounds;
+            int changedTileCount = 0;
+            foreach (Vector3Int position in bounds.allPositionsWithin)
+            {
+                TileBase currentTile = targetTilemap.GetTile(position);
+                if (currentTile != null)
+                {
+                    foreach (TileMapping mapping in secondaryMappings)
+                    {
+                        if (mapping.IsValid())
+                        {
+                            TileBase defaultTile = mapping.GetDefaultTile();
+                            if (defaultTile != null && currentTile.name == defaultTile.name)
+                            {
+                                TileBase secondaryTile = mapping.GetColoredTile();
+                                if (secondaryTile != null)
+                                {
+                                    targetTilemap.SetTile(position, secondaryTile);
+                                    changedTileCount++;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            Debug.Log($"Changed {changedTileCount} tiles using secondary mappings.");
+        }
+
+        /// <summary>
+        /// Change tiles according to a single secondary mapping (by index)
+        /// </summary>
+        /// <param name="secondaryMappingIndex">Index into the secondaryMappings list</param>
+        public void ChangeTilesToSecondaryMapping(int secondaryMappingIndex)
+        {
+            if (targetTilemap == null)
+            {
+                Debug.LogError("TilemapChanger: No tilemap assigned!");
+                return;
+            }
+            if (secondaryMappings == null || secondaryMappings.Count == 0)
+            {
+                Debug.LogWarning("TilemapChanger: No secondary mappings configured.");
+                return;
+            }
+            if (secondaryMappingIndex < 0 || secondaryMappingIndex >= secondaryMappings.Count)
+            {
+                Debug.LogWarning($"TilemapChanger: Secondary mapping index {secondaryMappingIndex} is out of range (0..{secondaryMappings.Count - 1}).");
+                return;
+            }
+
+            TileMapping mapping = secondaryMappings[secondaryMappingIndex];
+            if (mapping == null || !mapping.IsValid())
+            {
+                Debug.LogWarning($"TilemapChanger: Secondary mapping at index {secondaryMappingIndex} is not valid.");
+                return;
+            }
+
+            TileBase defaultTile = mapping.GetDefaultTile();
+            TileBase secondaryTile = mapping.GetColoredTile();
+            if (defaultTile == null || secondaryTile == null)
+            {
+                Debug.LogWarning($"TilemapChanger: Secondary mapping at index {secondaryMappingIndex} is missing tiles.");
+                return;
+            }
+
+            BoundsInt bounds = targetTilemap.cellBounds;
+            int changedTileCount = 0;
+            foreach (Vector3Int position in bounds.allPositionsWithin)
+            {
+                TileBase currentTile = targetTilemap.GetTile(position);
+                if (currentTile != null && currentTile.name == defaultTile.name)
+                {
+                    targetTilemap.SetTile(position, secondaryTile);
+                    changedTileCount++;
+                }
+            }
+
+            Debug.Log($"Changed {changedTileCount} tiles using secondary mapping index {secondaryMappingIndex}.");
+        }
     
     [Header("Terminal Integration")]
     [Tooltip("Check for terminal completion automatically")]
@@ -150,6 +250,30 @@ public class TilemapChanger : MonoBehaviour
     [Header("Performance")]
     [Tooltip("Preload all prefabs at start to avoid lag spikes during gameplay")]
     [SerializeField] private bool preloadPrefabs = true;
+    
+    /// <summary>
+    /// Change specific tiles at given positions to a new tile (can be called anytime)
+    /// </summary>
+    /// <param name="positions">List of tilemap positions to change</param>
+    /// <param name="newTile">The tile to set at those positions</param>
+    public void ChangeSpecificTiles(List<Vector3Int> positions, TileBase newTile)
+    {
+        if (targetTilemap == null)
+        {
+            Debug.LogError("TilemapChanger: No tilemap assigned!");
+            return;
+        }
+        if (positions == null || newTile == null)
+        {
+            Debug.LogWarning("TilemapChanger: Invalid arguments for ChangeSpecificTiles");
+            return;
+        }
+        foreach (var pos in positions)
+        {
+            targetTilemap.SetTile(pos, newTile);
+        }
+        Debug.Log($"Changed {positions.Count} tiles to {newTile.name}");
+    }
     
     private bool hasChangedTiles = false;
     

@@ -16,6 +16,10 @@ public class DialogueChoice
 {
     public string choiceText;
     public int nextNodeIndex;
+
+    [Header("Choice Actions")]
+    [Tooltip("Optional actions to run when this choice is selected")]
+    public List<DialogueAction> onSelectedActions;
 }
 
 public class DialogueManager : MonoBehaviour
@@ -51,6 +55,8 @@ public class DialogueManager : MonoBehaviour
     private string currentFullText = "";
     private bool skipRequested = false;
 
+    private DialogueContext currentContext;
+
     private void Update()
     {
         // Allow skipping typewriter effect with mouse click or space/enter
@@ -62,9 +68,22 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(List<DialogueNode> nodes)
     {
+        StartDialogue(nodes, null, null);
+    }
+
+    public void StartDialogue(List<DialogueNode> nodes, DialogueStarter starter, DialogueData dialogueData)
+    {
         IsDialogueActive = true;
         dialogueNodes = nodes;
         currentNodeIndex = 0;
+
+        currentContext = new DialogueContext
+        {
+            dialogueManager = this,
+            dialogueStarter = starter,
+            dialogueData = dialogueData,
+            player = GameObject.FindGameObjectWithTag("Player")
+        };
         
         // Activate UI panels and ensure they're interactable
         if (DialogueTextContainer != null)
@@ -107,6 +126,9 @@ public class DialogueManager : MonoBehaviour
         // Hide the health bar during dialogue
         HideHealthBar();
         
+        // Dialogue start actions (if this dialogue originated from a DialogueData)
+        ExecuteActionsSafe(dialogueData != null ? dialogueData.onDialogueStartActions : null);
+
         DisplayNode();
     }
 
@@ -116,6 +138,12 @@ public class DialogueManager : MonoBehaviour
         
         DialogueNode node = dialogueNodes[currentNodeIndex];
         characterNameText.text = node.characterName;
+
+        if (currentContext != null)
+        {
+            currentContext.currentNode = node;
+            currentContext.currentChoice = null;
+        }
         
         // Stop any existing typewriter coroutine
         if (typewriterCoroutine != null)
@@ -156,7 +184,7 @@ public class DialogueManager : MonoBehaviour
         skipRequested = false;
         
         // Now create the choice buttons after typing is complete
-        if (node.choices.Count > 0)
+        if (node.choices != null && node.choices.Count > 0)
         {
             // Activate choices container and ensure it's interactable
             choicesContainer.SetActive(true);
@@ -171,19 +199,38 @@ public class DialogueManager : MonoBehaviour
             
             foreach (var choice in node.choices)
             {
+                DialogueChoice capturedChoice = choice;
                 Button choiceButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
-                choiceButton.GetComponentInChildren<Text>().text = choice.choiceText;
-                choiceButton.onClick.AddListener(() => SelectChoice(choice.nextNodeIndex));
+                choiceButton.GetComponentInChildren<Text>().text = capturedChoice.choiceText;
+                choiceButton.onClick.AddListener(() => SelectChoice(capturedChoice));
                 
                 // Ensure choice button is interactable
                 choiceButton.interactable = true;
             }
         }
 
-        if (node.choices.Count == 0)
+        if (node.choices == null || node.choices.Count == 0)
         {
             StartCoroutine(HideDialogueAfterDelay(5f));
         }
+    }
+
+    public void SelectChoice(DialogueChoice choice)
+    {
+        if (choice == null)
+        {
+            EndDialogue();
+            return;
+        }
+
+        if (currentContext != null)
+        {
+            currentContext.currentChoice = choice;
+        }
+
+        ExecuteActionsSafe(choice.onSelectedActions);
+
+        SelectChoice(choice.nextNodeIndex);
     }
 
     public void SelectChoice(int nextNodeIndex)
@@ -227,6 +274,33 @@ public class DialogueManager : MonoBehaviour
         
         // Show the health bar again when dialogue ends
         ShowHealthBar();
+
+        // Dialogue end actions
+        if (currentContext != null && currentContext.dialogueData != null)
+        {
+            ExecuteActionsSafe(currentContext.dialogueData.onDialogueEndActions);
+        }
+
+        currentContext = null;
+    }
+
+    private void ExecuteActionsSafe(List<DialogueAction> actions)
+    {
+        if (actions == null || actions.Count == 0) return;
+
+        foreach (var action in actions)
+        {
+            if (action == null) continue;
+
+            try
+            {
+                action.Execute(currentContext);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+            }
+        }
     }
 
     private IEnumerator HideDialogueAfterDelay(float delay)

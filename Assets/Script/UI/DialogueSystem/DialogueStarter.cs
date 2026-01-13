@@ -170,7 +170,8 @@ public class DialogueStarter : MonoBehaviour
 
     private void StartDialogue()
     {
-        List<DialogueNode> dialogueNodes = GetSelectedDialogue();
+        DialogueData selectedDialogueData = GetSelectedDialogueData();
+        List<DialogueNode> dialogueNodes = GetDialogueNodes(selectedDialogueData);
         
         if (dialogueNodes != null && dialogueNodes.Count > 0)
         {
@@ -188,7 +189,7 @@ public class DialogueStarter : MonoBehaviour
             if (Johan)
             {
                 // Start dialogue immediately
-                dialogueManager.StartDialogue(dialogueNodes);
+                dialogueManager.StartDialogue(dialogueNodes, this, selectedDialogueData);
                 
                 // Play knee animation sequence in background
                 StartCoroutine(JohanKneeAnimationSequence());
@@ -197,7 +198,7 @@ public class DialogueStarter : MonoBehaviour
             {
                 // Set talking animation for other characters
                 SetCharacterTalkingAnimation(true);
-                dialogueManager.StartDialogue(dialogueNodes);
+                dialogueManager.StartDialogue(dialogueNodes, this, selectedDialogueData);
             }
         }
         else
@@ -206,9 +207,8 @@ public class DialogueStarter : MonoBehaviour
         }
     }
     
-    private List<DialogueNode> GetSelectedDialogue()
+    private DialogueData GetSelectedDialogueData()
     {
-        // First, try to use DialogueData assets
         if (availableDialogues != null && availableDialogues.Count > 0)
         {
             // Ensure selected index is within bounds
@@ -216,16 +216,26 @@ public class DialogueStarter : MonoBehaviour
             
             if (availableDialogues[clampedIndex] != null)
             {
-                return availableDialogues[clampedIndex].dialogueNodes;
+                return availableDialogues[clampedIndex];
             }
         }
-        
+
+        return null;
+    }
+
+    private List<DialogueNode> GetDialogueNodes(DialogueData selectedDialogueData)
+    {
+        if (selectedDialogueData != null && selectedDialogueData.dialogueNodes != null)
+        {
+            return selectedDialogueData.dialogueNodes;
+        }
+
         // Fallback to hardcoded dialogue if no DialogueData is assigned
         if (useFallbackDialogue)
         {
             return GetFallbackDialogue();
         }
-        
+
         return null;
     }
     
@@ -409,7 +419,7 @@ public class DialogueStarter : MonoBehaviour
         }
         
         // Start dialogue - let DialogueManager handle UI
-        dialogueManager.StartDialogue(dialogueNodes);
+        dialogueManager.StartDialogue(dialogueNodes, this, null);
     }
 
     /// <summary>
