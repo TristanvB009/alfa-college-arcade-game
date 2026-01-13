@@ -41,6 +41,7 @@ public class DialogueStarter : MonoBehaviour
     public bool Maik = false;
     public bool Sjoerd = false;
     public bool Auke = false;
+    public bool Sign = false; // Static sign post that only idles
     [SerializeField] private bool EvilIds = false; // Using SerializeField with different name for "Evil Ids"
     
     [Header("Character Animations")]
@@ -74,6 +75,9 @@ public class DialogueStarter : MonoBehaviour
     public string AukeIdle = "AukeIdle";
     public string AukeTalking = "AukeTalking";
     
+    // Sign animations (idle only)
+    public string SignIdle = "SignIdle";
+
     // Evil Ids animations
     public string EvilIdsIdle = "EvilIdsIdle";
     public string EvilIdsTalking = "EvilIdsTalking";
@@ -348,6 +352,10 @@ public class DialogueStarter : MonoBehaviour
         {
             characterAnimator.SetBool(AukeIdle, true);
         }
+        else if (Sign)
+        {
+            characterAnimator.SetBool(SignIdle, true);
+        }
         else if (EvilIds)
         {
             characterAnimator.SetBool(EvilIdsIdle, true);
@@ -465,6 +473,11 @@ public class DialogueStarter : MonoBehaviour
             else
                 characterAnimator.SetBool(AukeIdle, true);
         }
+        else if (Sign)
+        {
+            // Sign has no talking animation; keep showing idle
+            characterAnimator.SetBool(SignIdle, true);
+        }
         else if (EvilIds)
         {
             if (isTalking)
@@ -509,6 +522,9 @@ public class DialogueStarter : MonoBehaviour
         // Reset Auke animations
         characterAnimator.SetBool(AukeIdle, false);
         characterAnimator.SetBool(AukeTalking, false);
+
+        // Reset Sign animations
+        characterAnimator.SetBool(SignIdle, false);
         
         // Reset Evil Ids animations
         characterAnimator.SetBool(EvilIdsIdle, false);
