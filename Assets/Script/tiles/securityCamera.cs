@@ -66,11 +66,7 @@ public class SecurityCamera : MonoBehaviour
     {
         // TODO: put stuff here
         Debug.Log("Player Detected");
-        StartCoroutine(hazardDamage.WaitForKnockbackThenRespawn
-        (
-            player.GetComponent<PlayerController>(),
-            player
-        ));
+        StartCoroutine(hazardDamage.WaitForKnockbackThenRespawn(player.GetComponent<PlayerController>(),player));
         TimePlayerInVision = 0;
     }
 }
