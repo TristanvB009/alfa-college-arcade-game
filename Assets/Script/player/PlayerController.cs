@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     private float _footstepTimer = 0f;
 
     [Header("SubCheckpoints")]
+    public Transform StartPosition;
     private Vector2 SubCheckPointPos;
 
 
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
         health = GetComponent<Health>();
+        SubCheckPointPos = StartPosition.position;
 
         // Find DialogueManager in scene
         dialogueManager = FindFirstObjectByType<DialogueManager>();
