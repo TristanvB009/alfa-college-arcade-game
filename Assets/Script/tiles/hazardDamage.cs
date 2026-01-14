@@ -58,7 +58,7 @@ public class hazardDamage : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForKnockbackThenRespawn(PlayerController playerController, GameObject player)
+    public IEnumerator WaitForKnockbackThenRespawn(PlayerController playerController, GameObject player)
     {
         // Get the knockback component to monitor its state
         Knockback knockback = player.GetComponent<Knockback>();
