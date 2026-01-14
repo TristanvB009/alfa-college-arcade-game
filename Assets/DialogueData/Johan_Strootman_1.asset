@@ -12,52 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd8006031202b946afb2d2e35ddac9e, type: 3}
   m_Name: Johan_Strootman_1
   m_EditorClassIdentifier: 
-  dialogueName: Johan Strootman
-  description: 
-  dialogueNodes:
-  - characterName: Johan Strootman
-    dialogueText: Een lange, ietwat grijzende man met een server op zijn rug staat
-      voor je. "Goedemiddag!"
-    choices:
-    - choiceText: '"Waarom heb je een server op je rug?"'
-      nextNodeIndex: 1
-      onSelectedActions: []
-    - choiceText: '"Ik zoek ids zijn broer"'
-      nextNodeIndex: 3
-      onSelectedActions: []
-  - characterName: Johan Strootman
-    dialogueText: '"Ik ben bezig met de backend van dit spel"'
-    choices:
-    - choiceText: '"Welk spel?"'
-      nextNodeIndex: 2
-      onSelectedActions: []
-  - characterName: Johan Strootman
-    dialogueText: '"DIT spel!" zegt Johan, wild gebarend om zich heen'
-    choices:
-    - choiceText: '"Uhm, oke? Ik zoek Ids zijn broer."'
-      nextNodeIndex: 3
-      onSelectedActions: []
-    - choiceText: Loop voorzichtig weg
-      nextNodeIndex: 999
-      onSelectedActions: []
-  - characterName: Johan Strootman
-    dialogueText: '"Nou kijk, die is normaal te vinden op de volgende verdieping"'
-    choices:
-    - choiceText: '"Welke verdieping is dat?"'
-      nextNodeIndex: 4
-      onSelectedActions: []
-  - characterName: Johan Strootman
-    dialogueText: '"De volgende." Zegt Johan met een sardonische grijns'
-    choices:
-    - choiceText: '"Ja maar welke is de volgende?"'
-      nextNodeIndex: 5
-      onSelectedActions: []
-  - characterName: Johan Strootman
-    dialogueText: '"Die ene na deze."'
-    choices:
-    - choiceText: je zucht, "Okee, dankjewel."
-      nextNodeIndex: 999
-      onSelectedActions: []
+  dialogueName: Johan Strootman_1
+  description: Start dialogue voor strootman
+  dialogueNodes: []
   onDialogueStartActions: []
-  onDialogueEndActions:
-  - {fileID: 11400000, guid: 2a5fd51a866ab994da637953734a3906, type: 2}
+  onDialogueEndActions: []

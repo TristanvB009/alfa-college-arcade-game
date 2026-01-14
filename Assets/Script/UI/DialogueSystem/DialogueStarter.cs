@@ -28,6 +28,21 @@ public class DialogueStarter : MonoBehaviour
     
     [Tooltip("Index of the dialogue to play (0-based)")]
     public int selectedDialogueIndex = 0;
+
+    [Header("Terminal -> Dialogue Switch")]
+    [Tooltip("Optional: switch this DialogueStarter's selected dialogue when all terminals are completed")]
+    [SerializeField] private bool switchDialogueWhenTerminalsComplete = false;
+
+    [Tooltip("How often to check terminal completion (seconds)")]
+    [SerializeField] private float terminalCheckInterval = 0.5f;
+
+    [Tooltip("DialogueData to select when terminals complete. Must exist in Available Dialogues list.")]
+    [SerializeField] private DialogueData dialogueToSelectWhenTerminalsComplete;
+
+    [Tooltip("Fallback index if Dialogue To Select When Terminals Complete is not set. -1 = ignore.")]
+    [SerializeField] private int dialogueIndexWhenTerminalsComplete = -1;
+
+    private bool hasSwitchedDialogueFromTerminals = false;
     
     [Header("Fallback Dialogue (if no DialogueData is assigned)")]
     public bool useFallbackDialogue = true;
@@ -121,12 +136,60 @@ public class DialogueStarter : MonoBehaviour
         
         // Set idle animation for the selected character
         SetCharacterIdleAnimation();
+
+        if (switchDialogueWhenTerminalsComplete)
+        {
+            InvokeRepeating(nameof(CheckTerminalCompletionForDialogueSwitch), 0.5f, Mathf.Max(0.1f, terminalCheckInterval));
+        }
     }
     
     void OnDestroy()
     {
         // Remove this instance from the static list
         allDialogueStarters.Remove(this);
+
+        if (switchDialogueWhenTerminalsComplete)
+        {
+            CancelInvoke(nameof(CheckTerminalCompletionForDialogueSwitch));
+        }
+    }
+
+    private void CheckTerminalCompletionForDialogueSwitch()
+    {
+        if (!switchDialogueWhenTerminalsComplete || hasSwitchedDialogueFromTerminals)
+        {
+            return;
+        }
+
+        if (PowerTerminalMinigame.AreAllTerminalsCompleted())
+        {
+            SwitchDialogueOnTerminalComplete();
+            hasSwitchedDialogueFromTerminals = true;
+            CancelInvoke(nameof(CheckTerminalCompletionForDialogueSwitch));
+        }
+    }
+
+    private void SwitchDialogueOnTerminalComplete()
+    {
+        if (dialogueToSelectWhenTerminalsComplete != null)
+        {
+            int idx = availableDialogues != null ? availableDialogues.IndexOf(dialogueToSelectWhenTerminalsComplete) : -1;
+            if (idx >= 0)
+            {
+                SwitchDialogue(idx);
+            }
+            else
+            {
+                Debug.LogWarning($"DialogueStarter '{name}': DialogueData '{dialogueToSelectWhenTerminalsComplete.name}' not found in Available Dialogues.");
+            }
+
+            return;
+        }
+
+        if (dialogueIndexWhenTerminalsComplete >= 0)
+        {
+            SwitchDialogue(dialogueIndexWhenTerminalsComplete);
+        }
     }
 
     void Update()

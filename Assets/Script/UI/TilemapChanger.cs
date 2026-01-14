@@ -61,23 +61,16 @@ public class TileMapping
     private TileBase CreateTileFromPrefab(GameObject prefab)
     {
         if (prefab == null) return null;
-        
-        // First, check if the prefab itself is a TileBase (for Tile assets made into prefabs)
-        TileBase tileComponent = prefab.GetComponent<TileBase>();
-        if (tileComponent != null)
+
+        // NOTE: TileBase is a ScriptableObject (not a Component), so GetComponent<TileBase>() is invalid.
+        // For prefabs, we create a runtime Tile using the prefab's SpriteRenderer sprite.
+
+        // Cache created tiles per prefab to avoid allocating a new Tile each call.
+        if (cachedTilesByPrefab != null && cachedTilesByPrefab.TryGetValue(prefab, out TileBase cachedTile) && cachedTile != null)
         {
-            return tileComponent;
+            return cachedTile;
         }
-        
-        // Check if any child has a TileBase component
-        tileComponent = prefab.GetComponentInChildren<TileBase>();
-        if (tileComponent != null)
-        {
-            return tileComponent;
-        }
-        
-        // For GameObjects that aren't TileBase components, we need to create a Sprite tile
-        // and use the prefab's sprite
+
         SpriteRenderer spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -89,8 +82,12 @@ public class TileMapping
             // Create a new Sprite tile using the prefab's sprite
             UnityEngine.Tilemaps.Tile newTile = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
             newTile.sprite = spriteRenderer.sprite;
+            newTile.name = $"TileFromPrefab_{prefab.name}";
             
             Debug.Log($"Created Sprite tile from prefab {prefab.name} using sprite {spriteRenderer.sprite.name}");
+
+            cachedTilesByPrefab ??= new Dictionary<GameObject, TileBase>();
+            cachedTilesByPrefab[prefab] = newTile;
             
             return newTile;
         }
@@ -98,6 +95,8 @@ public class TileMapping
         Debug.LogWarning($"Prefab {prefab.name} doesn't have a TileBase component or SpriteRenderer with sprite. Cannot create tile from prefab.");
         return null;
     }
+
+    private Dictionary<GameObject, TileBase> cachedTilesByPrefab;
     
     /// <summary>
     /// Validate this tile mapping
@@ -161,27 +160,62 @@ public class TilemapChanger : MonoBehaviour
             foreach (Vector3Int position in bounds.allPositionsWithin)
             {
                 TileBase currentTile = targetTilemap.GetTile(position);
-                if (currentTile != null)
+                bool hasPrefab = TryGetPrefabAtCell(position, out GameObject currentPrefab);
+
+                foreach (TileMapping mapping in secondaryMappings)
                 {
-                    foreach (TileMapping mapping in secondaryMappings)
+                    if (mapping == null || !mapping.IsValid())
                     {
-                        if (mapping.IsValid())
+                        continue;
+                    }
+
+                    bool matches;
+                    if (currentTile != null)
+                    {
+                        TileBase defaultTile = mapping.GetDefaultTile();
+                        matches = defaultTile != null && TilesMatch(currentTile, defaultTile);
+                    }
+                    else if (hasPrefab && mapping.defaultPrefab != null)
+                    {
+                        matches = PrefabMatches(currentPrefab, mapping.defaultPrefab);
+                    }
+                    else
+                    {
+                        matches = false;
+                    }
+
+                    if (!matches)
+                    {
+                        continue;
+                    }
+
+                    // Apply secondary result
+                    if (mapping.coloredPrefab != null)
+                    {
+                        ReplacePrefabAtCell(position, mapping.coloredPrefab);
+                        targetTilemap.SetTile(position, null);
+                        changedTileCount++;
+                    }
+                    else
+                    {
+                        TileBase secondaryTile = mapping.GetColoredTile();
+                        if (secondaryTile != null)
                         {
-                            TileBase defaultTile = mapping.GetDefaultTile();
-                            if (defaultTile != null && currentTile.name == defaultTile.name)
+                            // If a prefab is occupying this cell visually, remove it.
+                            if (hasPrefab)
                             {
-                                TileBase secondaryTile = mapping.GetColoredTile();
-                                if (secondaryTile != null)
-                                {
-                                    targetTilemap.SetTile(position, secondaryTile);
-                                    changedTileCount++;
-                                }
-                                break;
+                                RemovePrefabAtCell(position);
                             }
+
+                            targetTilemap.SetTile(position, secondaryTile);
+                            changedTileCount++;
                         }
                     }
+
+                    break;
                 }
             }
+            targetTilemap.RefreshAllTiles();
             Debug.Log($"Changed {changedTileCount} tiles using secondary mappings.");
         }
 
@@ -215,8 +249,8 @@ public class TilemapChanger : MonoBehaviour
             }
 
             TileBase defaultTile = mapping.GetDefaultTile();
-            TileBase secondaryTile = mapping.GetColoredTile();
-            if (defaultTile == null || secondaryTile == null)
+            TileBase secondaryTile = mapping.coloredPrefab != null ? null : mapping.GetColoredTile();
+            if (defaultTile == null || (mapping.coloredPrefab == null && secondaryTile == null))
             {
                 Debug.LogWarning($"TilemapChanger: Secondary mapping at index {secondaryMappingIndex} is missing tiles.");
                 return;
@@ -227,14 +261,167 @@ public class TilemapChanger : MonoBehaviour
             foreach (Vector3Int position in bounds.allPositionsWithin)
             {
                 TileBase currentTile = targetTilemap.GetTile(position);
-                if (currentTile != null && currentTile.name == defaultTile.name)
+                bool hasPrefab = TryGetPrefabAtCell(position, out GameObject currentPrefab);
+
+                bool matches;
+                if (currentTile != null)
                 {
+                    matches = TilesMatch(currentTile, defaultTile);
+                }
+                else if (hasPrefab && mapping.defaultPrefab != null)
+                {
+                    matches = PrefabMatches(currentPrefab, mapping.defaultPrefab);
+                }
+                else
+                {
+                    matches = false;
+                }
+
+                if (!matches)
+                {
+                    continue;
+                }
+
+                if (mapping.coloredPrefab != null)
+                {
+                    ReplacePrefabAtCell(position, mapping.coloredPrefab);
+                    targetTilemap.SetTile(position, null);
+                    changedTileCount++;
+                }
+                else
+                {
+                    if (hasPrefab)
+                    {
+                        RemovePrefabAtCell(position);
+                    }
+
                     targetTilemap.SetTile(position, secondaryTile);
                     changedTileCount++;
                 }
             }
 
+            targetTilemap.RefreshAllTiles();
             Debug.Log($"Changed {changedTileCount} tiles using secondary mapping index {secondaryMappingIndex}.");
+        }
+
+        private Dictionary<Vector3Int, GameObject> spawnedSecondaryPrefabs = new Dictionary<Vector3Int, GameObject>();
+
+        private void SpawnSecondaryPrefabAt(Vector3Int cellPosition, GameObject prefab)
+        {
+            if (prefab == null || targetTilemap == null) return;
+
+            Vector3 worldPosition = targetTilemap.CellToWorld(cellPosition);
+            worldPosition.x += targetTilemap.cellSize.x * 0.5f;
+            worldPosition.y += targetTilemap.cellSize.y * 0.5f;
+
+            if (spawnedSecondaryPrefabs.TryGetValue(cellPosition, out GameObject existing) && existing != null)
+            {
+                Destroy(existing);
+            }
+
+            GameObject instance = Instantiate(prefab, worldPosition, Quaternion.identity);
+            instance.transform.SetParent(transform);
+            spawnedSecondaryPrefabs[cellPosition] = instance;
+        }
+
+        private bool TryGetPrefabAtCell(Vector3Int cellPosition, out GameObject instance)
+        {
+            // Secondary-spawned prefabs take priority
+            if (spawnedSecondaryPrefabs.TryGetValue(cellPosition, out instance) && instance != null)
+            {
+                return true;
+            }
+
+            // Primary preloaded prefabs (used by ChangeTilesToColored)
+            if (preloadedPrefabs != null && preloadedPrefabs.TryGetValue(cellPosition, out instance) && instance != null && instance.activeInHierarchy)
+            {
+                return true;
+            }
+
+            // Last resort: scan children and match by cell position
+            instance = null;
+            if (targetTilemap == null) return false;
+
+            foreach (Transform child in transform)
+            {
+                if (child == null) continue;
+                Vector3Int childCell = targetTilemap.WorldToCell(child.position);
+                if (childCell == cellPosition)
+                {
+                    instance = child.gameObject;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void ReplacePrefabAtCell(Vector3Int cellPosition, GameObject newPrefab)
+        {
+            RemovePrefabAtCell(cellPosition);
+            SpawnSecondaryPrefabAt(cellPosition, newPrefab);
+        }
+
+        private void RemovePrefabAtCell(Vector3Int cellPosition)
+        {
+            if (spawnedSecondaryPrefabs.TryGetValue(cellPosition, out GameObject secondary) && secondary != null)
+            {
+                Destroy(secondary);
+                spawnedSecondaryPrefabs[cellPosition] = null;
+            }
+
+            if (preloadedPrefabs != null && preloadedPrefabs.TryGetValue(cellPosition, out GameObject primary) && primary != null && primary.activeInHierarchy)
+            {
+                Destroy(primary);
+                preloadedPrefabs[cellPosition] = null;
+            }
+        }
+
+        private bool PrefabMatches(GameObject instance, GameObject prefabAsset)
+        {
+            if (instance == null || prefabAsset == null) return false;
+
+            string instanceName = NormalizeCloneName(instance.name);
+            if (instanceName == prefabAsset.name) return true;
+
+            // Fallback: compare sprites if both have them
+            SpriteRenderer a = instance.GetComponentInChildren<SpriteRenderer>();
+            SpriteRenderer b = prefabAsset.GetComponentInChildren<SpriteRenderer>();
+            if (a != null && b != null && a.sprite != null && b.sprite != null)
+            {
+                return ReferenceEquals(a.sprite, b.sprite) || a.sprite.name == b.sprite.name;
+            }
+
+            return false;
+        }
+
+        private string NormalizeCloneName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return name;
+            const string cloneSuffix = "(Clone)";
+            if (name.EndsWith(cloneSuffix))
+            {
+                return name.Substring(0, name.Length - cloneSuffix.Length).Trim();
+            }
+            return name;
+        }
+
+        private bool TilesMatch(TileBase current, TileBase expected)
+        {
+            if (current == null || expected == null) return false;
+            if (ReferenceEquals(current, expected)) return true;
+
+            // Prefer sprite comparison when possible (helps when tiles are generated from prefabs)
+            if (current is UnityEngine.Tilemaps.Tile currentTile && expected is UnityEngine.Tilemaps.Tile expectedTile)
+            {
+                if (currentTile.sprite != null && expectedTile.sprite != null)
+                {
+                    return ReferenceEquals(currentTile.sprite, expectedTile.sprite) || currentTile.sprite.name == expectedTile.sprite.name;
+                }
+            }
+
+            // Fallback to name match
+            return current.name == expected.name;
         }
     
     [Header("Terminal Integration")]
